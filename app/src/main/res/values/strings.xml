@@ -10,4 +10,16 @@
     <string name="add_recipe_title">Add Recipe</string>
     <string name="upload_image">Choose from media storage</string>
     <string name="recipe_name">Recipe name</string>
+    <string name="Home">Home</string>
+    <string name="Search">Search</string>
+    <string name="addRecipe">Add Recipe</string>
+    <string name="addCategory">Add Category</string>
+    <string name="addIngredients">Add Ingredients</string>
+    <string name="addIngredient">Add Ingredient</string>
+    <string name="addOrigin">Add Origin</string>
+    <string name="viewCategory">View Category List</string>
+    <string name="viewIngredients">View Ingredient List</string>
+    <string name="viewRecipes">View Recipe List</string>
+    <string name="clickHere">Click Here!</string>
+    <string name="testAddRecipe">Test Add Recipe</string>
 </resources>

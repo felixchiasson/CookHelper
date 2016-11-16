@@ -18,14 +18,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/button3"
-        android:onClick="onClickTestIngredient (MainActivity)" />
+        android:onClick="onClickTestIngredient" />
 
     <Button
         android:text="@string/testAddRecipe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/button2"
-        android:onClick="onClickTestRecipe (MainActivity)"
+        android:onClick="onClickTestRecipe"
         android:layout_below="@+id/button3"
         android:layout_alignParentStart="true"
         android:layout_marginTop="20dp" />
