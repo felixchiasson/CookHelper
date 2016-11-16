@@ -5,4 +5,9 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string name="title_activity_recipe_view_page">recipeViewPage</string>
+    <string name="title_activity_recipe_add_form">recipe_add_form</string>
+    <string name="add_recipe_title">Add Recipe</string>
+    <string name="upload_image">Choose from media storage</string>
+    <string name="recipe_name">Recipe name</string>
 </resources>

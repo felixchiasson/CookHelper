@@ -18,6 +18,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".recipeViewPage"
+            android:label="@string/title_activity_recipe_view_page"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="tophaters.cookhelper.MainActivity" />
+        </activity>
+        <activity
+            android:name=".recipe_add_form"
+            android:label="@string/title_activity_recipe_add_form"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="tophaters.cookhelper.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
