@@ -14,9 +14,19 @@
     tools:showIn="@layout/app_bar_main">
 
     <Button
-        android:text="Test Add Recipe"
+        android:text="@string/clickHere"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button3"
+        android:onClick="onClickTestIngredient (MainActivity)" />
+
+    <Button
+        android:text="@string/testAddRecipe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/button2"
-        android:onClick="onClickTestRecipe" />
+        android:onClick="onClickTestRecipe (MainActivity)"
+        android:layout_below="@+id/button3"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20dp" />
 </RelativeLayout>
