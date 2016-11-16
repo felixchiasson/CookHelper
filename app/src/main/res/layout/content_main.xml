@@ -38,7 +38,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="39dp"
         android:id="@+id/button5"
-        android:onClick="onClickTestCategory (MainActivity)" />
+        android:onClick="onClickTestCategory" />
 
     <Button
         android:text="@string/addOrigin"
@@ -48,5 +48,5 @@
         android:id="@+id/button4"
         android:layout_below="@+id/button2"
         android:layout_alignParentStart="true"
-        android:onClick="onClickTestOrigin (MainActivity)" />
+        android:onClick="onClickTestOrigin" />
 </RelativeLayout>
