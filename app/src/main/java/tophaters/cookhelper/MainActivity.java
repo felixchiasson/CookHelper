@@ -122,4 +122,18 @@ public class MainActivity extends AppCompatActivity
         startActivity(i);
 
     }
+    public void onClickTestOrigin(View v) {
+
+        Intent i;
+        i = new Intent(this, add_Origin.class);
+        startActivity(i);
+
+    }
+    public void onClickTestCategory(View v) {
+
+        Intent i;
+        i = new Intent(this, add_Category.class);
+        startActivity(i);
+
+    }
 }
