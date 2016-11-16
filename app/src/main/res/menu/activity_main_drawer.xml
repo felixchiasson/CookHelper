@@ -6,34 +6,34 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/home"
-            android:title="Home" />
+            android:title="@string/Home" />
         <item
             android:id="@+id/nav_search"
             android:icon="@drawable/search"
-            android:title="Search" />
+            android:title="@string/Search" />
         <item
             android:id="@+id/nav_addRecipe"
             android:icon="@drawable/recipe"
-            android:title="Add Recipe" />
+            android:title="@string/addRecipe" />
         <item
             android:id="@+id/nav_addCategory"
             android:icon="@drawable/category"
-            android:title="Add Category" />
-        <item android:title="Add Ingredient"
+            android:title="@string/addCategory" />
+        <item android:title="@string/addIngredient"
             android:id="@+id/nav_addIngredient"
             android:icon="@drawable/ingredients" />
-        <item android:title="Add Origin"
+        <item android:title="@string/addOrigin"
             android:id="@+id/nav_addOrigin"
             android:icon="@drawable/map" />
-        <item android:title="View Category List"
+        <item android:title="@string/viewCategory"
             android:id="@+id/nav_viewCategories"
-            android:icon="@drawable/Shape_triangle" />
-        <item android:title="View Ingredient List"
+            android:icon="@drawable/shape_triangle" />
+        <item android:title="@string/viewIngredients"
             android:id="@+id/nav_viewIngredients"
-            android:icon="@drawable/Shape_triangle" />
-        <item android:title="View Recipe List"
+            android:icon="@drawable/shape_triangle" />
+        <item android:title="@string/viewRecipes"
             android:id="@+id/nav_viewRecipe"
-            android:icon="@drawable/Shape_triangle" />
+            android:icon="@drawable/shape_triangle" />
     </group>
 
 </menu>
