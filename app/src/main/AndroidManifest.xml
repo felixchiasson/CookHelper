@@ -36,6 +36,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="tophaters.cookhelper.MainActivity" />
         </activity>
+        <activity android:name=".add_Ingredient"></activity>
     </application>
 
 </manifest>
