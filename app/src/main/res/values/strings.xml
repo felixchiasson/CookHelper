@@ -24,4 +24,11 @@
     <string name="testAddRecipe">Test Add Recipe</string>
     <string name="select_ingredients">Select Ingredients</string>
     <string name="test_ingredient">test_ingredient</string>
+    <string name="title_activity_add__origin">Add Origin</string>
+    <string name="typeOrigin">Type the new origin here.</string>
+    <string name="addOriginTitle">Add Origin:</string>
+    <string name="save">Save</string>
+    <string name="title_activity_add__category">add_Category</string>
+    <string name="addCategoryTitle">Add Category:</string>
+    <string name="typeCategory">Type the new category here.</string>
 </resources>
