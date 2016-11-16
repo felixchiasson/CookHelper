@@ -114,4 +114,12 @@ public class MainActivity extends AppCompatActivity
         startActivity(i);
 
     }
+
+    public void onClickTestIngredient(View v) {
+
+        Intent i;
+        i = new Intent(this, add_Ingredient.class);
+        startActivity(i);
+
+    }
 }
