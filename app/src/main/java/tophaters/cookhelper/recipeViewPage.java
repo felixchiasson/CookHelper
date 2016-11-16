@@ -5,7 +5,10 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 public class recipeViewPage extends AppCompatActivity {
 
@@ -25,6 +28,23 @@ public class recipeViewPage extends AppCompatActivity {
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+        int width = metrics.widthPixels;
+        int height = metrics.heightPixels;
+
+        RelativeLayout imageHolder = (RelativeLayout) findViewById(R.id.image_view_container);
+
+        ImageView image = new ImageView(this);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width, height/2);
+        image.setLayoutParams(params);
+
+        imageHolder.addView(image);
+
     }
+
+
 
 }

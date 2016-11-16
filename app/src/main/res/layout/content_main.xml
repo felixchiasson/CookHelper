@@ -13,8 +13,10 @@
     tools:context="tophaters.cookhelper.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <TextView
+    <Button
+        android:text="Test Add Recipe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:id="@+id/button2"
+        android:onClick="onClickTestRecipe" />
 </RelativeLayout>

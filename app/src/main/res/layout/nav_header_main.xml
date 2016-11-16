@@ -19,9 +19,10 @@
         android:layout_width="100dp"
         android:layout_height="69dp"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:src="@drawable/JoeHachache"
+        android:src="@drawable/habibi"
         android:layout_weight="0.64"
-        android:scaleType="fitCenter" />
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/habibi" />
 
 
     <TextView
