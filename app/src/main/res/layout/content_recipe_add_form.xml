@@ -19,21 +19,6 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:text="@string/add_recipe_title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/recipe_form_title"
-                android:textAppearance="@android:style/TextAppearance.Material.Display1"
-                android:layout_weight="1" />
-
-        </LinearLayout>
-
-        <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -48,20 +33,26 @@
                 android:selectAllOnFocus="false"
                 android:singleLine="false"
                 android:inputType="text" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/select_ingredients"
+                android:textAppearance="@android:style/TextAppearance.Material.Subhead" />
 
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/spinner"
                 android:hint="@string/recipe_name"
-                />
+                android:entries="@array/ingredientList"/>
 
         </LinearLayout>
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp">
 
             <ImageView
                 android:layout_width="match_parent"
