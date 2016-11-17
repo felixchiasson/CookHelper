@@ -24,6 +24,8 @@ public class add_Origin extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 }
