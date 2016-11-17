@@ -27,8 +27,9 @@
     <string name="title_activity_add__origin">Add Origin</string>
     <string name="typeOrigin">Type the new origin here.</string>
     <string name="addOriginTitle">Add Origin:</string>
+    <string name="title_activity_add_Ingredient">Add Ingredient</string>
     <string name="save">Save</string>
-    <string name="title_activity_add__category">add_Category</string>
+    <string name="title_activity_add__category">Add Category</string>
     <string name="addCategoryTitle">Add Category:</string>
     <string name="typeCategory">Type the new category here.</string>
 </resources>
