@@ -13,8 +13,8 @@
     tools:context="tophaters.cookhelper.recipe_add_form"
     tools:showIn="@layout/activity_recipe_add_form">
 
-    <LinearLayout
-        android:orientation="vertical"
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -23,54 +23,92 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <EditText
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:id="@+id/editText"
-                style="@android:style/Widget.Material.EditText"
-                android:hint="@string/add_recipe_name"
-                android:selectAllOnFocus="false"
-                android:inputType="text" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/add_recipe_select_ingredients"
-                android:textAppearance="@android:style/TextAppearance.Material.Subhead" />
+                android:layout_height="wrap_content">
 
-            <Spinner
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:id="@+id/editText"
+                    style="@android:style/Widget.Material.EditText"
+                    android:hint="@string/add_recipe_name"
+                    android:selectAllOnFocus="false"
+                    android:inputType="text" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/add_recipe_select_ingredients"
+                    android:textAppearance="@android:style/TextAppearance.Material.Subhead" />
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/spinner"
+                    android:entries="@array/add_recipe_ingredient_list"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/add_recipe_select_category"
+                    android:textAppearance="@android:style/TextAppearance.Material.Subhead"/>
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/add_recipe_category_spinner"
+                    android:entries="@array/add_recipe_category_list"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/add_recipe_add_steps"
+                    android:textAppearance="@android:style/TextAppearance.Material.Subhead"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:ems="10"
+                    android:id="@+id/add_recipe_edittext_steps"
+                    android:maxHeight="100dp"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/spinner"
-                android:entries="@array/ingredientList"/>
+                android:paddingTop="20dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:contentDescription="@string/add_recipe_upload_image"
+                    android:background="#80000000"
+                    android:id="@+id/imageView2"
+                    android:src="@drawable/default_recipe"
+                    android:scaleType="centerCrop"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:text="@string/add_recipe_upload_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:id="@+id/button"
+                    android:layout_weight="1"
+                    style="@android:style/Widget.Material.Button" />
+            </LinearLayout>
 
         </LinearLayout>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="20dp">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:contentDescription="@string/add_recipe_upload_image"
-                android:background="#80000000"
-                android:id="@+id/imageView2"
-                android:src="@drawable/default_recipe"
-                android:scaleType="centerCrop"
-                android:layout_weight="1" />
-
-            <Button
-                android:text="@string/add_recipe_upload_image"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:id="@+id/button"
-                android:layout_weight="1"
-                style="@android:style/Widget.Material.Button" />
-        </LinearLayout>
-
-    </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>

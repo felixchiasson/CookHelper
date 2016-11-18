@@ -6,6 +6,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 
 public class RecipeView extends AppCompatActivity {
 
@@ -29,5 +30,9 @@ public class RecipeView extends AppCompatActivity {
         }
 
 
+        // This is how to change TextView dynamically
+        TextView test = (TextView)findViewById(R.id.recipe_view_value_preptime);
+        test.setText("25min");
+        // ------------------------------------------
     }
 }
