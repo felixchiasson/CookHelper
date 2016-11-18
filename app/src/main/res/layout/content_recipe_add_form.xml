@@ -29,21 +29,19 @@
                 android:ems="10"
                 android:id="@+id/editText"
                 style="@android:style/Widget.Material.EditText"
-                android:hint="@string/recipe_name"
+                android:hint="@string/add_recipe_name"
                 android:selectAllOnFocus="false"
-                android:singleLine="false"
                 android:inputType="text" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/select_ingredients"
+                android:text="@string/add_recipe_select_ingredients"
                 android:textAppearance="@android:style/TextAppearance.Material.Subhead" />
 
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/spinner"
-                android:hint="@string/recipe_name"
                 android:entries="@array/ingredientList"/>
 
         </LinearLayout>
@@ -57,6 +55,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
+                android:contentDescription="@string/add_recipe_upload_image"
                 android:background="#80000000"
                 android:id="@+id/imageView2"
                 android:src="@drawable/default_recipe"
@@ -64,7 +63,7 @@
                 android:layout_weight="1" />
 
             <Button
-                android:text="@string/upload_image"
+                android:text="@string/add_recipe_upload_image"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:id="@+id/button"
