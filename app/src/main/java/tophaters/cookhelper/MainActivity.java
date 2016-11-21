@@ -14,30 +14,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.Adapter;
-import android.view.ViewGroup;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
-import java.util.ArrayList;
-import android.widget.Toast;
-
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
-    // variable d'instances
-    private List<Recipe> myRecipes = new ArrayList<Recipe>();
-
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,14 +25,14 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-       /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });*/
+        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -63,26 +42,6 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        populateRecipeList();
-        populateListView();
-    }
-
-    private void populateRecipeList(){
-        myRecipes.add(new Recipe("Lemon and Dill Crusted Salmon",R.drawable.ic_salmon));
-        myRecipes.add(new Recipe("Chocolate Crepes",R.drawable.ic_crepe));
-        myRecipes.add(new Recipe("Greek Tossed Pasta Salad",R.drawable.ic_recipe));
-        myRecipes.add(new Recipe("Filet Mignon",R.drawable.ic_filet));
-
-
-    }
-
-    private void populateListView(){
-
-        ArrayAdapter<Recipe> adapter= new MyListAdapter();
-        ListView list = (ListView) findViewById(R.id.recipesListView);
-        list.setAdapter(adapter);
-
     }
 
     @Override
@@ -93,37 +52,6 @@ public class MainActivity extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
-    }
-
-    private class MyListAdapter extends ArrayAdapter<Recipe>{
-
-        public MyListAdapter(){
-            super(MainActivity.this, R.layout.item_view, myRecipes);
-        }
-        @Override
-        public View getView (int position, View convertView, ViewGroup parent){
-            View itemView = convertView;
-            if( itemView == null){
-                itemView = getLayoutInflater().inflate(R.layout.item_view, parent, false);
-            }
-
-            //find the recipe
-
-            Recipe currentRecipe = myRecipes.get(position);
-
-            // fill the view
-
-            ImageView imageView = (ImageView)itemView.findViewById(R.id.item_icon);
-            imageView.setImageResource(currentRecipe.getIconId());
-
-            // Make name Text
-            TextView nameText = (TextView) itemView.findViewById(R.id.item_txtName);
-            nameText.setText(currentRecipe.getName());
-            return itemView;
-
-
-        }
-
     }
 
     @Override

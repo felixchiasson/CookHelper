@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-
-    >
-
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
         <item
-
             android:id="@+id/nav_home"
             android:icon="@drawable/home"
             android:title="@string/Home" />
         <item
-
             android:id="@+id/nav_search"
             android:icon="@drawable/search"
             android:title="@string/Search" />
