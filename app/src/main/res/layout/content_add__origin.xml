@@ -40,7 +40,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/inputNewCategory"
         android:layout_alignParentEnd="true"
-        android:id="@+id/saveButton" />
+        android:id="@+id/saveButton"
+        android:background="#21a359" />
 
     <ImageView
         android:layout_width="wrap_content"
