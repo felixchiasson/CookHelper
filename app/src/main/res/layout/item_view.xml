@@ -36,7 +36,7 @@
             android:layout_height="67dp"
             android:id="@+id/item_txtName"
             android:background="@android:color/holo_red_light"
-            android:textColor="@color/common_google_signin_btn_text_dark_default"
+            android:textColor="#90000000"
             android:textSize="24sp"
             android:gravity="center_vertical|center_horizontal" />
     </LinearLayout>

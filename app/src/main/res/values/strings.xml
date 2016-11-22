@@ -158,5 +158,7 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
 
+    <string name="title_bar_mene">COOK HELPER</string>
+
 
 </resources>
