@@ -206,19 +206,26 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_search) {
 
         } else if (id == R.id.nav_addRecipe) {
-
+            Intent a = new Intent(MainActivity.this, recipe_add_form.class);
+            startActivity(a);
         } else if (id == R.id.nav_addCategory) {
-
+            Intent a = new Intent(MainActivity.this, add_Category.class);
+            startActivity(a);
         } else if (id == R.id.nav_addIngredient) {
-
+            Intent a = new Intent(MainActivity.this, add_Ingredient.class);
+            startActivity(a);
         } else if (id == R.id.nav_addOrigin) {
-
-        }else if (id == R.id.nav_viewCategories) {
-
-        }else if (id == R.id.nav_viewIngredients) {
-
+            Intent a = new Intent(MainActivity.this, add_Origin.class);
+            startActivity(a);
+        } else if (id == R.id.nav_viewCategories) {
+            Intent a = new Intent(MainActivity.this, recipe_add_form.class);
+            startActivity(a);
+        } else if (id == R.id.nav_viewIngredients) {
+            Intent a = new Intent(MainActivity.this, recipe_add_form.class);
+            startActivity(a);
         }else if (id == R.id.nav_viewRecipe) {
-
+            Intent a = new Intent(MainActivity.this, RecipeView.class);
+            startActivity(a);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
