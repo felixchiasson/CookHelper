@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public @NonNull View getView(int position, View convertView, @NonNull ViewGroup parent) {
             View itemView = convertView;
             if (itemView == null) {
                 itemView = getLayoutInflater().inflate(R.layout.item_view, parent, false);
@@ -204,6 +204,9 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
             // Handle the camera action
         } else if (id == R.id.nav_search) {
+
+            Intent a = new Intent(MainActivity.this, content_search_activity.class);
+            startActivity(a);
 
         } else if (id == R.id.nav_addRecipe) {
             Intent a = new Intent(MainActivity.this, recipe_add_form.class);
