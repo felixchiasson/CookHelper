@@ -42,12 +42,5 @@
         android:layout_alignParentEnd="true"
         android:id="@+id/saveButton" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/tuturuu"
-        android:id="@+id/addCategoryPicture"
-        android:layout_below="@+id/inputNewCategory"
-        android:layout_alignParentStart="true" />
 </RelativeLayout>
 
