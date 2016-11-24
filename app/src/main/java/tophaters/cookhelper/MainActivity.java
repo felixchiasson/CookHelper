@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity
 
             public void onItemClick(AdapterView<?> parent, View viewClick, int position, long id){
                 Recipe clickedRecipe = myRecipes.get(position);
-                String message = "You clicked " + position + "this is car make" + clickedRecipe.getName();
+                String message = "You clicked " + position + " this is car make " + clickedRecipe.getName();
                 Toast.makeText( MainActivity.this, message , Toast.LENGTH_LONG).show();
 
             }

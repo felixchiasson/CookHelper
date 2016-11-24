@@ -1,4 +1,5 @@
 <resources>
+    <!--- TODO: File cleanup -->
     <string name="app_name">CookHelper</string>
 
     <!--
