@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
+    android:elevation="3dp"
     android:layout_height="wrap_content">
+
 
     <LinearLayout
         android:orientation="vertical"
@@ -16,6 +18,7 @@
             android:layout_alignParentLeft="true"
             android:scaleType="centerCrop"
             android:layout_alignParentTop="true"
+
 
             app:srcCompat="@drawable/ic_salmon"
             android:id="@+id/item_icon" />
@@ -35,8 +38,8 @@
             android:layout_width="match_parent"
             android:layout_height="67dp"
             android:id="@+id/item_txtName"
-            android:background="@android:color/holo_red_light"
-            android:textColor="#90000000"
+            android:background="@color/wallet_dim_foreground_disabled_holo_dark"
+            android:textColor="?android:attr/panelColorForeground"
             android:textSize="24sp"
             android:gravity="center_vertical|center_horizontal" />
     </LinearLayout>
