@@ -15,9 +15,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Adapter;
 import android.view.ViewGroup;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +53,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
 
    /*     FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -73,10 +76,28 @@ public class MainActivity extends AppCompatActivity
 
         populateRecipeList();
         populateListView();
+        registerClickCallBack();
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
+    //methode ajouter pour clicker sur les items sune liste
+    private void registerClickCallBack(){
+
+        ListView list = (ListView) findViewById(R.id.recipesListView);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            public void onItemClick(AdapterView<?> parent, View viewClick, int position, long id){
+                Recipe clickedRecipe = myRecipes.get(position);
+                String message = "You clicked " + position + "this is car make" + clickedRecipe.getName();
+                Toast.makeText( MainActivity.this, message , Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+    }
+
+
 
     private void populateRecipeList() {
         myRecipes.add(new Recipe("Lemon and Dill Crusted Salmon", R.drawable.ic_salmon));
@@ -148,7 +169,7 @@ public class MainActivity extends AppCompatActivity
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public @NonNull View getView(int position, View convertView, @NonNull ViewGroup parent) {
             View itemView = convertView;
             if (itemView == null) {
                 itemView = getLayoutInflater().inflate(R.layout.item_view, parent, false);
@@ -201,9 +222,12 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_home) {
+        if (id == R.id.nav_help) {
             // Handle the camera action
         } else if (id == R.id.nav_search) {
+
+            Intent a = new Intent(MainActivity.this, content_search_activity.class);
+            startActivity(a);
 
         } else if (id == R.id.nav_addRecipe) {
             Intent a = new Intent(MainActivity.this, recipe_add_form.class);

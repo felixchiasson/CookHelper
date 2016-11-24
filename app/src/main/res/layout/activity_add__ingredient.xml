@@ -38,15 +38,6 @@
         android:layout_below="@+id/addIngredientTitle"
         android:layout_alignParentStart="true" />
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/chris"
-        android:id="@+id/pictureAddIngredient"
-        android:layout_weight="0.25"
-        android:layout_below="@+id/addIngredientName"
-        android:layout_alignParentStart="true" />
-
     <Button
         android:text="@string/save"
         android:layout_width="wrap_content"
