@@ -48,11 +48,13 @@
     -->
 
     <string name="title_activity_recipe_add_form">Add Recipe</string>
-    <string name="add_recipe_upload_image">Choose from media storage</string>
+    <string name="add_recipe_add_button">Save</string>
+    <string name="add_recipe_upload_image">Upload image from media storage</string>
     <string name="add_recipe_name">Recipe name</string>
     <string name="add_recipe_select_ingredients">Select Ingredients</string>
     <string name="add_recipe_select_category">Select Category</string>
     <string name="add_recipe_add_steps">Add Steps</string>
+    <string name="add_recipe_select_origin">Select Origin</string>
     <!-- *** -->
 
     <string name="action_settings">Settings</string>

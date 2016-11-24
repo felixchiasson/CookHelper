@@ -28,6 +28,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:contentDescription="@string/add_recipe_upload_image"
+                    android:background="#80000000"
+                    android:id="@+id/imageView2"
+                    android:src="@drawable/ic_filet"
+                    android:scaleType="centerCrop"
+                    android:layout_weight="1"
+                    android:onClick="onClickOpenGallery"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -69,6 +88,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:text="@string/add_recipe_select_origin"
+                    android:textAppearance="@android:style/TextAppearance.Material.Subhead"/>
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/add_recipe_origin_spinner"
+                    android:entries="@array/add_recipe_origin_list"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:text="@string/add_recipe_add_steps"
                     android:textAppearance="@android:style/TextAppearance.Material.Subhead"/>
 
@@ -80,33 +113,17 @@
                     android:id="@+id/add_recipe_edittext_steps"
                     android:maxHeight="100dp"/>
 
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="20dp">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:contentDescription="@string/add_recipe_upload_image"
-                    android:background="#80000000"
-                    android:id="@+id/imageView2"
-                    android:src="@drawable/ic_filet"
-                    android:scaleType="centerCrop"
-                    android:layout_weight="1" />
-
                 <Button
-                    android:text="@string/add_recipe_upload_image"
+                    android:text="@string/add_recipe_add_button"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:id="@+id/button"
                     android:layout_weight="1"
                     style="@android:style/Widget.Material.Button" />
+
+
             </LinearLayout>
+
 
         </LinearLayout>
     </ScrollView>
