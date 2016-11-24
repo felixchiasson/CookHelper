@@ -159,6 +159,10 @@
     </string>
 
     <string name="title_bar_mene">COOK HELPER</string>
+    <string name="title_activity_help_page">activity_help_page</string>
 
-
+    <!--
+        help Page
+        -->
+    <string name="help_description">help page description</string>
 </resources>
