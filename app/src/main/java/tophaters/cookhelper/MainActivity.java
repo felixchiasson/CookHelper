@@ -15,9 +15,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Adapter;
 import android.view.ViewGroup;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,10 +76,28 @@ public class MainActivity extends AppCompatActivity
 
         populateRecipeList();
         populateListView();
+        registerClickCallBack();
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
+    //methode ajouter pour clicker sur les items sune liste
+    private void registerClickCallBack(){
+
+        ListView list = (ListView) findViewById(R.id.recipesListView);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            public void onItemClick(AdapterView<?> parent, View viewClick, int position, long id){
+                Recipe clickedRecipe = myRecipes.get(position);
+                String message = "You clicked " + position + "this is car make" + clickedRecipe.getName();
+                Toast.makeText( MainActivity.this, message , Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+    }
+
+
 
     private void populateRecipeList() {
         myRecipes.add(new Recipe("Lemon and Dill Crusted Salmon", R.drawable.ic_salmon));
