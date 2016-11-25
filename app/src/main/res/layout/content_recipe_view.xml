@@ -13,11 +13,28 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:text="@string/title_activity_recipe_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/recipe_view_title"
+                android:textAppearance="@android:style/TextAppearance.Material.Large"
+                android:layout_marginStart="25dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:baselineAligned="false"
-            android:id="@+id/linearLayout">
+            android:id="@+id/linearLayout"
+            android:layout_marginTop="50dp">
 
             <LinearLayout
                 android:orientation="vertical"
