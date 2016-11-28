@@ -27,11 +27,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/icon_add3"
+        app:srcCompat="@drawable/ic_add_black_24dp"
 
         app:backgroundTint="@android:color/holo_red_dark"
-        app:elevation="21dp"
-        app:fabSize="mini" />
+        app:fabSize="normal" />
 
 
     <include layout="@layout/content_ingredient__list" />
