@@ -100,10 +100,11 @@ public class MainActivity extends AppCompatActivity
 
 
     private void populateRecipeList() {
-        myRecipes.add(new Recipe("Lemon and Dill Crusted Salmon", R.drawable.ic_salmon));
-        myRecipes.add(new Recipe("Chocolate Crepes", R.drawable.ic_crepe));
-        myRecipes.add(new Recipe("Greek Tossed Pasta Salad", R.drawable.ic_recipe));
-        myRecipes.add(new Recipe("Filet Mignon", R.drawable.ic_filet));
+
+        myRecipes.add(new Recipe(0,0,"", "Lemon and Dill Crusted Salmon", R.drawable.ic_salmon, null, null, null));
+        myRecipes.add(new Recipe(0,0,"","Chocolate Crepes", R.drawable.ic_crepe, null, null, null));
+        myRecipes.add(new Recipe(0,0,"","Greek Tossed Pasta Salad", R.drawable.ic_recipe, null, null, null));
+        myRecipes.add(new Recipe(0,0,"","Filet Mignon", R.drawable.ic_filet, null, null, null));
 
 
     }
