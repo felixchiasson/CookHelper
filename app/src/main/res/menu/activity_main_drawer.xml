@@ -7,26 +7,15 @@
             android:id="@+id/nav_search"
             android:icon="@drawable/search"
             android:title="@string/Search" />
-        <item
-            android:id="@+id/nav_addRecipe"
-            android:icon="@drawable/recipe"
-            android:title="@string/addRecipe" />
-        <item
-            android:id="@+id/nav_addCategory"
-            android:icon="@drawable/category"
-            android:title="@string/addCategory" />
-        <item android:title="@string/addIngredient"
-            android:id="@+id/nav_addIngredient"
-            android:icon="@drawable/ingredients" />
-        <item android:title="@string/addOrigin"
-            android:id="@+id/nav_addOrigin"
-            android:icon="@drawable/map" />
-        <item android:title="@string/viewCategory"
-            android:id="@+id/nav_viewCategories"
-            android:icon="@drawable/shape_triangle" />
         <item android:title="@string/viewIngredients"
             android:id="@+id/nav_viewIngredients"
             android:icon="@drawable/shape_triangle" />
+        <item android:title="@string/viewCategory"
+            android:id="@+id/nav_viewCategories"
+            android:icon="@drawable/shape_triangle" />
+        <item android:title="View Origins List"
+            android:icon="@drawable/shape_triangle"
+            android:id="@+id/nav_viewOrigins" />
         <item android:title="@string/viewRecipes"
             android:id="@+id/nav_viewRecipe"
             android:icon="@drawable/shape_triangle" />
