@@ -243,10 +243,10 @@ public class MainActivity extends AppCompatActivity
             Intent a = new Intent(MainActivity.this, add_Origin.class);
             startActivity(a);
         } else if (id == R.id.nav_viewCategories) {
-            Intent a = new Intent(MainActivity.this, recipe_add_form.class);
+            Intent a = new Intent(MainActivity.this, Origin_List.class);
             startActivity(a);
         } else if (id == R.id.nav_viewIngredients) {
-            Intent a = new Intent(MainActivity.this, recipe_add_form.class);
+            Intent a = new Intent(MainActivity.this, Ingredient_List.class);
             startActivity(a);
         }else if (id == R.id.nav_viewRecipe) {
             Intent a = new Intent(MainActivity.this, RecipeView.class);

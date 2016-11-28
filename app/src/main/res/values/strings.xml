@@ -7,7 +7,7 @@
     -->
     <string name="recipe_view_prep">Preparation:</string>
     <string name="recipe_view_category">Category:</string>
-    <string name="recipe_view_origin">Origin:</string>
+    <string name="recipe_view_origin">tophaters.cookhelper.recipeViewPage.Origin:</string>
     <string name="recipe_view_cook">Cook time: </string>
     <string name="recipe_view_calories">Calories: </string>
     <string name="title_activity_recipe_view">Recipe Name Here</string>
@@ -41,7 +41,7 @@
 
     <string name="search_recipe_select_ingredients">Select Ingredients</string>
     <string name="search_recipe_select_category">Select Category</string>
-    <string name="search_recipe_select_origin">Select Origin</string>
+    <string name="search_recipe_select_origin">Select tophaters.cookhelper.recipeViewPage.Origin</string>
 
     <!--
     Add Recipe Form
@@ -177,4 +177,6 @@
         help Page
         -->
     <string name="help_description">help page description</string>
+    <string name="title_activity_ingredient__list"></string>
+    <string name="title_activity_origin__list"></string>
 </resources>
