@@ -9,16 +9,16 @@
             android:title="@string/Search" />
         <item android:title="@string/viewIngredients"
             android:id="@+id/nav_viewIngredients"
-            android:icon="@drawable/shape_triangle" />
+            android:icon="@drawable/ic_menu_slideshow" />
         <item android:title="@string/viewCategory"
             android:id="@+id/nav_viewCategories"
-            android:icon="@drawable/shape_triangle" />
+            android:icon="@drawable/ic_menu_slideshow" />
         <item android:title="View Origins List"
-            android:icon="@drawable/shape_triangle"
+            android:icon="@drawable/ic_menu_slideshow"
             android:id="@+id/nav_viewOrigins" />
         <item android:title="@string/viewRecipes"
             android:id="@+id/nav_viewRecipe"
-            android:icon="@drawable/shape_triangle" />
+            android:icon="@drawable/ic_menu_slideshow" />
         <item
             android:id="@+id/nav_help"
             android:icon="@drawable/home"

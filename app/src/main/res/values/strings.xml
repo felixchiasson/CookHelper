@@ -169,7 +169,7 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
 
-    <string name="title_bar_mene">COOK HELPER</string>
+    <string name="title_bar_mene">Cook Helper</string>
     <string name="title_activity_help_page">Help Page</string>
     <string name="help">Help</string>
 
@@ -177,7 +177,7 @@
         help Page
         -->
     <string name="help_description">help page description</string>
-    <string name="title_activity_ingredient__list"></string>
-    <string name="title_activity_origin__list"></string>
-    <string name="title_activity_category__list"></string>
+    <string name="title_activity_ingredient__list"> List of Ingredients</string>
+    <string name="title_activity_origin__list">List of Origins</string>
+    <string name="title_activity_category__list">List of Categories</string>
 </resources>

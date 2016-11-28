@@ -39,7 +39,7 @@
         <activity
             android:name=".add_Ingredient"
             android:label="@string/title_activity_add_Ingredient"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".Ingredient_List">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="tophaters.cookhelper.MainActivity" />
@@ -50,7 +50,7 @@
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="tophaters.cookhelper.MainActivity" />
+                android:value="tophaters.cookhelper.Origin_List" />
         </activity>
         <activity
             android:name=".add_Category"
@@ -58,7 +58,7 @@
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="tophaters.cookhelper.MainActivity" />
+                android:value="tophaters.cookhelper.Category_List" />
         </activity>
         <activity
             android:name=".RecipeView"
