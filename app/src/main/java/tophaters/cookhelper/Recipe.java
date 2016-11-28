@@ -94,11 +94,12 @@ public class Recipe {
     //methodes a implemeneter
 
     private void addIngredient(Ingredient ingredient){
-        System.out.println("METHODE A IMPLEMENTER");
+        ingredients.add(ingredient);
     }
 
-    private void removeIngredient(Ingredient ingredient){
-        System.out.println("METHODE A IMPLEMENTER");
+    private boolean removeIngredient(Ingredient ingredient){
+         return ingredients.remove(ingredient);
+
     }
 
 
