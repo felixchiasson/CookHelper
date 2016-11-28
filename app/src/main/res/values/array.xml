@@ -13,9 +13,9 @@
     </string-array>
 
     <string-array name="add_recipe_origin_list">
-        <item>tophaters.cookhelper.recipeViewPage.Origin 1</item>
-        <item>tophaters.cookhelper.recipeViewPage.Origin 2</item>
-        <item>tophaters.cookhelper.recipeViewPage.Origin 3</item>
+        <item>Origin q</item>
+        <item>Origin 2</item>
+        <item>Origin 3</item>
     </string-array>
 
 
@@ -37,9 +37,9 @@
     </string-array>
 
     <string-array name="search_recipe_origin_list">
-        <item>tophaters.cookhelper.recipeViewPage.Origin 1</item>
-        <item>tophaters.cookhelper.recipeViewPage.Origin 2</item>
-        <item>tophaters.cookhelper.recipeViewPage.Origin 3</item>
+        <item>Origin 1</item>
+        <item>Origin 2</item>
+        <item>Origin 3</item>
     </string-array>
 
     <string-array name="ingredient_search_types">
