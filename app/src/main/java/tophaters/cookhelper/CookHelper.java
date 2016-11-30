@@ -41,7 +41,7 @@ public class CookHelper {
         addOrigin(new Origin("Canadian"));
         addOrigin(new Origin("Colombian"));
 
-        // l'application va offrir ces 4 ingredients
+        // l'application va offrir ces 9 ingredients
         addOrigin(new Origin("Milk"));
         addOrigin(new Origin("Dark Chocolate"));
         addOrigin(new Origin("Butter"));
@@ -134,7 +134,14 @@ public class CookHelper {
         return true;
     }
 
+    /*La fonction qui implement le search de la recette
+    public void search(Category category, Origin origin, ArrayList<Ingredient> ingredients){
+        ArrayList<Recipe> recipes = getRecipes();
 
+
+
+    }
+    */
 
 
     // methodes d'Instances pour les variables d'instances
