@@ -4,6 +4,8 @@ package tophaters.cookhelper;
  * Created by shanelgauthier on 16-11-20.
  */
 import java.util.ArrayList;
+import java.util.Comparator;
+
 public class Recipe {
     //instances variables
     private String name;
@@ -91,8 +93,7 @@ public class Recipe {
         this.cookTime = cookTime;
     }
 
-    //methodes a implemeneter
-
+    //methodes permettant d'ajouter des ingredients
     private void addIngredient(Ingredient ingredient){
         ingredients.add(ingredient);
     }
@@ -102,5 +103,11 @@ public class Recipe {
 
     }
 
+    public static Comparator<Recipe> COMPARE_BY_Recipe = new Comparator<Recipe>() {
+        public int compare(Recipe one, Recipe other) {
+            return one.getName().compareTo(other.getName());
+        }
+    };}
 
-}
+
+

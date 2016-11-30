@@ -73,7 +73,11 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        populateRecipeList();
+        //initialisation du singleton
+        initSingletons();
+
+        // methodes permettant de populer la liste des recettes
+
         populateListView();
         registerClickCallBack();
         // ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -87,7 +91,7 @@ public class MainActivity extends AppCompatActivity
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             public void onItemClick(AdapterView<?> parent, View viewClick, int position, long id){
-                Recipe clickedRecipe = myRecipes.get(position);
+                Recipe clickedRecipe = CookHelper.getCookHelper().getRecipes().get(position);
                 String message = "You clicked " + position + " this is car make " + clickedRecipe.getName();
                 Toast.makeText( MainActivity.this, message , Toast.LENGTH_LONG).show();
 
@@ -97,16 +101,13 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-
-    private void populateRecipeList() {
-
-        myRecipes.add(new Recipe(0,0,"", "Lemon and Dill Crusted Salmon", R.drawable.ic_salmon, null, null, null));
-        myRecipes.add(new Recipe(0,0,"","Chocolate Crepes", R.drawable.ic_crepe, null, null, null));
-        myRecipes.add(new Recipe(0,0,"","Greek Tossed Pasta Salad", R.drawable.ic_recipe, null, null, null));
-        myRecipes.add(new Recipe(0,0,"","Filet Mignon", R.drawable.ic_filet, null, null, null));
-
-
+    protected void initSingletons()
+    {
+        // Initialize the instance of MySingleton
+        CookHelper.getCookHelper();
     }
+
+
 
     private void populateListView() {
 
@@ -165,7 +166,7 @@ public class MainActivity extends AppCompatActivity
     private class MyListAdapter extends ArrayAdapter<Recipe> {
 
         public MyListAdapter() {
-            super(MainActivity.this, R.layout.item_view, myRecipes);
+            super(MainActivity.this, R.layout.item_view, CookHelper.getCookHelper().getRecipes());
         }
 
         @Override
@@ -177,7 +178,7 @@ public class MainActivity extends AppCompatActivity
 
             //find the recipe
 
-            Recipe currentRecipe = myRecipes.get(position);
+            Recipe currentRecipe = CookHelper.getCookHelper().getRecipes().get(position);
 
             // fill the view
 

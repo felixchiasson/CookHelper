@@ -1,5 +1,7 @@
 package tophaters.cookhelper;
 
+import java.util.Comparator;
+
 /**
  * Created by shanelgauthier on 16-11-27.
  */
@@ -18,4 +20,12 @@ public class Ingredient {
     public void setName(String name) {
         this.name = name;
     }
-}
+
+
+    public static Comparator<Ingredient> COMPARE_BY_INGREDIENT = new Comparator<Ingredient>() {
+        public int compare(Ingredient one, Ingredient other) {
+            return one.getName().compareTo(other.getName());
+        }
+    };}
+
+
