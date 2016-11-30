@@ -39,7 +39,7 @@ public class Origin_List extends AppCompatActivity {
         if(getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-            populateOriginList();
+
             populateListView();
             //registerClickCallBack();
         }}
@@ -62,22 +62,6 @@ public class Origin_List extends AppCompatActivity {
 
 
 
-    private void populateOriginList() {
-        myOrigin.add(new Origin("French"));
-        myOrigin.add(new Origin("Canadian"));
-        myOrigin.add(new Origin("Mexican"));
-        myOrigin.add(new Origin("Asiatique"));
-        myOrigin.add(new Origin("Grecque"));
-        myOrigin.add(new Origin("Italian"));
-        myOrigin.add(new Origin("Japonaise"));
-        myOrigin.add(new Origin("Cubain"));
-        myOrigin.add(new Origin("Tunaisien"));
-        myOrigin.add(new Origin("Chinois"));
-
-
-
-
-    }
 
     private void populateListView() {
 
@@ -90,7 +74,7 @@ public class Origin_List extends AppCompatActivity {
     private class MyListAdapter extends ArrayAdapter<Origin> {
 
         public MyListAdapter() {
-            super(Origin_List.this, R.layout.item_ingredient_view, myOrigin);
+            super(Origin_List.this, R.layout.item_ingredient_view, CookHelper.getCookHelper().getOrigins());
         }
 
         @Override
@@ -103,7 +87,7 @@ public class Origin_List extends AppCompatActivity {
 
             //find the ingredient
 
-            Origin currentOrigin = myOrigin.get(position);
+            Origin currentOrigin = CookHelper.getCookHelper().getOrigins().get(position);
 
 
             // Make name Text

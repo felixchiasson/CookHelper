@@ -42,15 +42,15 @@ public class CookHelper {
         addOrigin(new Origin("Colombian"));
 
         // l'application va offrir ces 4 ingredients
-        addOrigin(new Origin("Milk"));
-        addOrigin(new Origin("Dark Chocolate"));
-        addOrigin(new Origin("Butter"));
-        addOrigin(new Origin("Egg"));
-        addOrigin(new Origin("Vanilla Extract"));
-        addOrigin(new Origin("Sugar"));
-        addOrigin(new Origin("Flour"));
-        addOrigin(new Origin("Sugar"));
-        addOrigin(new Origin("Whipping cream"));
+        addIngredient(new Ingredient("Milk"));
+        addIngredient(new Ingredient("Dark Chocolate"));
+        addIngredient(new Ingredient("Butter"));
+        addIngredient(new Ingredient("Egg"));
+        addIngredient(new Ingredient("Vanilla Extract"));
+        addIngredient(new Ingredient("Sugar"));
+        addIngredient(new Ingredient("Flour"));
+        addIngredient(new Ingredient("Sugar"));
+        addIngredient(new Ingredient("Whipping cream"));
 
 
         // l'application va offrir cette recette

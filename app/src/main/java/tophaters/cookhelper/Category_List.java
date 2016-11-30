@@ -85,7 +85,7 @@ public class Category_List extends AppCompatActivity {
         private class MyListAdapter extends ArrayAdapter<Category> {
 
             public MyListAdapter() {
-                super(Category_List.this, R.layout.item_ingredient_view, myCategories);
+                super(Category_List.this, R.layout.item_ingredient_view, CookHelper.getCookHelper().getCategories());
             }
 
             @Override
@@ -98,7 +98,7 @@ public class Category_List extends AppCompatActivity {
 
                 //find the ingredient
 
-                Category currentCategory = myCategories.get(position);
+                Category currentCategory = CookHelper.getCookHelper().getCategories().get(position);
 
 
                 // Make name Text

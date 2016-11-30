@@ -42,7 +42,7 @@ public class Ingredient_List extends AppCompatActivity {
         if(getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-            populateIngredientList();
+
             populateListView();
             //registerClickCallBack();
     }}
@@ -65,19 +65,6 @@ public class Ingredient_List extends AppCompatActivity {
 
 
 
-    private void populateIngredientList() {
-        myIngredients.add(new Ingredient("Tomate"));
-        myIngredients.add(new Ingredient("Sel"));
-        myIngredients.add(new Ingredient("Poivron"));
-        myIngredients.add(new Ingredient("Poivre"));
-        myIngredients.add(new Ingredient("Fraise"));
-        myIngredients.add(new Ingredient("Jambon"));
-        myIngredients.add(new Ingredient("Gingembre"));
-        myIngredients.add(new Ingredient("Chocolat"));
-        myIngredients.add(new Ingredient("Pain blanc"));
-
-
-    }
 
     private void populateListView() {
 
@@ -91,7 +78,7 @@ public class Ingredient_List extends AppCompatActivity {
     private class MyListAdapter extends ArrayAdapter<Ingredient> {
 
         public MyListAdapter() {
-            super(Ingredient_List.this, R.layout.item_ingredient_view, myIngredients);
+            super(Ingredient_List.this, R.layout.item_ingredient_view, CookHelper.getCookHelper().getIngredients());
         }
 
         @Override
@@ -104,7 +91,7 @@ public class Ingredient_List extends AppCompatActivity {
 
             //find the ingredient
 
-            Ingredient currentIngredient = myIngredients.get(position);
+            Ingredient currentIngredient = CookHelper.getCookHelper().getIngredients().get(position);
 
 
             // Make name Text
