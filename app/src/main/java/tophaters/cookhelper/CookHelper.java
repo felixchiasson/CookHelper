@@ -146,15 +146,18 @@ public class CookHelper {
     }
 
     private ArrayList<Category> filterCategory(Category category, ArrayList<Recipe> recipes){
-
+        ArrayList<Recipe> newRecipes;
+        return newRecipes;
     }
 
     private ArrayList<Category> filterOrigin(Origin origin, ArrayList<Recipe> recipes){
-
+        ArrayList<Recipe> newRecipes;
+        return newRecipes;
     }
 
     private ArrayList<Category> filterIngredient(String bool, Ingredient ingredient, ArrayList<Recipe> recipes){
-
+        ArrayList<Recipe> newRecipes;
+        return newRecipes;
     }
     */
     // methodes d'Instances pour les variables d'instances
