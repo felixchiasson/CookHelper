@@ -133,17 +133,30 @@ public class CookHelper {
 
         return true;
     }
-
-    /*La fonction qui implement le search de la recette
-    public void search(Category category, Origin origin, ArrayList<Ingredient> ingredients){
+    /*
+    //La fonction qui implemente la recherhce de recette
+    public ArrayList<Recipe> search(Category category, Origin origin, ArrayList<Ingredient> ingredients, ArrayList<String> bools) {
         ArrayList<Recipe> recipes = getRecipes();
+        recipes = filterCategory(category, recipes);
+        recipes = filterOrigin(origin, recipes);
+        for (int i = 0; i < ingredients.size(); i++) {
+            recipes = filterIngredient(bools[i], ingredients[i], recipes);
+        }
+        return recipes;
+    }
 
+    private ArrayList<Category> filterCategory(Category category, ArrayList<Recipe> recipes){
 
+    }
+
+    private ArrayList<Category> filterOrigin(Origin origin, ArrayList<Recipe> recipes){
+
+    }
+
+    private ArrayList<Category> filterIngredient(String bool, Ingredient ingredient, ArrayList<Recipe> recipes){
 
     }
     */
-
-
     // methodes d'Instances pour les variables d'instances
     public ArrayList<Category> getCategories() {
         return categories;
