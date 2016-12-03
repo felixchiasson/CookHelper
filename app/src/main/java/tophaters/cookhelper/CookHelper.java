@@ -119,8 +119,8 @@ public class CookHelper {
 
     //ajouter des origins
     public  boolean addOrigin(Origin origin) {
-        for (int i = 0; i <= origins.size(); i++) {
-            if (origin.getName() == origins.get(i).getName()) {
+        for (int i = 0; i < origins.size(); i++) {
+            if (origin.getName().toLowerCase().equals(origins.get(i).getName().toLowerCase())) {
                 return false;
             }
         }
@@ -135,7 +135,7 @@ public class CookHelper {
     //ajouter des ingredients
     public  boolean addIngredient(Ingredient ingredient) {
         for (int i = 0; i < ingredients.size(); i++) {
-            if (ingredient == ingredients.get(i)) {
+            if (ingredient.getName().toLowerCase().equals(ingredients.get(i).getName().toLowerCase())) {
                 return false;
             }
         }
@@ -150,7 +150,7 @@ public class CookHelper {
     //ajouter des recettes
     public  boolean addRecipe(Recipe recipe) {
         for (int i = 0; i < recipes.size(); i++) {
-            if (recipe == recipes.get(i)) {
+            if (recipe.getName().toLowerCase().equals(recipes.get(i).getName().toLowerCase())){
                 return false;
             }
         }
