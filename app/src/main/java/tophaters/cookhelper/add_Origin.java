@@ -32,7 +32,7 @@ public class add_Origin extends AppCompatActivity {
         }
     }
     public void onClickSaveOrigin(View v){
-        boolean added = false;
+        boolean added;
         EditText edit =  (EditText) findViewById(R.id.inputNewOrigin);
         Origin newOrigin = new Origin(edit.getText().toString());
 
