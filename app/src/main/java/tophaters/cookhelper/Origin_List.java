@@ -11,13 +11,15 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 public class Origin_List extends AppCompatActivity {
     private List<Origin> myOrigin= new ArrayList<Origin>();
+    private ArrayAdapter<Origin> adapter;
+    ListView list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +44,45 @@ public class Origin_List extends AppCompatActivity {
 
             populateListView();
             //registerClickCallBack();
+            SwipeDismissListViewTouchListener touchListener =
+                    new SwipeDismissListViewTouchListener(
+                            list,
+                            new SwipeDismissListViewTouchListener.DismissCallbacks() {
+                                @Override
+                                public boolean canDismiss(int position) {
+                                    return true;
+                                }
+
+                                @Override
+                                public void onDismiss(ListView listView, int[] reverseSortedPositions) {
+                                    for (int position : reverseSortedPositions) {
+
+
+                                        Origin origin =CookHelper.getCookHelper().getOrigins().get(position);
+                                        boolean isNotInRecipe = CookHelper.getCookHelper().removeOrigin(origin);
+                                        if(!isNotInRecipe){
+                                            String message =" You can not remove this origin because it is currently used in a recipe";
+
+                                            Toast.makeText(Origin_List.this, message , Toast.LENGTH_LONG).show();
+                                        }
+
+                                        adapter.notifyDataSetChanged();
+
+                                    }
+
+                                }
+                            });
+            list.setOnTouchListener(touchListener);
+
+
         }}
+
+
+
+
+
+
+
 
     //methode ajouter pour clicker sur les items sune liste
 //    private void registerClickCallBack(){
@@ -65,8 +105,8 @@ public class Origin_List extends AppCompatActivity {
 
     private void populateListView() {
 
-        ArrayAdapter<Origin> adapter = new Origin_List.MyListAdapter();
-        ListView list = (ListView) findViewById(R.id.originsListView);
+        adapter = new Origin_List.MyListAdapter();
+        list = (ListView) findViewById(R.id.originsListView);
         list.setAdapter(adapter);
 
     }

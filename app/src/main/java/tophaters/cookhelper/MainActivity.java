@@ -5,8 +5,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -15,19 +13,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Adapter;
-import android.view.ViewGroup;
-
-
-import java.util.ArrayList;
-import java.util.List;
-
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import java.util.ArrayList;
 import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
@@ -40,7 +32,9 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     // variable d'instances
-    private List<Recipe> myRecipes = new ArrayList<Recipe>();
+    ArrayAdapter<Recipe> adapter;
+    ListView list;
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -82,7 +76,49 @@ public class MainActivity extends AppCompatActivity
         registerClickCallBack();
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
+
+        SwipeDismissListViewTouchListener touchListener =
+                new SwipeDismissListViewTouchListener(
+                        list,
+                        new SwipeDismissListViewTouchListener.DismissCallbacks() {
+                            @Override
+                            public boolean canDismiss(int position) {
+                                return true;
+                            }
+
+                            @Override
+                            public void onDismiss(ListView listView, int[] reverseSortedPositions) {
+                                for (int position : reverseSortedPositions) {
+
+
+                                    Recipe recipe = CookHelper.getCookHelper().getRecipes().get(position);
+                                    CookHelper.getCookHelper().removeRecipe(recipe);
+
+                                    adapter.notifyDataSetChanged();
+
+                                }
+
+                            }
+                        });
+        list.setOnTouchListener(touchListener);
+
+
+
+
+
+
+
+
+
+
+
+
+
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
+
+
+
     }
     //methode ajouter pour clicker sur les items sune liste
     private void registerClickCallBack(){
@@ -111,11 +147,12 @@ public class MainActivity extends AppCompatActivity
 
     private void populateListView() {
 
-        ArrayAdapter<Recipe> adapter = new MyListAdapter();
-        ListView list = (ListView) findViewById(R.id.recipesListView);
+         adapter = new MyListAdapter();
+        list = (ListView) findViewById(R.id.recipesListView);
         list.setAdapter(adapter);
 
     }
+
 
     @Override
     public void onBackPressed() {

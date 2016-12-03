@@ -4,23 +4,23 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
+import static tophaters.cookhelper.CookHelper.getCookHelper;
+import static tophaters.cookhelper.R.layout.item_ingredient_view;
 
 public class Ingredient_List extends AppCompatActivity {
-    private List<Ingredient> myIngredients = new ArrayList<Ingredient>();
+    private ListView list;
+    private ArrayAdapter<Ingredient> adapter;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +45,39 @@ public class Ingredient_List extends AppCompatActivity {
 
             populateListView();
             //registerClickCallBack();
+
+
+            SwipeDismissListViewTouchListener touchListener =
+                    new SwipeDismissListViewTouchListener(
+                            list,
+                            new SwipeDismissListViewTouchListener.DismissCallbacks() {
+                                @Override
+                                public boolean canDismiss(int position) {
+                                    return true;
+                                }
+
+                                @Override
+                                public void onDismiss(ListView listView, int[] reverseSortedPositions) {
+                                    for (int position : reverseSortedPositions) {
+
+
+                                        Ingredient ingredient =CookHelper.getCookHelper().getIngredients().get(position);
+                                        boolean isNotInRecipe = CookHelper.getCookHelper().removeIngredient(ingredient);
+                                        if(!isNotInRecipe){
+                                            String message =" You can not remove this ingredient because it is currently used in a recipe";
+
+                                            Toast.makeText( Ingredient_List.this, message , Toast.LENGTH_LONG).show();
+                                        }
+
+                                        adapter.notifyDataSetChanged();
+
+                                    }
+
+                                }
+                            });
+            list.setOnTouchListener(touchListener);
+
+
     }}
 
     //methode ajouter pour clicker sur les items sune liste
@@ -68,17 +101,19 @@ public class Ingredient_List extends AppCompatActivity {
 
     private void populateListView() {
 
-        ArrayAdapter<Ingredient> adapter = new MyListAdapter();
-        ListView list = (ListView) findViewById(R.id.ingredientsListView);
+        adapter= new MyListAdapter();
+        list = (ListView) findViewById(R.id.ingredientsListView);
         list.setAdapter(adapter);
 
     }
 
 
-    private class MyListAdapter extends ArrayAdapter<Ingredient> {
+
+
+    private class  MyListAdapter extends ArrayAdapter<Ingredient> {
 
         public MyListAdapter() {
-            super(Ingredient_List.this, R.layout.item_ingredient_view, CookHelper.getCookHelper().getIngredients());
+            super(Ingredient_List.this, item_ingredient_view, getCookHelper().getIngredients());
         }
 
         @Override
@@ -86,12 +121,12 @@ public class Ingredient_List extends AppCompatActivity {
         View getView(int position, View convertView, @NonNull ViewGroup parent) {
             View itemView = convertView;
             if (itemView == null) {
-                itemView = getLayoutInflater().inflate(R.layout.item_ingredient_view, parent, false);
+                itemView = getLayoutInflater().inflate(item_ingredient_view, parent, false);
             }
 
             //find the ingredient
 
-            Ingredient currentIngredient = CookHelper.getCookHelper().getIngredients().get(position);
+            Ingredient currentIngredient = getCookHelper().getIngredients().get(position);
 
 
             // Make name Text
@@ -103,6 +138,7 @@ public class Ingredient_List extends AppCompatActivity {
         }
 
     }
+
 
 
 

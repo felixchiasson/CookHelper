@@ -1,7 +1,6 @@
 package tophaters.cookhelper;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Collections;
 
 /**
@@ -33,7 +32,7 @@ public class CookHelper {
         addCategory(new Category("Dessert"));
         addCategory(new Category("Sauce"));
         addCategory(new Category("Drink"));
-        addCategory(new Category("Main Meal"));
+        addCategory(new Category("Sea Food"));
 
        // l'application va offrir ces 4 origines
         addOrigin(new Origin("French"));
@@ -42,22 +41,51 @@ public class CookHelper {
         addOrigin(new Origin("Colombian"));
 
         // l'application va offrir ces 9 ingredients
-        addOrigin(new Origin("Milk"));
-        addOrigin(new Origin("Dark Chocolate"));
-        addOrigin(new Origin("Butter"));
-        addOrigin(new Origin("Egg"));
-        addOrigin(new Origin("Vanilla Extract"));
-        addOrigin(new Origin("Sugar"));
-        addOrigin(new Origin("Flour"));
-        addOrigin(new Origin("Sugar"));
-        addOrigin(new Origin("Whipping cream"));
-
+        addIngredient(new Ingredient("Milk"));
+        addIngredient(new Ingredient("Dark Chocolate"));
+        addIngredient(new Ingredient("Butter"));
+        addIngredient(new Ingredient("Egg"));
+        addIngredient(new Ingredient("Vanilla Extract"));
+        addIngredient(new Ingredient("Sugar"));
+        addIngredient(new Ingredient("Flour"));
+        addIngredient(new Ingredient("Sugar"));
+        addIngredient(new Ingredient("Whipping cream"));
 
         // l'application va offrir cette recette
 
         addRecipe(new Recipe(5, 30, "For the crepes: Put the milk, chocolate and butter in a saucepan and heat to melt. Beat the eggs with the sugar in a bowl. Add the vanilla, then the flour. Beat in the chocolate mixture. Strain into a jug and let sit for 30 minutes. Add more milk or water if necessary to give the consistency of thin cream. " +
                 "Fry the crepes in a nonstick pan. If you do not have a nonstick pan use a bit of oil. For the chocolate sauce: Put the chocolate and cream together in a saucepan and heat, gently, until the chocolate has melted and the mixture is very smooth. Thin, as needed with more cream. Serve hot."
                 ,"Chocolate Crepes", R.drawable.ic_crepe, origins.get(0) , categories.get(0), (ArrayList<Ingredient>)ingredients.clone()));
+
+        //Voici le array d'Ingredients pour le saumon
+        Ingredient a1= new Ingredient("Salmon Filet");
+        Ingredient a2 =new Ingredient("Lemon Pepper");
+        Ingredient a3 = new Ingredient("Garlic Powder");
+        Ingredient a4 = new Ingredient("Salt");
+        Ingredient a5 =new Ingredient("Soy Sauce");
+        Ingredient a6 =new Ingredient("Brown Sugar");
+        Ingredient a7 = new Ingredient("Water");
+        Ingredient a8 =new Ingredient("Vegetable Oil");
+
+        ArrayList<Ingredient> salmon_ingredient= new ArrayList<Ingredient>();
+
+        salmon_ingredient.add(a1); addIngredient(a1);
+        salmon_ingredient.add(a2); addIngredient(a2);
+        salmon_ingredient.add(a3); addIngredient(a3);
+        salmon_ingredient.add(a4); addIngredient(a4);
+        salmon_ingredient.add(a5); addIngredient(a5);
+        salmon_ingredient.add(a6); addIngredient(a6);
+        salmon_ingredient.add(a7); addIngredient(a7);
+        salmon_ingredient.add(a8); addIngredient(a8);
+
+
+
+        addRecipe(new Recipe(15, 16, "Season salmon fillets with lemon pepper, garlic powder, and salt.\n" +
+                "In a small bowl, stir together soy sauce, brown sugar, water, and vegetable oil until sugar is dissolved.\n Place fish in a large resealable plastic bag with the soy sauce mixture, " +
+                "seal, and turn to coat. Refrigerate for at least 2 hours.\n" +
+                "Preheat grill for medium heat.\n" +
+                "Lightly oil grill grate. Place salmon on the preheated grill, and discard marinade. Cook salmon for 6 to 8 minutes per side, or until the fish flakes easily with a fork.", "Grilled Salmon", R.drawable.ic_salmon, origins.get(0) , categories.get(3), salmon_ingredient));
+        addIngredient(new Ingredient("Tomato"));
 
 
     }
@@ -133,6 +161,84 @@ public class CookHelper {
 
         return true;
     }
+
+    //Les methode pour supprimer des ingredients, des catégorie et des recettes.
+
+    //supprimer des ingredient
+    public boolean removeIngredient(Ingredient ingredient) {
+        // Check that the ingredient to be removed doesnt exist in any recipe
+        for(int i = 0; i<recipes.size(); i++ ){
+            Recipe recipeCheck = recipes.get(i);
+            for (int j = 0; j<recipeCheck.getIngredients().size(); j++){
+                Ingredient ingredientCheck = recipeCheck.getIngredients().get(j);
+                if(ingredientCheck == ingredient){
+                    return false;
+                }
+            }
+        }
+        for (int i = 0; i < ingredients.size(); i++) {
+            if (ingredient == ingredients.get(i)) {
+                ingredients.remove(ingredients.get(i));
+                return true;
+            }
+        }
+        return false;
+
+
+    }
+    //supprimer des recettes
+    public boolean removeRecipe(Recipe recipe) {
+        for (int i = 0; i < recipes.size(); i++) {
+            if (recipe == recipes.get(i)) {
+                recipes.remove(recipes.get(i));
+                return true;
+            }
+        }
+        return false;
+
+
+    }
+    //supprimer des origines
+    public boolean removeOrigin(Origin origin) {
+        // Check that the Orgin to be removed doesnt exist in any recipe
+        for(int i = 0; i<recipes.size(); i++ ){
+            Recipe recipeCheck = recipes.get(i);
+            if(recipeCheck.getOrigin() == origin){
+                return false;
+            }
+        }
+        for (int i = 0; i < origins.size(); i++) {
+            if (origin == origins.get(i)) {
+                origins.remove(origins.get(i));
+                return true;
+            }
+        }
+        return false;
+
+
+    }
+
+    //supprimer des category
+
+    public boolean removeCategory(Category category) {
+        // Check that the category to be removed doesnt exist in any recipe
+        for(int i = 0; i<recipes.size(); i++ ){
+            Recipe recipeCheck = recipes.get(i);
+            if(recipeCheck.getCategory() == category){
+                return false;
+            }
+        }
+        for (int i = 0; i < categories.size(); i++) {
+            if (category == categories.get(i)) {
+                categories.remove(categories.get(i));
+                return true;
+            }
+        }
+        return false;
+
+
+    }
+
     /*
     //La fonction qui implemente la recherhce de recette
     public ArrayList<Recipe> search(Category category, Origin origin, ArrayList<Ingredient> ingredients, ArrayList<String> bools) {
@@ -192,6 +298,8 @@ public class CookHelper {
     public void setIngredients(ArrayList<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
+
+
 
 
 

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -12,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +19,9 @@ import java.util.List;
 public class Category_List extends AppCompatActivity {
 
     private List<Category> myCategories= new ArrayList<Category>();
+    private ListView list;
+    private ArrayAdapter<Category> adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,15 +40,48 @@ public class Category_List extends AppCompatActivity {
 
             }
         });
-        if(getSupportActionBar() != null){
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-            populateCategoryList();
+
             populateListView();
             //registerClickCallBack();
-        }}
 
-    //methode ajouter pour clicker sur les items sune liste
+            SwipeDismissListViewTouchListener touchListener =
+                    new SwipeDismissListViewTouchListener(
+                            list,
+                            new SwipeDismissListViewTouchListener.DismissCallbacks() {
+                                @Override
+                                public boolean canDismiss(int position) {
+                                    return true;
+                                }
+
+                                @Override
+                                public void onDismiss(ListView listView, int[] reverseSortedPositions) {
+                                    for (int position : reverseSortedPositions) {
+
+
+                                        Category category = CookHelper.getCookHelper().getCategories().get(position);
+                                        boolean isNotInRecipe = CookHelper.getCookHelper().removeCategory(category);
+                                        if (!isNotInRecipe) {
+                                            String message = " You can not remove this category because it is currently used in a recipe";
+
+                                            Toast.makeText(Category_List.this, message, Toast.LENGTH_LONG).show();
+                                        }
+
+                                        adapter.notifyDataSetChanged();
+
+                                    }
+
+                                }
+                            });
+            list.setOnTouchListener(touchListener);
+
+
+        }
+
+
+        //methode ajouter pour clicker sur les items sune liste
 //    private void registerClickCallBack(){
 //
 //        ListView list = (ListView) findViewById(R.id.ingredientsListView);
@@ -61,22 +97,12 @@ public class Category_List extends AppCompatActivity {
 //
 //    }
 
-
-
-    private void populateCategoryList() {
-        myCategories.add(new Category("Dessert"));
-        myCategories.add(new Category("Repas Principal"));
-        myCategories.add(new Category("Brevage"));
-        myCategories.add(new Category("Dejeuner"));
-        myCategories.add(new Category("Sauce"));
-        myCategories.add(new Category("Boisson"));
-
     }
 
     private void populateListView() {
 
-        ArrayAdapter<Category> adapter = new MyListAdapter();
-        ListView list = (ListView) findViewById(R.id.categoriesListView);
+        adapter = new MyListAdapter();
+        list = (ListView) findViewById(R.id.categoriesListView);
         list.setAdapter(adapter);
 
     }
