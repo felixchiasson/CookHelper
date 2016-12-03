@@ -6,6 +6,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class add_Origin extends AppCompatActivity {
 
@@ -29,5 +31,19 @@ public class add_Origin extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
+    public void onClickSaveOrigin(View v){
+        boolean added = false;
+        EditText edit =  (EditText) findViewById(R.id.inputNewOrigin);
+        Origin newOrigin = new Origin(edit.getText().toString());
+
+        added = CookHelper.getCookHelper().addOrigin(newOrigin);
+
+        if (added == true){
+            Toast.makeText(add_Origin.this, "Saved", Toast.LENGTH_LONG).show();
+        }else{
+            Toast.makeText(add_Origin.this, "Origin already exists.", Toast.LENGTH_LONG).show();
+        }
+    }
+
 
 }

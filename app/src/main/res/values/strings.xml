@@ -172,6 +172,7 @@
     <string name="title_bar_mene">Cook Helper</string>
     <string name="title_activity_help_page">Help Page</string>
     <string name="help">Help</string>
+    <string name="recipeName">Recipe Name</string>
 
     <!--
         help Page

@@ -293,44 +293,4 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-    public void onClickTestRecipe(View v) {
-
-        Intent i;
-
-        i = new Intent(this, recipe_add_form.class);
-        startActivity(i);
-
-    }
-
-    public void onClickTestIngredient(View v) {
-
-        Intent i;
-        i = new Intent(this, add_Ingredient.class);
-        startActivity(i);
-
-    }
-
-    public void onClickTestOrigin(View v) {
-
-        Intent i;
-        i = new Intent(this, add_Origin.class);
-        startActivity(i);
-
-    }
-
-    public void onClickTestCategory(View v) {
-
-        Intent i;
-        i = new Intent(this, add_Category.class);
-        startActivity(i);
-
-    }
-
-    public void onClickTestRecipeView(View v) {
-
-        Intent i;
-        i = new Intent(this, RecipeView.class);
-        startActivity(i);
-    }
 }

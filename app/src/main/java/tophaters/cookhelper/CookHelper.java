@@ -12,11 +12,11 @@ import java.util.Collections;
 public class CookHelper {
     private static CookHelper cookHelper; // l'instance du Singleton
 
-    // le Singleton va stocker les categories, les recettes, les origns et les ingdients dans des lisres
-    private ArrayList<Category> categories;
-    private ArrayList<Recipe> recipes;
-    private ArrayList<Origin> origins;
-    private ArrayList<Ingredient> ingredients;
+    // le Singleton va stocker les categories, les recettes, les origns et les ingredients dans des listes
+    private   ArrayList<Category> categories;
+    private   ArrayList<Recipe> recipes;
+    private   ArrayList<Origin> origins;
+    private   ArrayList<Ingredient> ingredients;
 
     private CookHelper() {
         //creer les listes
@@ -103,7 +103,7 @@ public class CookHelper {
     // methodes pour ajouter en ordre alphabetique dans les differentes listes
 
     //ajouter des categories
-    public boolean addCategory(Category category) {
+    public  boolean addCategory(Category category) {
         for (int i = 0; i < categories.size(); i++) {
             if (category == categories.get(i)) {
                 return false;
@@ -118,9 +118,9 @@ public class CookHelper {
     }
 
     //ajouter des origins
-    public boolean addOrigin(Origin origin) {
-        for (int i = 0; i < origins.size(); i++) {
-            if (origin == origins.get(i)) {
+    public  boolean addOrigin(Origin origin) {
+        for (int i = 0; i <= origins.size(); i++) {
+            if (origin.getName() == origins.get(i).getName()) {
                 return false;
             }
         }
@@ -133,7 +133,7 @@ public class CookHelper {
     }
 
     //ajouter des ingredients
-    public boolean addIngredient(Ingredient ingredient) {
+    public  boolean addIngredient(Ingredient ingredient) {
         for (int i = 0; i < ingredients.size(); i++) {
             if (ingredient == ingredients.get(i)) {
                 return false;
@@ -148,7 +148,7 @@ public class CookHelper {
     }
 
     //ajouter des recettes
-    public boolean addRecipe(Recipe recipe) {
+    public  boolean addRecipe(Recipe recipe) {
         for (int i = 0; i < recipes.size(); i++) {
             if (recipe == recipes.get(i)) {
                 return false;
@@ -165,7 +165,7 @@ public class CookHelper {
     //Les methode pour supprimer des ingredients, des catégorie et des recettes.
 
     //supprimer des ingredient
-    public boolean removeIngredient(Ingredient ingredient) {
+    public  boolean removeIngredient(Ingredient ingredient) {
         // Check that the ingredient to be removed doesnt exist in any recipe
         for(int i = 0; i<recipes.size(); i++ ){
             Recipe recipeCheck = recipes.get(i);
@@ -187,7 +187,7 @@ public class CookHelper {
 
     }
     //supprimer des recettes
-    public boolean removeRecipe(Recipe recipe) {
+    public  boolean removeRecipe(Recipe recipe) {
         for (int i = 0; i < recipes.size(); i++) {
             if (recipe == recipes.get(i)) {
                 recipes.remove(recipes.get(i));
@@ -199,7 +199,7 @@ public class CookHelper {
 
     }
     //supprimer des origines
-    public boolean removeOrigin(Origin origin) {
+    public  boolean removeOrigin(Origin origin) {
         // Check that the Orgin to be removed doesnt exist in any recipe
         for(int i = 0; i<recipes.size(); i++ ){
             Recipe recipeCheck = recipes.get(i);
@@ -220,7 +220,7 @@ public class CookHelper {
 
     //supprimer des category
 
-    public boolean removeCategory(Category category) {
+    public  boolean removeCategory(Category category) {
         // Check that the category to be removed doesnt exist in any recipe
         for(int i = 0; i<recipes.size(); i++ ){
             Recipe recipeCheck = recipes.get(i);
