@@ -58,13 +58,6 @@
                     android:textAppearance="@android:style/TextAppearance.Material.Medium" />
 
                 <TextView
-                    android:text="@string/recipe_view_calories"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/recipe_view_text_calories"
-                    android:textAppearance="@android:style/TextAppearance.Material.Medium" />
-
-                <TextView
                     android:text="@string/recipe_view_category"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -100,13 +93,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/recipe_view_value_cooktime"
-                    android:textAppearance="@android:style/TextAppearance.Material.Medium" />
-
-                <TextView
-                    android:text="350"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/recipe_view_value_calories"
                     android:textAppearance="@android:style/TextAppearance.Material.Medium" />
 
                 <TextView

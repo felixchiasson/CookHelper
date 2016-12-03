@@ -20,7 +20,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -128,8 +127,20 @@ public class MainActivity extends AppCompatActivity
 
             public void onItemClick(AdapterView<?> parent, View viewClick, int position, long id){
                 Recipe clickedRecipe = CookHelper.getCookHelper().getRecipes().get(position);
-                String message = "You clicked " + position + " this is car make " + clickedRecipe.getName();
-                Toast.makeText( MainActivity.this, message , Toast.LENGTH_LONG).show();
+                Intent i = new Intent(MainActivity.this, RecipeView.class);
+                i.putExtra("prepTime", clickedRecipe.getPreTime()+" minutes");
+                i.putExtra("name", clickedRecipe.getName()+"");
+                i.putExtra("cookTime", clickedRecipe.getCookTime()+" minutes");
+                i.putExtra("category", clickedRecipe.getCategory().getName()+"");
+                i.putExtra("origin", clickedRecipe.getOrigin().getName()+"");
+                i.putExtra("description", clickedRecipe.getDescription());
+                i.putExtra("picture", clickedRecipe.getIconId()+"");
+
+
+
+                //  start the activity
+                startActivity(i);
+
 
             }
         });
@@ -277,11 +288,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_viewOrigins) {
             Intent a = new Intent(MainActivity.this, Origin_List.class);
             startActivity(a);
-        }else if (id == R.id.nav_viewRecipe) {
-            Intent a = new Intent(MainActivity.this, RecipeView.class);
-            startActivity(a);
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

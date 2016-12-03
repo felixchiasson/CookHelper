@@ -3,10 +3,12 @@ package tophaters.cookhelper;
 /**
  * Created by shanelgauthier on 16-11-20.
  */
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-public class Recipe {
+public class Recipe  implements Serializable {
     //instances variables
     private String name;
     private String description;
@@ -16,6 +18,7 @@ public class Recipe {
     private Origin origin; // the origin of the recipe
     private Category category;  // the category of the recipe
     private ArrayList<Ingredient> ingredients; // a list with all the ingredients to use in the recipe
+    private static final long serialVersionUID = 1L;
 
 
     public Recipe(int cookTime, int preTime, String description,  String name, int iconId, Origin origin, Category category, ArrayList<Ingredient> ingredients ) {
