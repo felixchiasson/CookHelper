@@ -105,7 +105,7 @@ public class CookHelper {
     //ajouter des categories
     public  boolean addCategory(Category category) {
         for (int i = 0; i < categories.size(); i++) {
-            if (category == categories.get(i)) {
+            if (category.getName().toLowerCase().equals(categories.get(i).getName().toLowerCase())) {
                 return false;
             }
         }

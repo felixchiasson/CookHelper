@@ -20,7 +20,8 @@ public class add_Ingredient extends AppCompatActivity {
     public void onClickSaveIngredient(View v){
         boolean added;
         EditText edit =  (EditText) findViewById(R.id.addIngredientName);
-        Ingredient newIngredient= new Ingredient(edit.getText().toString());
+        String ingredient = edit.getText().toString();
+        Ingredient newIngredient= new Ingredient(ingredient.substring(0,1).toUpperCase() + ingredient.substring(1).toLowerCase());
 
         added = CookHelper.getCookHelper().addIngredient(newIngredient);
 

@@ -33,7 +33,8 @@ public class add_Category extends AppCompatActivity {
     public void onClickSaveCategory(View v){
         boolean added;
         EditText edit =  (EditText) findViewById(R.id.inputNewCategory);
-        Category newCategory= new Category(edit.getText().toString());
+        String category = edit.getText().toString();
+        Category newCategory= new Category(category.substring(0,1).toUpperCase() + category.substring(1).toLowerCase());
 
         added = CookHelper.getCookHelper().addCategory(newCategory);
 
