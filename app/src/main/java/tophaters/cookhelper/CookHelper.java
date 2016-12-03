@@ -243,10 +243,18 @@ public class CookHelper {
     //La fonction qui implemente la recherhce de recette
     public ArrayList<Recipe> search(Category category, Origin origin, ArrayList<Ingredient> ingredients, ArrayList<String> bools) {
         ArrayList<Recipe> recipes = getRecipes();
+        ArrayList<Ingredient> orIngredients;
         recipes = filterCategory(category, recipes);
         recipes = filterOrigin(origin, recipes);
         for (int i = 0; i < ingredients.size(); i++) {
-            recipes = filterIngredient(bools[i], ingredients[i], recipes);
+            if(bools[i]!="OR"){
+                recipes = filterIngredient(bools[i], ingredients[i], recipes);
+            }else{
+                orIngredients.add(ingredients[i]);
+            }
+        }
+        for(){
+
         }
         return recipes;
     }
