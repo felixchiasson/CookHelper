@@ -15,7 +15,6 @@ public class Recipe  implements Serializable {
     private String name;
     private String description;
     private Uri iconId;
-    private int iconIdInt;
     private int preTime;   // in minutes
     private int cookTime;   // in minutes
     private Origin origin; // the origin of the recipe
@@ -28,17 +27,6 @@ public class Recipe  implements Serializable {
         this.cookTime = cookTime;
         this.preTime = preTime;
         this.iconId = iconId;
-        this.description = description;
-        this.name = name;
-        this.origin = origin;
-        this.category = category;
-        this.ingredients=ingredients;
-    }
-
-    public Recipe(int cookTime, int preTime, String description,  String name, int iconId, Origin origin, Category category, ArrayList<Ingredient> ingredients ) {
-        this.cookTime = cookTime;
-        this.preTime = preTime;
-        this.iconIdInt = iconId;
         this.description = description;
         this.name = name;
         this.origin = origin;
