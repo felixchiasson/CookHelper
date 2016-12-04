@@ -51,11 +51,31 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:id="@+id/editText"
+                    android:id="@+id/recipe_add_name"
                     style="@android:style/Widget.Material.EditText"
                     android:hint="@string/add_recipe_name"
                     android:selectAllOnFocus="false"
                     android:inputType="text" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:id="@+id/recipe_add_preptime"
+                    style="@android:style/Widget.Material.EditText"
+                    android:hint="@string/add_recipe_preptime"
+                    android:selectAllOnFocus="false"
+                    android:inputType="number" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:id="@+id/recipe_add_cooktime"
+                    style="@android:style/Widget.Material.EditText"
+                    android:hint="@string/add_recipe_cooktime"
+                    android:selectAllOnFocus="false"
+                    android:inputType="number" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -67,7 +87,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:id="@+id/spinner"
+                    android:id="@+id/spinnerIngredients"
                     android:entries="@array/add_recipe_ingredient_list"/>
 
                 <TextView

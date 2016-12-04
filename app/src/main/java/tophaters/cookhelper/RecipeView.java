@@ -1,6 +1,7 @@
 package tophaters.cookhelper;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -82,7 +83,7 @@ public class RecipeView extends AppCompatActivity {
 
         //change the picture of each recipe
         ImageView img= (ImageView) findViewById(R.id.defaultRecipeImage);
-        img.setImageResource(Integer.parseInt(iconId));
+        img.setImageURI(Uri.parse(iconId));
 
 
         // ------------------------------------------

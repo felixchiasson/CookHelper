@@ -1,5 +1,11 @@
 package tophaters.cookhelper;
 
+import android.content.ContentResolver;
+import android.content.Context;
+import android.net.Uri;
+import android.support.annotation.AnyRes;
+import android.support.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.PriorityQueue;
@@ -12,6 +18,9 @@ import java.util.PriorityQueue;
 //cette classe sera le singleton de l'application
 public class CookHelper {
     private static CookHelper cookHelper; // l'instance du Singleton
+
+    private Uri defaultRecipeA = Uri.parse("android.resource://tophaters.cookhelper/drawable/ic_crepe");
+    private Uri defaultRecipeB = Uri.parse("android.resource://tophaters.cookhelper/drawable/ic_salmon");
 
     // le Singleton va stocker les categories, les recettes, les origns et les ingredients dans des listes
     private   ArrayList<Category> categories;
@@ -56,7 +65,7 @@ public class CookHelper {
 
         addRecipe(new Recipe(5, 30, "For the crepes: Put the milk, chocolate and butter in a saucepan and heat to melt. Beat the eggs with the sugar in a bowl. Add the vanilla, then the flour. Beat in the chocolate mixture. Strain into a jug and let sit for 30 minutes. Add more milk or water if necessary to give the consistency of thin cream. " +
                 "Fry the crepes in a nonstick pan. If you do not have a nonstick pan use a bit of oil. For the chocolate sauce: Put the chocolate and cream together in a saucepan and heat, gently, until the chocolate has melted and the mixture is very smooth. Thin, as needed with more cream. Serve hot."
-                ,"Chocolate Crepes", R.drawable.ic_crepe, origins.get(0) , categories.get(0), (ArrayList<Ingredient>)ingredients.clone()));
+                ,"Chocolate Crepes", defaultRecipeA, origins.get(0) , categories.get(0), (ArrayList<Ingredient>)ingredients.clone()));
 
         //Voici le array d'Ingredients pour le saumon
         Ingredient a1= new Ingredient("Salmon Filet");
@@ -85,7 +94,7 @@ public class CookHelper {
                 "In a small bowl, stir together soy sauce, brown sugar, water, and vegetable oil until sugar is dissolved.\n Place fish in a large resealable plastic bag with the soy sauce mixture, " +
                 "seal, and turn to coat. Refrigerate for at least 2 hours.\n" +
                 "Preheat grill for medium heat.\n" +
-                "Lightly oil grill grate. Place salmon on the preheated grill, and discard marinade. Cook salmon for 6 to 8 minutes per side, or until the fish flakes easily with a fork.", "Grilled Salmon", R.drawable.ic_salmon, origins.get(0) , categories.get(3), salmon_ingredient));
+                "Lightly oil grill grate. Place salmon on the preheated grill, and discard marinade. Cook salmon for 6 to 8 minutes per side, or until the fish flakes easily with a fork.", "Grilled Salmon", defaultRecipeB, origins.get(0) , categories.get(3), salmon_ingredient));
         addIngredient(new Ingredient("Tomato"));
 
 
@@ -357,9 +366,6 @@ public class CookHelper {
     public void setIngredients(ArrayList<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
-
-
-
 
 
 }

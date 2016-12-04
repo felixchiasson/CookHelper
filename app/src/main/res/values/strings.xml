@@ -55,6 +55,8 @@
     <string name="add_recipe_select_category">Select Category</string>
     <string name="add_recipe_add_steps">Add Steps</string>
     <string name="add_recipe_select_origin">Select Origin</string>
+    <string name="add_recipe_cooktime">Cook Time (in minutes)</string>
+    <string name="add_recipe_preptime">Preparation Time (in minutes)</string>
     <!-- *** -->
 
     <string name="action_settings">Settings</string>
@@ -181,4 +183,5 @@
     <string name="title_activity_ingredient__list"> List of Ingredients</string>
     <string name="title_activity_origin__list">List of Origins</string>
     <string name="title_activity_category__list">List of Categories</string>
+    <string name="title_activity_browse_picture">BrowsePictureActivity</string>
 </resources>

@@ -1,8 +1,11 @@
 package tophaters.cookhelper;
 
+import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.AnyRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -25,6 +28,8 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
+
+import static java.security.AccessController.getContext;
 
 
 public class MainActivity extends AppCompatActivity
@@ -221,7 +226,7 @@ public class MainActivity extends AppCompatActivity
             // fill the view
 
             ImageView imageView = (ImageView) itemView.findViewById(R.id.item_icon);
-            imageView.setImageResource(currentRecipe.getIconId());
+            imageView.setImageURI(currentRecipe.getIconId());
 
             // Make name Text
             TextView nameText = (TextView) itemView.findViewById(R.id.item_txtName);

@@ -4,6 +4,8 @@ package tophaters.cookhelper;
  * Created by shanelgauthier on 16-11-20.
  */
 
+import android.net.Uri;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -12,7 +14,8 @@ public class Recipe  implements Serializable {
     //instances variables
     private String name;
     private String description;
-    private int iconId;
+    private Uri iconId;
+    private int iconIdInt;
     private int preTime;   // in minutes
     private int cookTime;   // in minutes
     private Origin origin; // the origin of the recipe
@@ -21,10 +24,21 @@ public class Recipe  implements Serializable {
     private static final long serialVersionUID = 1L;
 
 
-    public Recipe(int cookTime, int preTime, String description,  String name, int iconId, Origin origin, Category category, ArrayList<Ingredient> ingredients ) {
+    public Recipe(int cookTime, int preTime, String description,  String name, Uri iconId, Origin origin, Category category, ArrayList<Ingredient> ingredients ) {
         this.cookTime = cookTime;
         this.preTime = preTime;
         this.iconId = iconId;
+        this.description = description;
+        this.name = name;
+        this.origin = origin;
+        this.category = category;
+        this.ingredients=ingredients;
+    }
+
+    public Recipe(int cookTime, int preTime, String description,  String name, int iconId, Origin origin, Category category, ArrayList<Ingredient> ingredients ) {
+        this.cookTime = cookTime;
+        this.preTime = preTime;
+        this.iconIdInt = iconId;
         this.description = description;
         this.name = name;
         this.origin = origin;
@@ -83,11 +97,11 @@ public class Recipe  implements Serializable {
         this.preTime = preTime;
     }
 
-    public int getIconId() {
+    public Uri getIconId() {
         return iconId;
     }
 
-    public void setIconId(int iconId) {
+    public void setIconId(Uri iconId) {
         this.iconId = iconId;
     }
 
