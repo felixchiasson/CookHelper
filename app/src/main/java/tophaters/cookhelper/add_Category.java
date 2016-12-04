@@ -40,6 +40,7 @@ public class add_Category extends AppCompatActivity {
 
         if (added == true){
             Toast.makeText(add_Category.this, "Saved", Toast.LENGTH_LONG).show();
+            finish();
         }else{
             Toast.makeText(add_Category.this, "Category already exists.", Toast.LENGTH_LONG).show();
         }

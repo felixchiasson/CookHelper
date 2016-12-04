@@ -27,6 +27,7 @@ public class add_Ingredient extends AppCompatActivity {
 
         if (added == true){
             Toast.makeText(add_Ingredient.this, "Saved", Toast.LENGTH_LONG).show();
+            finish();
         }else{
             Toast.makeText(add_Ingredient.this, "Ingredient already exists.", Toast.LENGTH_LONG).show();
         }

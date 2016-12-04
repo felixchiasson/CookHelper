@@ -41,6 +41,7 @@ public class add_Origin extends AppCompatActivity {
 
         if (added == true){
             Toast.makeText(add_Origin.this, "Saved", Toast.LENGTH_LONG).show();
+            finish();
         }else{
             Toast.makeText(add_Origin.this, "Origin already exists.", Toast.LENGTH_LONG).show();
         }
