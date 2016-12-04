@@ -54,32 +54,22 @@
             android:text="@string/search_recipe_select_ingredients"
             android:textAppearance="@android:style/TextAppearance.Material.Subhead" />
 
-        <LinearLayout
-            android:orientation="horizontal"
+
+        <ListView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent" />
 
-            <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:id="@+id/ingredient_search_type"
-                android:entries="@array/ingredient_search_types"
-                android:layout_weight="15" />
-
-            <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:id="@+id/ingredient_search"
-                android:entries="@array/search_recipe_ingredient_list"
-                android:layout_weight="6" />
-
-        </LinearLayout>
+        <Button
+            android:text="Add Ingredient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:id="@+id/addIngredient"
+            android:layout_gravity="center" />
 
         <Button
             android:text="Search for recipes"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:id="@+id/search_button" />

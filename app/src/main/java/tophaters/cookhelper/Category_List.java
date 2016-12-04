@@ -44,41 +44,7 @@ public class Category_List extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-            populateListView();
-            //registerClickCallBack();
-
-            SwipeDismissListViewTouchListener touchListener =
-                    new SwipeDismissListViewTouchListener(
-                            list,
-                            new SwipeDismissListViewTouchListener.DismissCallbacks() {
-                                @Override
-                                public boolean canDismiss(int position) {
-                                    return true;
-                                }
-
-                                @Override
-                                public void onDismiss(ListView listView, int[] reverseSortedPositions) {
-                                    for (int position : reverseSortedPositions) {
-
-
-                                        Category category = CookHelper.getCookHelper().getCategories().get(position);
-                                        boolean isNotInRecipe = CookHelper.getCookHelper().removeCategory(category);
-                                        if (!isNotInRecipe) {
-                                            String message = " You can not remove this category because it is currently used in a recipe";
-
-                                            Toast.makeText(Category_List.this, message, Toast.LENGTH_LONG).show();
-                                        }
-
-                                        adapter.notifyDataSetChanged();
-
-                                    }
-
-                                }
-                            });
-            list.setOnTouchListener(touchListener);
-
-
-        }
+            }
 
 
         //methode ajouter pour clicker sur les items sune liste
@@ -98,6 +64,47 @@ public class Category_List extends AppCompatActivity {
 //    }
 
     }
+
+    // Always refresh activity when going back to it after (for example) adding an item
+    // onResume is called after onCreate, thus allowing populateListView to be called here instead of calling it in onCreate.
+
+    public void onResume() {
+
+        super.onResume();
+        populateListView();
+        //registerClickCallBack();
+
+        SwipeDismissListViewTouchListener touchListener =
+                new SwipeDismissListViewTouchListener(
+                        list,
+                        new SwipeDismissListViewTouchListener.DismissCallbacks() {
+                            @Override
+                            public boolean canDismiss(int position) {
+                                return true;
+                            }
+
+                            @Override
+                            public void onDismiss(ListView listView, int[] reverseSortedPositions) {
+                                for (int position : reverseSortedPositions) {
+
+
+                                    Category category = CookHelper.getCookHelper().getCategories().get(position);
+                                    boolean isNotInRecipe = CookHelper.getCookHelper().removeCategory(category);
+                                    if (!isNotInRecipe) {
+                                        String message = " You can not remove this category because it is currently used in a recipe";
+
+                                        Toast.makeText(Category_List.this, message, Toast.LENGTH_LONG).show();
+                                    }
+
+                                    adapter.notifyDataSetChanged();
+
+                                }
+
+                            }
+                        });
+        list.setOnTouchListener(touchListener);
+    }
+
 
     private void populateListView() {
 

@@ -43,42 +43,46 @@ public class Ingredient_List extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-            populateListView();
-            //registerClickCallBack();
-
-
-            SwipeDismissListViewTouchListener touchListener =
-                    new SwipeDismissListViewTouchListener(
-                            list,
-                            new SwipeDismissListViewTouchListener.DismissCallbacks() {
-                                @Override
-                                public boolean canDismiss(int position) {
-                                    return true;
-                                }
-
-                                @Override
-                                public void onDismiss(ListView listView, int[] reverseSortedPositions) {
-                                    for (int position : reverseSortedPositions) {
-
-
-                                        Ingredient ingredient =CookHelper.getCookHelper().getIngredients().get(position);
-                                        boolean isNotInRecipe = CookHelper.getCookHelper().removeIngredient(ingredient);
-                                        if(!isNotInRecipe){
-                                            String message =" You can not remove this ingredient because it is currently used in a recipe";
-
-                                            Toast.makeText( Ingredient_List.this, message , Toast.LENGTH_LONG).show();
-                                        }
-
-                                        adapter.notifyDataSetChanged();
-
-                                    }
-
-                                }
-                            });
-            list.setOnTouchListener(touchListener);
-
 
     }}
+
+    public void onResume() {
+        super.onResume();
+
+        populateListView();
+        //registerClickCallBack();
+
+
+        SwipeDismissListViewTouchListener touchListener =
+                new SwipeDismissListViewTouchListener(
+                        list,
+                        new SwipeDismissListViewTouchListener.DismissCallbacks() {
+                            @Override
+                            public boolean canDismiss(int position) {
+                                return true;
+                            }
+
+                            @Override
+                            public void onDismiss(ListView listView, int[] reverseSortedPositions) {
+                                for (int position : reverseSortedPositions) {
+
+
+                                    Ingredient ingredient =CookHelper.getCookHelper().getIngredients().get(position);
+                                    boolean isNotInRecipe = CookHelper.getCookHelper().removeIngredient(ingredient);
+                                    if(!isNotInRecipe){
+                                        String message =" You can not remove this ingredient because it is currently used in a recipe";
+
+                                        Toast.makeText( Ingredient_List.this, message , Toast.LENGTH_LONG).show();
+                                    }
+
+                                    adapter.notifyDataSetChanged();
+
+                                }
+
+                            }
+                        });
+        list.setOnTouchListener(touchListener);
+    }
 
     //methode ajouter pour clicker sur les items sune liste
 //    private void registerClickCallBack(){
@@ -106,8 +110,6 @@ public class Ingredient_List extends AppCompatActivity {
         list.setAdapter(adapter);
 
     }
-
-
 
 
     private class  MyListAdapter extends ArrayAdapter<Ingredient> {

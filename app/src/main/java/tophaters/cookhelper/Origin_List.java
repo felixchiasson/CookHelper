@@ -42,43 +42,44 @@ public class Origin_List extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-            populateListView();
-            //registerClickCallBack();
-            SwipeDismissListViewTouchListener touchListener =
-                    new SwipeDismissListViewTouchListener(
-                            list,
-                            new SwipeDismissListViewTouchListener.DismissCallbacks() {
-                                @Override
-                                public boolean canDismiss(int position) {
-                                    return true;
-                                }
-
-                                @Override
-                                public void onDismiss(ListView listView, int[] reverseSortedPositions) {
-                                    for (int position : reverseSortedPositions) {
-
-
-                                        Origin origin =CookHelper.getCookHelper().getOrigins().get(position);
-                                        boolean isNotInRecipe = CookHelper.getCookHelper().removeOrigin(origin);
-                                        if(!isNotInRecipe){
-                                            String message =" You can not remove this origin because it is currently used in a recipe";
-
-                                            Toast.makeText(Origin_List.this, message , Toast.LENGTH_LONG).show();
-                                        }
-
-                                        adapter.notifyDataSetChanged();
-
-                                    }
-
-                                }
-                            });
-            list.setOnTouchListener(touchListener);
-
 
         }}
 
 
+    protected void onResume() {
+        super.onResume();
+        populateListView();
+        //registerClickCallBack();
+        SwipeDismissListViewTouchListener touchListener =
+                new SwipeDismissListViewTouchListener(
+                        list,
+                        new SwipeDismissListViewTouchListener.DismissCallbacks() {
+                            @Override
+                            public boolean canDismiss(int position) {
+                                return true;
+                            }
 
+                            @Override
+                            public void onDismiss(ListView listView, int[] reverseSortedPositions) {
+                                for (int position : reverseSortedPositions) {
+
+
+                                    Origin origin =CookHelper.getCookHelper().getOrigins().get(position);
+                                    boolean isNotInRecipe = CookHelper.getCookHelper().removeOrigin(origin);
+                                    if(!isNotInRecipe){
+                                        String message =" You can not remove this origin because it is currently used in a recipe";
+
+                                        Toast.makeText(Origin_List.this, message , Toast.LENGTH_LONG).show();
+                                    }
+
+                                    adapter.notifyDataSetChanged();
+
+                                }
+
+                            }
+                        });
+        list.setOnTouchListener(touchListener);
+    }
 
 
 

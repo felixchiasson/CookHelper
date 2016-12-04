@@ -27,4 +27,6 @@ public class content_search_activity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+
+
 }

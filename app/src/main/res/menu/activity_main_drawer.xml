@@ -16,9 +16,6 @@
         <item android:title="View Origins List"
             android:icon="@drawable/ic_menu_slideshow"
             android:id="@+id/nav_viewOrigins" />
-        <item android:title="@string/viewRecipes"
-            android:id="@+id/nav_viewRecipe"
-            android:icon="@drawable/ic_menu_slideshow" />
         <item
             android:id="@+id/nav_help"
             android:icon="@drawable/home"
