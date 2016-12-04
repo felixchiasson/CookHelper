@@ -18,14 +18,4 @@
         android:entries="@array/search_recipe_ingredient_list"
         android:layout_weight="6" />
 
-    <Button
-        android:drawable="@android:drawable/ic_menu_close_clear_cancel"
-        android:layout_width="30dp"
-        android:id="@+id/removeIngredient"
-        android:layout_height="30dp"
-        android:layout_gravity="center_vertical"
-        android:layout_marginTop="5dp"
-        style="@style/Widget.AppCompat.Button"
-        android:background="@android:drawable/ic_menu_close_clear_cancel" />
-
 </LinearLayout>
