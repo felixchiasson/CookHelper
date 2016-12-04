@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.PriorityQueue;
 
+
 import static tophaters.cookhelper.Serializer.deserialize;
 import static tophaters.cookhelper.Serializer.serialize;
 
@@ -23,6 +24,8 @@ public class CookHelper {
     private static CookHelper cookHelper; // l'instance du Singleton
     private byte[] savedData;
     private String filename ="CookHelper";
+    private static Context context;
+
 
     // le Singleton va stocker les categories, les recettes, les origns et les ingredients dans des listes
     private   ArrayList<Category> categories;
@@ -102,6 +105,11 @@ public class CookHelper {
         addIngredient(new Ingredient("Tomato"));
 
 
+    }
+
+    public void init(Context context) {
+        // this.context = context; // (1)
+        this.context = context.getApplicationContext(); // (2)
     }
 
 
@@ -193,6 +201,7 @@ public class CookHelper {
         for (int i = 0; i < ingredients.size(); i++) {
             if (ingredient == ingredients.get(i)) {
                 ingredients.remove(ingredients.get(i));
+
                 return true;
             }
         }
@@ -234,7 +243,7 @@ public class CookHelper {
 
     //supprimer des category
 
-    public  boolean removeCategory(Category category) {
+    public  boolean removeCategory(Category category) throws IOException {
         // Check that the category to be removed doesnt exist in any recipe
         for(int i = 0; i<recipes.size(); i++ ){
             Recipe recipeCheck = recipes.get(i);
@@ -245,6 +254,7 @@ public class CookHelper {
         for (int i = 0; i < categories.size(); i++) {
             if (category == categories.get(i)) {
                 categories.remove(categories.get(i));
+                Save(context);
                 return true;
             }
         }

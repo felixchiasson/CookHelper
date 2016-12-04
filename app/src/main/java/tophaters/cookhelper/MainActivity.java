@@ -1,5 +1,6 @@
 package tophaters.cookhelper;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -26,6 +27,8 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import static tophaters.cookhelper.CookHelper.getCookHelper;
+
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -33,6 +36,8 @@ public class MainActivity extends AppCompatActivity
     // variable d'instances
     ArrayAdapter<Recipe> adapter;
     ListView list;
+    Context context;
+
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -44,6 +49,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        context = getApplicationContext();
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -68,6 +74,7 @@ public class MainActivity extends AppCompatActivity
 
         //initialisation du singleton
         initSingletons();
+        CookHelper.getCookHelper().init(this);
 
         // methodes permettant de populer la liste des recettes
 
@@ -90,8 +97,8 @@ public class MainActivity extends AppCompatActivity
                                 for (int position : reverseSortedPositions) {
 
 
-                                    Recipe recipe = CookHelper.getCookHelper().getRecipes().get(position);
-                                    CookHelper.getCookHelper().removeRecipe(recipe);
+                                    Recipe recipe = getCookHelper().getRecipes().get(position);
+                                    getCookHelper().removeRecipe(recipe);
 
                                     adapter.notifyDataSetChanged();
 
@@ -100,6 +107,8 @@ public class MainActivity extends AppCompatActivity
                             }
                         });
         list.setOnTouchListener(touchListener);
+
+
 
 
 
@@ -116,7 +125,7 @@ public class MainActivity extends AppCompatActivity
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             public void onItemClick(AdapterView<?> parent, View viewClick, int position, long id){
-                Recipe clickedRecipe = CookHelper.getCookHelper().getRecipes().get(position);
+                Recipe clickedRecipe = getCookHelper().getRecipes().get(position);
                 Intent i = new Intent(MainActivity.this, RecipeView.class);
                 i.putExtra("prepTime", clickedRecipe.getPreTime()+" minutes");
                 i.putExtra("name", clickedRecipe.getName()+"");
@@ -141,7 +150,7 @@ public class MainActivity extends AppCompatActivity
     protected void initSingletons()
     {
         // Initialize the instance of MySingleton
-        CookHelper.getCookHelper();
+        getCookHelper();
     }
 
 
@@ -204,7 +213,7 @@ public class MainActivity extends AppCompatActivity
     private class MyListAdapter extends ArrayAdapter<Recipe> {
 
         public MyListAdapter() {
-            super(MainActivity.this, R.layout.item_view, CookHelper.getCookHelper().getRecipes());
+            super(MainActivity.this, R.layout.item_view, getCookHelper().getRecipes());
         }
 
         @Override
@@ -216,7 +225,7 @@ public class MainActivity extends AppCompatActivity
 
             //find the recipe
 
-            Recipe currentRecipe = CookHelper.getCookHelper().getRecipes().get(position);
+            Recipe currentRecipe = getCookHelper().getRecipes().get(position);
 
             // fill the view
 
@@ -283,4 +292,8 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
+
+
 }
