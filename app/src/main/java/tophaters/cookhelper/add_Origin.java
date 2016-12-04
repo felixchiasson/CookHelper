@@ -38,11 +38,9 @@ public class add_Origin extends AppCompatActivity {
 
         added = CookHelper.getCookHelper().addOrigin(newOrigin);
 
-        if (added == true){
+        if (added){
             Toast.makeText(add_Origin.this, "Saved", Toast.LENGTH_LONG).show();
-            //finish();
-            Intent a = new Intent(this, Origin_List.class);
-            startActivity(a);
+            finish();
 
         }else{
             Toast.makeText(add_Origin.this, "Origin already exists.", Toast.LENGTH_LONG).show();

@@ -25,8 +25,7 @@ public class add_Ingredient extends AppCompatActivity {
 
         if (added == true){
             Toast.makeText(add_Ingredient.this, "Saved", Toast.LENGTH_LONG).show();
-            Intent a = new Intent(this, Ingredient_List.class);
-            startActivity(a);
+            finish();
 
         }else{
             Toast.makeText(add_Ingredient.this, "Ingredient already exists.", Toast.LENGTH_LONG).show();
