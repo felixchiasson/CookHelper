@@ -1,13 +1,17 @@
 package tophaters.cookhelper;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 public class content_search_activity extends AppCompatActivity {
+    private ArrayAdapter<Category> adapter;
+    ListView list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +28,50 @@ public class content_search_activity extends AppCompatActivity {
 //                        .setAction("Action", null).show();
 //            }
 //        });
+
+
+
+
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
+
+
+    private void populateListView() {
+
+        adapter = new content_search_activity.MyListAdapter();
+        list = (ListView) findViewById(R.id.item_select_ingredient);
+        list.setAdapter(adapter);
+
+    }
+
+
+    private class MyListAdapter extends ArrayAdapter<Category> {
+
+        public MyListAdapter() {
+            super(content_search_activity.this, R.layout.select_ingredient_view, CookHelper.getCookHelper().getCategories());
+        }
+
+        @Override
+        public @NonNull
+        View getView(int position, View convertView, @NonNull ViewGroup parent) {
+            View itemView = convertView;
+            if (itemView == null) {
+                itemView = getLayoutInflater().inflate(R.layout.select_ingredient_view, parent, false);
+            }
+            return itemView;
+
+
+
+
+    }}
+
+
+
+
+
+
+
 
 
 
