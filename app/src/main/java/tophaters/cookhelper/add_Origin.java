@@ -1,8 +1,7 @@
 package tophaters.cookhelper;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -41,7 +40,10 @@ public class add_Origin extends AppCompatActivity {
 
         if (added == true){
             Toast.makeText(add_Origin.this, "Saved", Toast.LENGTH_LONG).show();
-            finish();
+            //finish();
+            Intent a = new Intent(this, Origin_List.class);
+            startActivity(a);
+
         }else{
             Toast.makeText(add_Origin.this, "Origin already exists.", Toast.LENGTH_LONG).show();
         }

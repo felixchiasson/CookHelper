@@ -1,8 +1,7 @@
 package tophaters.cookhelper;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -40,7 +39,9 @@ public class add_Category extends AppCompatActivity {
 
         if (added == true){
             Toast.makeText(add_Category.this, "Saved", Toast.LENGTH_LONG).show();
-            finish();
+            Intent a = new Intent(this, Category_List.class);
+            startActivity(a);
+
         }else{
             Toast.makeText(add_Category.this, "Category already exists.", Toast.LENGTH_LONG).show();
         }
