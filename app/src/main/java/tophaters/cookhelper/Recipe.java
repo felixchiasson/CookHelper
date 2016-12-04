@@ -32,6 +32,17 @@ public class Recipe  implements Serializable {
         this.ingredients=ingredients;
     }
 
+    public Boolean hasIngredient(Ingredient ingredient){
+        Boolean flag=false;
+        for(int i=0 ; i<ingredients.size() ; i++){
+            if(ingredients.get(i)==ingredient){
+                flag=true;
+                break;
+            }
+        }
+        return flag;
+    }
+
     //list of the getters ans setters
 
 

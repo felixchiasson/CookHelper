@@ -2,6 +2,7 @@ package tophaters.cookhelper;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.PriorityQueue;
 
 /**
  * Created by shanelgauthier on 16-11-29.
@@ -239,41 +240,91 @@ public class CookHelper {
 
     }
 
-    /*
+
     //La fonction qui implemente la recherhce de recette
     public ArrayList<Recipe> search(Category category, Origin origin, ArrayList<Ingredient> ingredients, ArrayList<String> bools) {
+
         ArrayList<Recipe> recipes = getRecipes();
-        ArrayList<Ingredient> orIngredients;
+        ArrayList<Ingredient> orIngredients = new ArrayList<Ingredient>();
+        ArrayList<Integer> orCounter;
+        Integer counter;
+        PriorityQueue<Recipe> sortedRecipes;
+
+
         recipes = filterCategory(category, recipes);
         recipes = filterOrigin(origin, recipes);
         for (int i = 0; i < ingredients.size(); i++) {
-            if(bools[i]!="OR"){
-                recipes = filterIngredient(bools[i], ingredients[i], recipes);
+            if(bools.get(i)!="OR"){
+                recipes = filterIngredient(bools.get(i), ingredients.get(i), recipes);
             }else{
-                orIngredients.add(ingredients[i]);
+                orIngredients.add(ingredients.get(i));
             }
         }
-        for(){
+
+        orCounter = new ArrayList<Integer>(recipes.size());
+        if(orIngredients.size()>0) {
+            for (int j=0; j < recipes.size(); j++) {
+                counter=0;
+                for(int k=0 ; k < orIngredients.size();k++){
+                    if(recipes.get(j).hasIngredient(orIngredients.get(k))==true){
+                        counter++;
+                    }
+                }
+                orCounter.set(j,counter);
+            }
+        }else{//no or ingredients
+            for(int h=0 ; h<orCounter.size() ; h++){
+                orCounter.set(h,0);
+            }
+        }
+        for(int g=0; g<orCounter.size();g++){
 
         }
         return recipes;
     }
 
-    private ArrayList<Category> filterCategory(Category category, ArrayList<Recipe> recipes){
-        ArrayList<Recipe> newRecipes;
+    private ArrayList<Recipe> filterCategory(Category category, ArrayList<Recipe> recipes){
+        ArrayList<Recipe> newRecipes= new ArrayList<Recipe>();
+        for(int i=0 ; i<recipes.size();i++){
+            if(recipes.get(i).getCategory()== category){
+                newRecipes.add(recipes.get(i));
+            }
+        }
         return newRecipes;
     }
 
-    private ArrayList<Category> filterOrigin(Origin origin, ArrayList<Recipe> recipes){
-        ArrayList<Recipe> newRecipes;
+    private ArrayList<Recipe> filterOrigin(Origin origin, ArrayList<Recipe> recipes){
+        ArrayList<Recipe> newRecipes= new ArrayList<Recipe>();
+        for(int i=0 ; i<recipes.size();i++){
+            if(recipes.get(i).getOrigin()== origin){
+                newRecipes.add(recipes.get(i));
+            }
+        }
         return newRecipes;
     }
 
-    private ArrayList<Category> filterIngredient(String bool, Ingredient ingredient, ArrayList<Recipe> recipes){
-        ArrayList<Recipe> newRecipes;
+    private ArrayList<Recipe> filterIngredient(String bool, Ingredient ingredient, ArrayList<Recipe> recipes){
+        ArrayList<Recipe> newRecipes= new ArrayList<Recipe>();
+        Boolean flag;
+        ArrayList<Ingredient>  tempIngredients;
+        for(int i=0 ; i<recipes.size() ; i++){
+            tempIngredients=recipes.get(i).getIngredients();
+            flag=false;
+            for(int j=0; j<tempIngredients.size();j++) {
+                flag=recipes.get(i).hasIngredient(tempIngredients.get(j));
+                if(flag==true){
+                    break;
+                }
+            }
+            if(bool=="AND" && flag==true){
+                newRecipes.add(recipes.get(i));
+            }else if(bool=="NOT" && flag==false){
+                newRecipes.add(recipes.get(i));
+            }
+        }
         return newRecipes;
     }
-    */
+
     // methodes d'Instances pour les variables d'instances
     public ArrayList<Category> getCategories() {
         return categories;
