@@ -284,23 +284,29 @@ public class CookHelper implements java.io.Serializable{
         Integer counter;
         PriorityQueue<Recipe> sortedRecipes;
 
-
-        recipes = filterCategory(category, recipes);
-        recipes = filterOrigin(origin, recipes);
-        for (int i = 0; i < ingredients.size(); i++) {
-            if(bools.get(i)!="OR"){
-                recipes = filterIngredient(bools.get(i), ingredients.get(i), recipes);
-            }else{
-                orIngredients.add(ingredients.get(i));
+        if(category!=null){
+            recipes = filterCategory(category, recipes);
+        }
+        if(origin!=null){
+            recipes = filterOrigin(origin, recipes);
+        }
+        if(ingredients!=null && bools!=null){
+            for (int i = 0; i < ingredients.size(); i++) {
+                if(!bools.get(i).equals("OR")){
+                    recipes = filterIngredient(bools.get(i), ingredients.get(i), recipes);
+                }else{
+                    orIngredients.add(ingredients.get(i));
+                }
             }
         }
+
 
         orCounter = new ArrayList<Integer>(recipes.size());
         if(orIngredients.size()>0) {
             for (int j=0; j < recipes.size(); j++) {
                 counter=0;
                 for(int k=0 ; k < orIngredients.size();k++){
-                    if(recipes.get(j).hasIngredient(orIngredients.get(k))==true){
+                    if(recipes.get(j).hasIngredient(orIngredients.get(k))){
                         counter++;
                     }
                 }
@@ -361,7 +367,7 @@ public class CookHelper implements java.io.Serializable{
 
     public Ingredient findIngredient(String ing){
         for(int i=0; i<ingredients.size();i++){
-            if(ing==ingredients.get(i).getName().toLowerCase()){
+            if(ing.equals(ingredients.get(i).getName().toLowerCase())){
                 return ingredients.get(i);
             }
         }

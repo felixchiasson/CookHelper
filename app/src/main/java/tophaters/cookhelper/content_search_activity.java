@@ -82,9 +82,15 @@ public class content_search_activity extends AppCompatActivity {
                 Origin origin = (Origin) origins.getSelectedItem();
 
                 try{
-                    readIngredients(ingredients);
-                    ArrayList<Recipe> searchRecipes = CookHelper.getCookHelper().search(category, origin, searchIngredients, searchBools );
-                    //populateListView();
+                    boolean flag = readIngredients(ingredients);
+                    //boolean flag= true;
+                    if(flag==false){
+                        Toast.makeText( content_search_activity.this, "You got false nerd" , Toast.LENGTH_LONG).show();
+                    }else{
+                        Toast.makeText( content_search_activity.this, "You got true nerd" , Toast.LENGTH_LONG).show();
+                        ArrayList<Recipe> searchRecipes = CookHelper.getCookHelper().search(category, origin, searchIngredients, searchBools );
+                    }
+                   // populateListView();
                 }catch (IOException e){
                     Toast.makeText( content_search_activity.this, "String was not valid for search. Refer to help page for details." , Toast.LENGTH_LONG).show();
                     return;
@@ -100,25 +106,27 @@ public class content_search_activity extends AppCompatActivity {
 
 
     public Boolean readIngredients(String received) throws IOException{
-        String[] splitString = received.split(" ");
+        String[] splitString = received.trim().split(" ");
         ArrayList<String> ingredients;
+
         if(splitString.length%2!=0){
             throw new IOException("String not convertible to search");
         }
+
         for(int i = 0 ; i<splitString.length;i++){
             splitString[i]=splitString[i].toLowerCase();
         }
-        searchBools= new ArrayList<String>(splitString.length/2);
-        ingredients= new ArrayList<String>(splitString.length/2);
+        searchBools= new ArrayList<String>();
+        ingredients= new ArrayList<String>();
         for(int j=0;j<splitString.length/2;j++){
-            if(splitString[2*j].toUpperCase()=="AND" ||
-                    splitString[2*j].toUpperCase()=="NOT" ||
-                    splitString[2*j].toUpperCase()=="OR"){
-                searchBools.set(j,splitString[2*j]);
+            if(splitString[2*j].toUpperCase().equals("AND") ||
+                    splitString[2*j].toUpperCase().equals("NOT") ||
+                    splitString[2*j].toUpperCase().equals("OR")){
+                searchBools.add(j,splitString[2*j].toUpperCase());
             }else{
                 return false;
             }
-            ingredients.set(j,splitString[2*j+1]);
+            ingredients.add(j,splitString[2*j+1]);
         }
         searchIngredients=new ArrayList<Ingredient>();
         for(int h=0;h<ingredients.size();h++){
