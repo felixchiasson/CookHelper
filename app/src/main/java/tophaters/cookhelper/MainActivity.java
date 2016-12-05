@@ -1,9 +1,11 @@
 package tophaters.cookhelper;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.AnyRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -26,6 +28,10 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
+
+import java.io.PrintWriter;
+
+import static java.security.AccessController.getContext;
 
 
 public class MainActivity extends AppCompatActivity
@@ -75,8 +81,20 @@ public class MainActivity extends AppCompatActivity
         //initialisation du singleton
         initSingletons();
 
-        // methodes permettant de populer la liste des recettes
 
+
+
+
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
+
+
+
+    }
+
+    protected void onResume(){
+        // methodes permettant de populer la liste des recettes
+        super.onResume();
         populateListView();
         registerClickCallBack();
         // ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -115,8 +133,6 @@ public class MainActivity extends AppCompatActivity
 
 
     }
-
-
     //methode ajouter pour clicker sur les items sune liste
     private void registerClickCallBack(){
 
@@ -149,6 +165,7 @@ public class MainActivity extends AppCompatActivity
     protected void initSingletons()
     {
         // Initialize the instance of MySingleton
+
         CookHelper.getCookHelper();
     }
 
@@ -202,6 +219,14 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onStop() {
         super.onStop();
+
+        try{
+            byte[]  bytes = Serializer.serialize(CookHelper.getCookHelper());
+            PrintWriter writer = new PrintWriter("DATA.txt");
+            writer.print(bytes);
+        }
+        catch(java.io.IOException e){}
+
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.

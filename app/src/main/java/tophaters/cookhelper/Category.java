@@ -21,6 +21,10 @@ public class Category {
         this.name = name;
     }
 
+    public String toString() {
+        return name;
+    }
+
     public static Comparator<Category> COMPARE_BY_CATEGORY = new Comparator<Category>() {
         public int compare(Category one, Category other) {
             return one.getName().compareTo(other.getName());
