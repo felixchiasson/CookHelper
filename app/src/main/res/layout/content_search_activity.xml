@@ -16,89 +16,102 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="1"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
+        android:layout_height="match_parent">
 
-        <TextView
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:text="@string/search_recipe_select_category"
-            android:textAppearance="@android:style/TextAppearance.Material.Subhead" />
+            android:weightSum="1"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true">
 
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:id="@+id/category_search"
-            android:entries="@array/search_recipe_category_list"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:text="@string/search_recipe_select_category"
+                android:textAppearance="@android:style/TextAppearance.Material.Subhead"
+                android:layout_weight="1" />
 
-        <TextView
-            android:text="@string/search_recipe_select_origin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:textAppearance="@android:style/TextAppearance.Material.Subhead" />
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:id="@+id/category_search"
+                android:entries="@array/search_recipe_category_list"
+                android:layout_weight="1" />
 
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:id="@+id/origin_search"
-            android:entries="@array/search_recipe_origin_list"/>
+            <TextView
+                android:text="@string/search_recipe_select_origin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:textAppearance="@android:style/TextAppearance.Material.Subhead"
+                android:layout_weight="1" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:text="@string/search_recipe_select_ingredients"
-            android:textAppearance="@android:style/TextAppearance.Material.Subhead" />
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:id="@+id/origin_search"
+                android:entries="@array/search_recipe_origin_list"
+                android:layout_weight="1" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="@string/search_recipe_select_ingredients"
+                android:textAppearance="@android:style/TextAppearance.Material.Subhead" />
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="40dp">
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
-                android:text="Enter the boolean and the ingredients"
                 android:ems="10"
-                android:layout_marginStart="31dp"
-                android:layout_marginBottom="13dp"
-                android:id="@+id/text_ingredients"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentStart="true"
-                android:gravity="center_vertical|center_horizontal"
-                android:textSize="14sp" />
-        </ScrollView>
+                android:id="@+id/editText"
+                android:layout_weight="1"
+                android:hint="@string/SearchIngredients" />
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="25dp">
-
-            <Button
-                android:text="Search for recipes"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/search_button"
-                android:layout_weight="1" />
+                android:layout_marginTop="25dp"
+                android:layout_weight="1">
+
+                <Button
+                    android:text="Search for recipes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/search_button"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
 
         </LinearLayout>
 
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:alwaysDrawnWithCache="true">
 
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true">
+
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="250dp" />
+            </ScrollView>
+        </LinearLayout>
     </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_centerHorizontal="true"
-        android:alwaysDrawnWithCache="true"></LinearLayout>
 
 </RelativeLayout>

@@ -184,4 +184,5 @@
     <string name="title_activity_origin__list">List of Origins</string>
     <string name="title_activity_category__list">List of Categories</string>
     <string name="title_activity_browse_picture">BrowsePictureActivity</string>
+    <string name="SearchIngredients">Enter the boolean and the ingredients.</string>
 </resources>
