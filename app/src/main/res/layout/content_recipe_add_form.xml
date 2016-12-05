@@ -83,12 +83,25 @@
                     android:text="@string/add_recipe_select_ingredients"
                     android:textAppearance="@android:style/TextAppearance.Material.Subhead" />
 
-                <Spinner
-                    android:layout_width="match_parent"
+
+
+                <ListView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/ingredientList"/>
+
+
+
+                <Button
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:id="@+id/spinnerIngredients"
+                    android:id="@+id/buttonIngredients"
+                    android:text="Add Ingredients"
+                    android:onClick="onClickOpenIngredientDialog"
                     android:entries="@array/add_recipe_ingredient_list"/>
+
+
 
                 <TextView
                     android:layout_width="match_parent"
@@ -139,6 +152,7 @@
                     android:layout_height="40dp"
                     android:id="@+id/button"
                     android:layout_weight="1"
+                    android:onClick="onClickSaveRecipe"
                     style="@android:style/Widget.Material.Button" />
 
 

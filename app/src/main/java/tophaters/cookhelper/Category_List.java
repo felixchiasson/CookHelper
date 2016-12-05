@@ -90,13 +90,13 @@ public class Category_List extends AppCompatActivity {
 
 
                                     Category category = CookHelper.getCookHelper().getCategories().get(position);
-                                    try{boolean isNotInRecipe = CookHelper.getCookHelper().removeCategory(category);
+                                    boolean isNotInRecipe = CookHelper.getCookHelper().removeCategory(category);
                                     if (!isNotInRecipe) {
                                         String message = " You can not remove this category because it is currently used in a recipe";
 
                                         Toast.makeText(Category_List.this, message, Toast.LENGTH_LONG).show();
-                                    }}
-                                    catch (IOException e){}
+                                    }
+
 
                                     adapter.notifyDataSetChanged();
 

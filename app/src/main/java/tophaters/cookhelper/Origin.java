@@ -22,6 +22,10 @@ public class Origin {
         this.name = name;
     }
 
+    public String toString() {
+        return name;
+    }
+
     public static Comparator<Origin> COMPARE_BY_ORIGIN = new Comparator<Origin>() {
         public int compare(Origin one, Origin other) {
             return one.getName().compareTo(other.getName());

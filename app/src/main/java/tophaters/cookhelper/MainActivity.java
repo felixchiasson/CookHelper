@@ -74,8 +74,20 @@ public class MainActivity extends AppCompatActivity
         //initialisation du singleton
         initSingletons();
 
-        // methodes permettant de populer la liste des recettes
 
+
+
+
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
+
+
+
+    }
+
+    protected void onResume(){
+        // methodes permettant de populer la liste des recettes
+        super.onResume();
         populateListView();
         registerClickCallBack();
         // ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -105,14 +117,6 @@ public class MainActivity extends AppCompatActivity
                             }
                         });
         list.setOnTouchListener(touchListener);
-
-
-
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-
-
-
-
     }
     //methode ajouter pour clicker sur les items sune liste
     private void registerClickCallBack(){
@@ -129,7 +133,7 @@ public class MainActivity extends AppCompatActivity
                 i.putExtra("category", clickedRecipe.getCategory().getName()+"");
                 i.putExtra("origin", clickedRecipe.getOrigin().getName()+"");
                 i.putExtra("description", clickedRecipe.getDescription());
-                i.putExtra("picture", clickedRecipe.getIconId()+"");
+                i.putExtra("picture", clickedRecipe.getIconId());
 
 
 
