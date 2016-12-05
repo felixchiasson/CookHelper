@@ -1,7 +1,17 @@
 package tophaters.cookhelper;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.net.Uri;
+import android.support.annotation.AnyRes;
+import android.support.annotation.NonNull;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.PriorityQueue;
+import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
@@ -20,7 +30,7 @@ import static tophaters.cookhelper.Serializer.serialize;
 
 
 //cette classe sera le singleton de l'application
-public class CookHelper {
+public class CookHelper implements java.io.Serializable{
     private static CookHelper cookHelper; // l'instance du Singleton
     private byte[] savedData;
     private String filename ="CookHelper";
@@ -109,7 +119,25 @@ public class CookHelper {
     // methode qui permet d'obtenir une seule instance de CookHelper
     public static CookHelper getCookHelper(){
         if(cookHelper == null){
-            cookHelper= new CookHelper();
+            try{
+                FileReader reader = new FileReader("DATA.txt");
+                ArrayList<Character> fileInfo = new ArrayList<Character>();
+                byte[] bytes;
+                while(reader.ready()){
+                    fileInfo.add((char)reader.read());
+                }
+                bytes = new byte[fileInfo.size()];
+                for(int i = 0 ; i<fileInfo.size();i++){
+                    bytes[i] = (byte)(int)fileInfo.get(i);
+                }
+                cookHelper = Serializer.deserialize(bytes);
+            }catch(FileNotFoundException e) {
+                cookHelper = new CookHelper();
+            }catch(java.io.IOException g){
+                cookHelper = new CookHelper();
+            }catch(java.lang.ClassNotFoundException h){
+                cookHelper = new CookHelper();
+            }
         }
         return cookHelper;
 
@@ -198,7 +226,6 @@ public class CookHelper {
             }
         }
         return false;
-
 
 
     }
@@ -374,7 +401,7 @@ public class CookHelper {
     }
 
     //Functions to save
-    public void Save(Context c)throws IOException{
+    public void save(Context c)throws IOException{
         c.deleteFile("CookHelper");//delete if the file already exists to free memory
         FileOutputStream outputStream;
         savedData = serialize(cookHelper);

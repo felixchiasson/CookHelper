@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-public class Recipe  implements Serializable {
+public class Recipe implements Serializable {
     //instances variables
     private String name;
     private String description;
