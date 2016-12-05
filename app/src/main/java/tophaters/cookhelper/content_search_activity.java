@@ -18,7 +18,8 @@ import java.io.PrintWriter;
 public class content_search_activity extends AppCompatActivity {
     private ArrayAdapter<Category> adapter;
     ListView list;
-    private ArrayList<String> searchBools,searchIngredients;
+    private ArrayList<String> searchBools;
+    private ArrayList<Ingredient> searchIngredients;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,8 +102,9 @@ public class content_search_activity extends AppCompatActivity {
             searchBools.set(j,splitString[2*j]);
             ingredients.set(j,splitString[2*j+1]);
         }
+        searchIngredients=new ArrayList<Ingredient>;
         for(int h=0;h<ingredients.size();h++){
-
+            searchIngredients.add(CookHelper.getCookHelper().findIngredient(ingredients.get(h)));
         }
     }
 }
