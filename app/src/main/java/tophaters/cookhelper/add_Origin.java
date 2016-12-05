@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.PrintWriter;
+
 public class add_Origin extends AppCompatActivity {
 
     @Override
@@ -47,5 +49,15 @@ public class add_Origin extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onStop(){
+        super.onStop();
+        try{
+            byte[]  bytes = Serializer.serialize(CookHelper.getCookHelper());
+            PrintWriter writer = new PrintWriter("DATA.txt");
+            writer.print(bytes);
+        }
+        catch(java.io.IOException e){}
 
+    }
 }

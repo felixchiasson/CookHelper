@@ -19,6 +19,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.io.PrintWriter;
+
 public class recipe_add_form extends AppCompatActivity {
 
     private static final int SELECT_PICTURE = 1;
@@ -115,6 +117,16 @@ public class recipe_add_form extends AppCompatActivity {
 
 
     }
+    @Override
+    public void onStop(){
+        super.onStop();
+        try{
+            byte[]  bytes = Serializer.serialize(CookHelper.getCookHelper());
+            PrintWriter writer = new PrintWriter("DATA.txt");
+            writer.print(bytes);
+        }
+        catch(java.io.IOException e){}
 
+    }
 
 }

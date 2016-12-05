@@ -60,7 +60,6 @@ public class Recipe  implements Serializable {
         return ingredients;
     }
 
-
     public Category getCategory() {
         return category;
     }

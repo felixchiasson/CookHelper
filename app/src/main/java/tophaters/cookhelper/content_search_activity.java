@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.io.PrintWriter;
+
 public class content_search_activity extends AppCompatActivity {
     private ArrayAdapter<Category> adapter;
     ListView list;
@@ -64,15 +66,19 @@ public class content_search_activity extends AppCompatActivity {
 
 
 
-    }}
+        }
+    }
 
+    @Override
+    public void onStop(){
+        super.onStop();
+        try{
+            byte[]  bytes = Serializer.serialize(CookHelper.getCookHelper());
+            PrintWriter writer = new PrintWriter("DATA.txt");
+            writer.print(bytes);
+        }
+        catch(java.io.IOException e){}
 
-
-
-
-
-
-
-
+    }
 
 }

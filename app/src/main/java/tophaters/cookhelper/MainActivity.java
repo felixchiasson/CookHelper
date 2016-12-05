@@ -29,6 +29,8 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import java.io.PrintWriter;
+
 import static java.security.AccessController.getContext;
 
 
@@ -73,6 +75,7 @@ public class MainActivity extends AppCompatActivity
 
         //initialisation du singleton
         initSingletons();
+
 
         // methodes permettant de populer la liste des recettes
 
@@ -146,6 +149,7 @@ public class MainActivity extends AppCompatActivity
     protected void initSingletons()
     {
         // Initialize the instance of MySingleton
+
         CookHelper.getCookHelper();
     }
 
@@ -199,6 +203,14 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onStop() {
         super.onStop();
+
+        try{
+            byte[]  bytes = Serializer.serialize(CookHelper.getCookHelper());
+            PrintWriter writer = new PrintWriter("DATA.txt");
+            writer.print(bytes);
+        }
+        catch(java.io.IOException e){}
+
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
