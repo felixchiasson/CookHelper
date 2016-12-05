@@ -213,8 +213,8 @@ public class recipe_add_form extends AppCompatActivity {
 
     // ************** SAVE RECIPE *********************
 
-    public void onClickSaveRecipe() {
-
+    public void onClickSaveRecipe(View v) {
+        boolean added;
 
         EditText recipeName = (EditText) findViewById(R.id.recipe_add_name);
         String sRecipeName = recipeName.getText().toString();
@@ -279,7 +279,6 @@ public class recipe_add_form extends AppCompatActivity {
         listView.setLayoutParams(params);
     }
 
-}
     @Override
     public void onStop(){
         super.onStop();
