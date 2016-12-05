@@ -10,6 +10,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.PriorityQueue;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import static tophaters.cookhelper.Serializer.deserialize;
+import static tophaters.cookhelper.Serializer.serialize;
+
 /**
  * Created by shanelgauthier on 16-11-29.
  */
@@ -18,7 +26,8 @@ import java.util.PriorityQueue;
 //cette classe sera le singleton de l'application
 public class CookHelper {
     private static CookHelper cookHelper; // l'instance du Singleton
-
+    private byte[] savedData;
+    private String filename ="CookHelper";
     private Uri defaultRecipeA = Uri.parse("android.resource://tophaters.cookhelper/drawable/ic_crepe");
     private Uri defaultRecipeB = Uri.parse("android.resource://tophaters.cookhelper/drawable/ic_salmon");
 
@@ -367,5 +376,37 @@ public class CookHelper {
         this.ingredients = ingredients;
     }
 
+    //Functions to save
+    public void Save(Context c)throws IOException{
+        c.deleteFile("CookHelper");//delete if the file already exists to free memory
+        FileOutputStream outputStream;
+        savedData = serialize(cookHelper);
+
+        try {
+            outputStream = c.openFileOutput(filename,Context.MODE_PRIVATE);
+            outputStream.write(savedData);
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public CookHelper openFile(Context c)throws IOException, ClassNotFoundException{
+        savedData = null; //wipe the current byte array
+        FileInputStream fin = c.openFileInput("CookHelper");
+
+        return deserialize(readBytes(fin));
+    }
+
+    public byte[] readBytes(FileInputStream inputStream) throws IOException {
+        ByteArrayOutputStream byteBuffer = new ByteArrayOutputStream();
+
+        byte[] buffer = new byte[1024];
+        int len = 0;
+        while ((len = inputStream.read(buffer)) != -1) {
+            byteBuffer.write(buffer, 0, len);
+        }
+        return byteBuffer.toByteArray(); //http://stackoverflow.com/questions/2436385/android-getting-from-a-uri-to-an-inputstream-to-a-byte-array
+    }
 
 }
