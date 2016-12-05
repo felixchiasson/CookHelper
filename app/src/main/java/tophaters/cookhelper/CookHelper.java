@@ -58,14 +58,14 @@ public class CookHelper implements java.io.Serializable{
 
         // l'application va offrir ces 9 ingredients
         addIngredient(new Ingredient("Milk"));
-        addIngredient(new Ingredient("Dark Chocolate"));
+        addIngredient(new Ingredient("Dark-Chocolate"));
         addIngredient(new Ingredient("Butter"));
         addIngredient(new Ingredient("Egg"));
-        addIngredient(new Ingredient("Vanilla Extract"));
+        addIngredient(new Ingredient("Vanilla-Extract"));
         addIngredient(new Ingredient("Sugar"));
         addIngredient(new Ingredient("Flour"));
         addIngredient(new Ingredient("Sugar"));
-        addIngredient(new Ingredient("Whipping cream"));
+        addIngredient(new Ingredient("Whipping-cream"));
 
         // l'application va offrir cette recette
 
@@ -74,14 +74,14 @@ public class CookHelper implements java.io.Serializable{
                 ,"Chocolate Crepes", defaultRecipeA, origins.get(0) , categories.get(0), (ArrayList<Ingredient>)ingredients.clone()));
 
         //Voici le array d'Ingredients pour le saumon
-        Ingredient a1= new Ingredient("Salmon Filet");
-        Ingredient a2 =new Ingredient("Lemon Pepper");
-        Ingredient a3 = new Ingredient("Garlic Powder");
+        Ingredient a1= new Ingredient("Salmon-Filet");
+        Ingredient a2 =new Ingredient("Lemon-Pepper");
+        Ingredient a3 = new Ingredient("Garlic-Powder");
         Ingredient a4 = new Ingredient("Salt");
-        Ingredient a5 =new Ingredient("Soy Sauce");
-        Ingredient a6 =new Ingredient("Brown Sugar");
+        Ingredient a5 =new Ingredient("Soy-Sauce");
+        Ingredient a6 =new Ingredient("Brown-Sugar");
         Ingredient a7 = new Ingredient("Water");
-        Ingredient a8 =new Ingredient("Vegetable Oil");
+        Ingredient a8 =new Ingredient("Vegetable-Oil");
 
         ArrayList<Ingredient> salmon_ingredient= new ArrayList<Ingredient>();
 

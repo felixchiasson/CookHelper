@@ -82,11 +82,12 @@ public class content_search_activity extends AppCompatActivity {
 
                 Spinner origins = (Spinner) findViewById(R.id.origin_search);
                 Origin origin = (Origin) origins.getSelectedItem();
+                boolean allo = true;
 
                 try{
-                    if(! ingredients.equals(null)){
-                        readIngredients(ingredients);
-                        Toast.makeText( content_search_activity.this, searchIngredients.get(0).getName() , Toast.LENGTH_LONG).show();
+                    if(! ingredients.matches("")){
+                        allo =readIngredients(ingredients);
+                        Toast.makeText( content_search_activity.this, ""+allo , Toast.LENGTH_LONG).show();
                     }
                     recherche = CookHelper.getCookHelper().search(category, origin, searchIngredients, searchBools);
                 }catch (IOException e){
@@ -94,7 +95,9 @@ public class content_search_activity extends AppCompatActivity {
                     return;
 
                 }
-                populateListView();
+               if (allo){
+                   populateListView();
+               }
                 registerClickCallBack();
 
 
