@@ -345,16 +345,12 @@ public class CookHelper implements java.io.Serializable{
     private ArrayList<Recipe> filterIngredient(String bool, Ingredient ingredient, ArrayList<Recipe> recipes){
         ArrayList<Recipe> newRecipes= new ArrayList<Recipe>();
         Boolean flag;
-        ArrayList<Ingredient>  tempIngredients;
+
         for(int i=0 ; i<recipes.size() ; i++){
-            tempIngredients=recipes.get(i).getIngredients();
-            flag=false;
-            for(int j=0; j<tempIngredients.size();j++) {
-                flag=recipes.get(i).hasIngredient(tempIngredients.get(j));
-                if(flag==true){
-                    break;
-                }
-            }
+
+            flag=recipes.get(i).hasIngredient(ingredient);
+
+
             if(bool.equals("AND") && flag==true){
                 newRecipes.add(recipes.get(i));
             }else if(bool.equals("NOT") && flag==false){
