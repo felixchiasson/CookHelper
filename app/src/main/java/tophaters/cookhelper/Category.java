@@ -6,7 +6,7 @@ import java.util.Comparator;
  * Created by shanelgauthier on 16-11-27.
  */
 
-public class Category {
+public class Category  implements java.io.Serializable{
     private String name;
 
     public Category(String name) {
