@@ -13,7 +13,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +45,7 @@ public class Category_List extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-            }
+        }
 
 
         //methode ajouter pour clicker sur les items sune liste
@@ -91,20 +90,16 @@ public class Category_List extends AppCompatActivity {
 
 
                                     Category category = CookHelper.getCookHelper().getCategories().get(position);
-                                    try{boolean isNotInRecipe = CookHelper.getCookHelper().removeCategory(category);
+
+                                    boolean isNotInRecipe = CookHelper.getCookHelper().removeCategory(category);
                                     if (!isNotInRecipe) {
                                         String message = " You can not remove this category because it is currently used in a recipe";
-
                                         Toast.makeText(Category_List.this, message, Toast.LENGTH_LONG).show();
+                                        adapter.notifyDataSetChanged();
                                     }
 
-
-                                    adapter.notifyDataSetChanged();
-
                                 }
-
-                            }
-                        });
+                            }});
         list.setOnTouchListener(touchListener);
     }
 
