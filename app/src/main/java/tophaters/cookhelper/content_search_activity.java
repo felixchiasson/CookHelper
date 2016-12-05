@@ -9,11 +9,16 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
+
 import java.io.PrintWriter;
 
 public class content_search_activity extends AppCompatActivity {
     private ArrayAdapter<Category> adapter;
     ListView list;
+    private ArrayList<String> searchBools,searchIngredients;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,4 +86,23 @@ public class content_search_activity extends AppCompatActivity {
 
     }
 
+    public void readIngredients(String received) throws IOException{
+        String[] splitString = received.split(" ");
+        ArrayList<String> ingredients;
+        if(splitString.length%2!=0){
+            throw new IOException("String not convertible to search");
+        }
+        for(int i = 0 ; i<splitString.length;i++){
+            splitString[i]=splitString[i].toLowerCase();
+        }
+        searchBools= new ArrayList<String>(splitString.length/2);
+        ingredients= new ArrayList<String>(splitString.length/2);
+        for(int j=0;j<splitString.length/2;j++){
+            searchBools.set(j,splitString[2*j]);
+            ingredients.set(j,splitString[2*j+1]);
+        }
+        for(int h=0;h<ingredients.size();h++){
+
+        }
+    }
 }

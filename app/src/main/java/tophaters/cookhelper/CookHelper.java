@@ -366,6 +366,15 @@ public class CookHelper implements java.io.Serializable{
         return newRecipes;
     }
 
+    public Ingredient findIngredient(String ing){
+        for(int i=0; i<ingredients.size();i++){
+            if(ing==ingredients.get(i).getName().toLowerCase()){
+                return ingredients.get(i);
+            }
+        }
+        return null;
+    }
+
     // methodes d'Instances pour les variables d'instances
     public ArrayList<Category> getCategories() {
         return categories;
