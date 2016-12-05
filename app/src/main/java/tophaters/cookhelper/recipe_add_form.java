@@ -161,7 +161,7 @@ public class recipe_add_form extends AppCompatActivity {
 
 
 
-        builder.setTitle("Test")
+        builder.setTitle("Select Ingredient")
                 // Specify the list array, the items to be selected by default (null for none),
                 // and the listener through which to receive callbacks when items are selected
                 .setMultiChoiceItems(fol_list, null,
