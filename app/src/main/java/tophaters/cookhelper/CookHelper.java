@@ -27,7 +27,7 @@ import static tophaters.cookhelper.Serializer.serialize;
 
 
 //cette classe sera le singleton de l'application
-public class CookHelper {
+public class CookHelper implements java.io.Serializable{
     private static CookHelper cookHelper; // l'instance du Singleton
     private byte[] savedData;
     private String filename ="CookHelper";
@@ -135,6 +135,8 @@ public class CookHelper {
             }catch(java.lang.ClassNotFoundException h){
                 cookHelper = new CookHelper();
             }
+        }else{
+            return cookHelper;
         }
         return cookHelper;
 
@@ -398,7 +400,7 @@ public class CookHelper {
     }
 
     //Functions to save
-    public void Save(Context c)throws IOException{
+    public void save(Context c)throws IOException{
         c.deleteFile("CookHelper");//delete if the file already exists to free memory
         FileOutputStream outputStream;
         savedData = serialize(cookHelper);

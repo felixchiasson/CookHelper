@@ -6,7 +6,7 @@ import java.util.Comparator;
  * Created by shanelgauthier on 16-11-27.
  */
 
-public class Origin {
+public class Origin implements java.io.Serializable{
 
     private String name;
 

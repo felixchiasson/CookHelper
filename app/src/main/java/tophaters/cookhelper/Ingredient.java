@@ -10,7 +10,7 @@ import java.util.Comparator;
  * Created by shanelgauthier on 16-11-27.
  */
 
-public class Ingredient implements Parcelable {
+public class Ingredient  implements java.io.Serializable, Parcelable {
     private String name;
 
     public Ingredient(String name) {
