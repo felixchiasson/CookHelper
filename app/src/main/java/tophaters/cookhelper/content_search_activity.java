@@ -207,8 +207,53 @@ public class content_search_activity extends AppCompatActivity {
             return itemView;
 
 
-        }}
+        }
+    }
+    public ArrayList<Ingredient> getOrIngredients(ArrayList<String> bools, ArrayList<Ingredient> ings){
+        ArrayList<Ingredient> orIngredients= new ArrayList<>();
+        if(bools.size()<0) {
+            for (int i = 0; i < bools.size(); i++) {
+                if (bools.get(i).equals("OR")) {
+                    orIngredients.add(ings.get(i));
+                }
+            }
+            return orIngredients;
+        }else{
+            return null;
+        }
+    }
 
+    public ArrayList<String> orInRecipes(ArrayList<Recipe> recipes, ArrayList<Ingredient> ingredients){
+        ArrayList<String> ors = new ArrayList<>(recipes.size());
+        int counter;
+        for(int i=0;i<recipes.size();i++){
+            counter=0;
+            for(int j=0;j<ingredients.size();j++){
+                if(recipes.get(i).hasIngredient(ingredients.get(j))){
+                    counter++;
+                }
+            }
+            ors.set(i,counter+"/"+ingredients.size());
+        }
+        return ors;
+    }
+
+    public void sortSearchResult(ArrayList<Recipe> recipes, ArrayList<String> orsOfRecipes){
+        ArrayList<Recipe> newRecipes= new ArrayList<>(recipes.size());
+        ArrayList<String> newOrsOfRecipes = new ArrayList<>(orsOfRecipes.size());
+        int counter = orsOfRecipes.size();
+        while(counter>=0){
+            for(int i=0;i<orsOfRecipes.size();i++){
+                if(orsOfRecipes.get(i).charAt(0)==(char)counter){
+                    newRecipes.add(recipes.get(i));
+                    newOrsOfRecipes.add(orsOfRecipes.get(i));
+                }
+            }
+            counter--;
+        }
+        recipes=newRecipes;
+        orsOfRecipes=newOrsOfRecipes;
+    }
 
 
 }
