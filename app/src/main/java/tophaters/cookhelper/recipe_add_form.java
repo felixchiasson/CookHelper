@@ -25,6 +25,8 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.io.PrintWriter;
+
 import java.util.ArrayList;
 
 public class recipe_add_form extends AppCompatActivity {
@@ -211,8 +213,8 @@ public class recipe_add_form extends AppCompatActivity {
 
     // ************** SAVE RECIPE *********************
 
-    public void onClickSaveRecipe(View v) {
-        boolean added;
+    public void onClickSaveRecipe() {
+
 
         EditText recipeName = (EditText) findViewById(R.id.recipe_add_name);
         String sRecipeName = recipeName.getText().toString();
@@ -239,6 +241,7 @@ public class recipe_add_form extends AppCompatActivity {
             listIngredientToAdd.add(inAdapter.getItem(i));
         }
 
+        // Recipe newRecipe = new Recipe(sCookTime, sPrepTime, steps, sRecipeName, selectedImageUri);
 
 
 
@@ -274,6 +277,19 @@ public class recipe_add_form extends AppCompatActivity {
         ViewGroup.LayoutParams params = listView.getLayoutParams();
         params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
         listView.setLayoutParams(params);
+    }
+
+}
+    @Override
+    public void onStop(){
+        super.onStop();
+        try{
+            byte[]  bytes = Serializer.serialize(CookHelper.getCookHelper());
+            PrintWriter writer = new PrintWriter("DATA.txt");
+            writer.print(bytes);
+        }
+        catch(java.io.IOException e){}
+
     }
 
 }

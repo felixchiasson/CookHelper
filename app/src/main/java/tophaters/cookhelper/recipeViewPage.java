@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import java.io.PrintWriter;
+
 public class recipeViewPage extends AppCompatActivity {
 
     @Override
@@ -64,5 +66,17 @@ public class recipeViewPage extends AppCompatActivity {
         public void setName(String name) {
             this.name = name;
         }
+    }
+
+    @Override
+    public void onStop(){
+        super.onStop();
+        try{
+            byte[]  bytes = Serializer.serialize(CookHelper.getCookHelper());
+            PrintWriter writer = new PrintWriter("DATA.txt");
+            writer.print(bytes);
+        }
+        catch(java.io.IOException e){}
+
     }
 }

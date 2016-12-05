@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.io.PrintWriter;
 
 import static tophaters.cookhelper.CookHelper.getCookHelper;
 import static tophaters.cookhelper.R.layout.item_ingredient_view;
@@ -101,7 +102,17 @@ public class Ingredient_List extends AppCompatActivity {
 //    }
 
 
+    @Override
+    public void onStop(){
+        super.onStop();
+        try{
+            byte[]  bytes = Serializer.serialize(CookHelper.getCookHelper());
+            PrintWriter writer = new PrintWriter("DATA.txt");
+            writer.print(bytes);
+        }
+        catch(java.io.IOException e){}
 
+    }
 
     private void populateListView() {
 

@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.PrintWriter;
+
 public class RecipeView extends AppCompatActivity {
     private String name;
     private String prepTime;
@@ -108,5 +110,16 @@ public class RecipeView extends AppCompatActivity {
                 }
             }
         });
+    }
+    @Override
+    public void onStop(){
+        super.onStop();
+        try{
+            byte[]  bytes = Serializer.serialize(CookHelper.getCookHelper());
+            PrintWriter writer = new PrintWriter("DATA.txt");
+            writer.print(bytes);
+        }
+        catch(java.io.IOException e){}
+
     }
 }
