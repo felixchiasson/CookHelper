@@ -1,27 +1,31 @@
 package tophaters.cookhelper;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static tophaters.cookhelper.R.layout.item_ingredient_view;
+
 public class content_search_activity extends AppCompatActivity {
-    private ArrayAdapter<Integer> adapter;
-    ListView list;
+    private ArrayAdapter<Recipe> adapter;
+    private ListView list;
     private ArrayList<String> searchBools;
     private ArrayList<Ingredient> searchIngredients;
-    private ArrayList<Integer> array;
-   // private ArrayList<String> searchBools;
-    //private ArrayList<Ingredient> searchIngredients;
+    private ArrayList<Recipe> searchRecipes;
+
 
 
     @Override
@@ -30,8 +34,7 @@ public class content_search_activity extends AppCompatActivity {
         setContentView(R.layout.activity_search_activity);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        array = new ArrayList<Integer>();
-        array.add(1);
+
 //
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
@@ -45,7 +48,7 @@ public class content_search_activity extends AppCompatActivity {
 
 
 
-//populateListView();
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ArrayAdapter<Category> categoryAdapter = new ArrayAdapter<Category>(this, android.R.layout.simple_spinner_item, CookHelper.getCookHelper().getCategories());
@@ -80,6 +83,8 @@ public class content_search_activity extends AppCompatActivity {
 
                 try{
                     readIngredients(ingredients);
+                    ArrayList<Recipe> searchRecipes = CookHelper.getCookHelper().search(category, origin, searchIngredients, searchBools );
+                    //populateListView();
                 }catch (IOException e){
                     Toast.makeText( content_search_activity.this, "String was not valid for search. Refer to help page for details." , Toast.LENGTH_LONG).show();
                     return;
@@ -89,69 +94,8 @@ public class content_search_activity extends AppCompatActivity {
 
 
 
+
             }});}
-
-
-
-
-
-
-
-
-    //private void populateListView() {
-
-
-       // adapter = new content_search_activity.MyListAdapter();
-       // list = (ListView) findViewById(R.id.selectIgrendientListView);
-
-        //list.setAdapter(adapter);
-
-   // }
-
-   // private class MyListAdapter extends ArrayAdapter<Origin> {
-
-//    private class MyListAdapter extends ArrayAdapter<Integer> {
-//
-//        public MyListAdapter() {
-//            super(content_search_activity.this, R.layout.item_view, array);
-//        }
-//
-//        @Override
-//        public @NonNull
-//        View getView(int position, View convertView, @NonNull ViewGroup parent) {
-//            View itemView = convertView;
-//            if (itemView == null) {
-//                itemView = getLayoutInflater().inflate(R.layout.select_ingredient_view, parent, false);
-//            }
-//
-//            //find the ingredient
-//
-//           // Origin currentOrigin = CookHelper.getCookHelper().getOrigins().get(position);
-//
-//
-//            // Make name Text
-//            //TextView nameText = (TextView) itemView.findViewById(R.id.item_textName);
-//            //nameText.setText(currentOrigin.getName());
-//            return itemView;
-
-            //find the ingredient
-
-           // Origin currentOrigin = CookHelper.getCookHelper().getOrigins().get(position);
-
-
-            // Make name Text
-            //TextView nameText = (TextView) itemView.findViewById(R.id.item_textName);
-            //nameText.setText(currentOrigin.getName());
-            //return itemView;
-
-
-
-
-       // }
-   // }
-
-    //}
-
 
 
 
@@ -186,5 +130,50 @@ public class content_search_activity extends AppCompatActivity {
         }
         return true;
     }
+
+
+
+
+    private void populateListView() {
+
+
+        adapter = new content_search_activity.MyListAdapter();
+        list = (ListView) findViewById(R.id.select_ListView);
+
+        list.setAdapter(adapter);
+
+    }
+
+    private class  MyListAdapter extends ArrayAdapter<Recipe> {
+                public MyListAdapter() {
+            super(content_search_activity.this, item_ingredient_view, searchRecipes);
+       }
+
+        @Override
+        public @NonNull
+        View getView(int position, View convertView, @NonNull ViewGroup parent) {View itemView = convertView;
+            if (itemView == null) {
+                itemView = getLayoutInflater().inflate(item_ingredient_view, parent, false);
+            }
+
+            //find the ingredient
+
+            Recipe currentRecipe = searchRecipes.get(position);
+
+
+            // Make name Text
+            TextView nameText = (TextView) itemView.findViewById(R.id.item_textName);
+            nameText.setText(currentRecipe.getName());
+            return itemView;
+
+
+        }}
+
+
+
 }
+
+
+
+
 

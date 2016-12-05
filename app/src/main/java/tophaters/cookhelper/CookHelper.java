@@ -1,21 +1,13 @@
 package tophaters.cookhelper;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.net.Uri;
-import android.support.annotation.AnyRes;
-import android.support.annotation.NonNull;
-
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.PriorityQueue;
-import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
