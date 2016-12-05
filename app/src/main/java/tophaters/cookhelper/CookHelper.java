@@ -11,7 +11,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.PriorityQueue;
 
 import static tophaters.cookhelper.Serializer.deserialize;
 import static tophaters.cookhelper.Serializer.serialize;
@@ -279,10 +278,10 @@ public class CookHelper implements java.io.Serializable{
     public ArrayList<Recipe> search(Category category, Origin origin, ArrayList<Ingredient> ingredients, ArrayList<String> bools) {
 
         ArrayList<Recipe> recipes = getRecipes();
-        ArrayList<Ingredient> orIngredients = new ArrayList<Ingredient>();
+       ArrayList<Ingredient> orIngredients = new ArrayList<Ingredient>();
         ArrayList<Integer> orCounter;
         Integer counter;
-        PriorityQueue<Recipe> sortedRecipes;
+        //PriorityQueue<Recipe> sortedRecipes;
 
         if(category!=null){
             recipes = filterCategory(category, recipes);
@@ -309,7 +308,8 @@ public class CookHelper implements java.io.Serializable{
                         counter++;
                     }
                 }
-                orCounter.set(j,counter);
+
+                // orCounter.add(j,counter);
             }
         }else{//no or ingredients
             for(int h=0 ; h<orCounter.size() ; h++){
@@ -355,9 +355,9 @@ public class CookHelper implements java.io.Serializable{
                     break;
                 }
             }
-            if(bool=="AND" && flag==true){
+            if(bool.equals("AND") && flag==true){
                 newRecipes.add(recipes.get(i));
-            }else if(bool=="NOT" && flag==false){
+            }else if(bool.equals("NOT") && flag==false){
                 newRecipes.add(recipes.get(i));
             }
         }

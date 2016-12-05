@@ -84,7 +84,10 @@ public class content_search_activity extends AppCompatActivity {
                 Origin origin = (Origin) origins.getSelectedItem();
 
                 try{
-                    readIngredients(ingredients);
+                    if(! ingredients.equals(null)){
+                        readIngredients(ingredients);
+                        Toast.makeText( content_search_activity.this, searchIngredients.get(0).getName() , Toast.LENGTH_LONG).show();
+                    }
                     recherche = CookHelper.getCookHelper().search(category, origin, searchIngredients, searchBools);
                 }catch (IOException e){
                     Toast.makeText( content_search_activity.this, "String was not valid for search. Refer to help page for details." , Toast.LENGTH_LONG).show();
