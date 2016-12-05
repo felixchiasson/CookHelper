@@ -13,8 +13,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,13 +89,12 @@ public class Category_List extends AppCompatActivity {
 
 
                                     Category category = CookHelper.getCookHelper().getCategories().get(position);
-                                    try{boolean isNotInRecipe = CookHelper.getCookHelper().removeCategory(category);
+                                    boolean isNotInRecipe = CookHelper.getCookHelper().removeCategory(category);
                                     if (!isNotInRecipe) {
                                         String message = " You can not remove this category because it is currently used in a recipe";
 
                                         Toast.makeText(Category_List.this, message, Toast.LENGTH_LONG).show();
-                                    }}
-                                    catch (Exception e){}
+                                    }
 
                                     adapter.notifyDataSetChanged();
 
@@ -146,17 +143,7 @@ public class Category_List extends AppCompatActivity {
             }
 
     }
-    @Override
-    public void onStop(){
-        super.onStop();
-        try{
-            byte[]  bytes = Serializer.serialize(CookHelper.getCookHelper());
-            PrintWriter writer = new PrintWriter("DATA.txt");
-            writer.print(bytes);
-        }
-        catch(java.io.IOException e){}
 
-    }
 
 
 }

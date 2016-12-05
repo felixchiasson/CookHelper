@@ -118,13 +118,6 @@
                     android:id="@+id/add_recipe_origin_spinner"
                     android:entries="@array/add_recipe_origin_list"/>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/add_recipe_add_steps"
-                    android:textAppearance="@android:style/TextAppearance.Material.Subhead"/>
-
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -132,6 +125,13 @@
                     android:ems="10"
                     android:id="@+id/add_recipe_edittext_steps"
                     android:maxHeight="100dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/add_recipe_add_steps"
+                    android:textAppearance="@android:style/TextAppearance.Material.Subhead"/>
 
                 <Button
                     android:text="@string/add_recipe_add_button"

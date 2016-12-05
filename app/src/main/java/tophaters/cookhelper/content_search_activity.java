@@ -9,10 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import java.io.PrintWriter;
-
 public class content_search_activity extends AppCompatActivity {
-    private ArrayAdapter<Category> adapter;
+    private ArrayAdapter<Origin> adapter;
     ListView list;
 
     @Override
@@ -34,7 +32,7 @@ public class content_search_activity extends AppCompatActivity {
 
 
 
-
+populateListView();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
@@ -42,16 +40,16 @@ public class content_search_activity extends AppCompatActivity {
     private void populateListView() {
 
         adapter = new content_search_activity.MyListAdapter();
-        list = (ListView) findViewById(R.id.item_select_ingredient);
+        list = (ListView) findViewById(R.id.selectIgrendientListView);
+
         list.setAdapter(adapter);
 
     }
 
-
-    private class MyListAdapter extends ArrayAdapter<Category> {
+    private class MyListAdapter extends ArrayAdapter<Origin> {
 
         public MyListAdapter() {
-            super(content_search_activity.this, R.layout.select_ingredient_view, CookHelper.getCookHelper().getCategories());
+            super(content_search_activity.this, R.layout.item_view, CookHelper.getCookHelper().getOrigins());
         }
 
         @Override
@@ -61,24 +59,38 @@ public class content_search_activity extends AppCompatActivity {
             if (itemView == null) {
                 itemView = getLayoutInflater().inflate(R.layout.select_ingredient_view, parent, false);
             }
+
+            //find the ingredient
+
+           // Origin currentOrigin = CookHelper.getCookHelper().getOrigins().get(position);
+
+
+            // Make name Text
+            //TextView nameText = (TextView) itemView.findViewById(R.id.item_textName);
+            //nameText.setText(currentOrigin.getName());
             return itemView;
 
 
-
-
         }
+
     }
 
-    @Override
-    public void onStop(){
-        super.onStop();
-        try{
-            byte[]  bytes = Serializer.serialize(CookHelper.getCookHelper());
-            PrintWriter writer = new PrintWriter("DATA.txt");
-            writer.print(bytes);
-        }
-        catch(java.io.IOException e){}
 
-    }
+
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
