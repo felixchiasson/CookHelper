@@ -300,7 +300,6 @@ public class CookHelper implements java.io.Serializable{
             }
         }
 
-
         orCounter = new ArrayList<Integer>(recipes.size());
         if(orIngredients.size()>0) {
             for (int j=0; j < recipes.size(); j++) {

@@ -1,11 +1,13 @@
 package tophaters.cookhelper;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,7 +26,7 @@ public class content_search_activity extends AppCompatActivity {
     private ListView list;
     private ArrayList<String> searchBools;
     private ArrayList<Ingredient> searchIngredients;
-    private ArrayList<Recipe> searchRecipes;
+    private ArrayList<Recipe> recherche;
 
 
 
@@ -82,26 +84,50 @@ public class content_search_activity extends AppCompatActivity {
                 Origin origin = (Origin) origins.getSelectedItem();
 
                 try{
-                    boolean flag = readIngredients(ingredients);
-                    //boolean flag= true;
-                    if(flag==false){
-                        Toast.makeText( content_search_activity.this, "You got false nerd" , Toast.LENGTH_LONG).show();
-                    }else{
-                        Toast.makeText( content_search_activity.this, "You got true nerd" , Toast.LENGTH_LONG).show();
-                        ArrayList<Recipe> searchRecipes = CookHelper.getCookHelper().search(category, origin, searchIngredients, searchBools );
-                    }
-                   // populateListView();
+                    readIngredients(ingredients);
+                    recherche = CookHelper.getCookHelper().search(category, origin, searchIngredients, searchBools);
                 }catch (IOException e){
                     Toast.makeText( content_search_activity.this, "String was not valid for search. Refer to help page for details." , Toast.LENGTH_LONG).show();
                     return;
 
                 }
+                populateListView();
+                registerClickCallBack();
 
 
 
 
 
             }});}
+
+
+    //methode ajouter pour clicker sur les items sune liste
+    private void registerClickCallBack(){
+
+        ListView list = (ListView) findViewById(R.id.select_ListView);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            public void onItemClick(AdapterView<?> parent, View viewClick, int position, long id){
+                Recipe clickedRecipe = CookHelper.getCookHelper().getRecipes().get(position);
+                Intent i = new Intent(content_search_activity.this, RecipeView.class);
+                i.putExtra("prepTime", clickedRecipe.getPreTime()+" minutes");
+                i.putExtra("name", clickedRecipe.getName()+"");
+                i.putExtra("cookTime", clickedRecipe.getCookTime()+" minutes");
+                i.putExtra("category", clickedRecipe.getCategory().getName()+"");
+                i.putExtra("origin", clickedRecipe.getOrigin().getName()+"");
+                i.putExtra("description", clickedRecipe.getDescription());
+                i.putExtra("picture", clickedRecipe.getIconId()+"");
+
+
+
+                //  start the activity
+                startActivity(i);
+
+
+            }
+        });
+
+    }
 
 
 
@@ -154,7 +180,7 @@ public class content_search_activity extends AppCompatActivity {
 
     private class  MyListAdapter extends ArrayAdapter<Recipe> {
                 public MyListAdapter() {
-            super(content_search_activity.this, item_ingredient_view, searchRecipes);
+            super(content_search_activity.this, item_ingredient_view, recherche);
        }
 
         @Override
@@ -166,7 +192,7 @@ public class content_search_activity extends AppCompatActivity {
 
             //find the ingredient
 
-            Recipe currentRecipe = searchRecipes.get(position);
+            Recipe currentRecipe = recherche.get(position);
 
 
             // Make name Text
