@@ -303,15 +303,11 @@ public class edit_recipe extends AppCompatActivity {
                 }
             }
             if (found) {
-                CookHelper.getCookHelper().removeRecipe(recipe);
+
 
                 EditText recipeName = (EditText) findViewById(R.id.recipe_add_name);
                 String sRecipeName = recipeName.getText().toString();
-                if (sRecipeName.isEmpty()) {
-                    Toast.makeText(edit_recipe.this, "Your recipe needs a name!", Toast.LENGTH_LONG).show();
-                } else {
-                    sRecipeName = (sRecipeName.substring(0, 1).toUpperCase() + sRecipeName.substring(1).toLowerCase());
-                }
+
 
                 EditText prepTime = (EditText) findViewById(R.id.recipe_add_preptime);
                 String sPrepTime = prepTime.getText().toString();
@@ -343,16 +339,23 @@ public class edit_recipe extends AppCompatActivity {
 
                 ArrayList<Ingredient> listIngredientToAdd = new ArrayList<>();
                 ListView listIngredients = (ListView) findViewById(R.id.ingredientList);
-                ArrayAdapter<Ingredient> inAdapter = (ArrayAdapter<Ingredient>) listIngredients.getAdapter();
-                if (inAdapter == null) {
+                ArrayAdapter<Ingredient> inAdapter = (ArrayAdapter<Ingredient>)ingredientList.getAdapter();
+                if (in_list.isEmpty()) {
                     Toast.makeText(edit_recipe.this, "Your recipe cannot have 0 ingredient, please add at least one.", Toast.LENGTH_LONG).show();
                 } else {
                     for (int i = 0; i < inAdapter.getCount(); i++) {
-                        listIngredientToAdd.add(inAdapter.getItem(i));
+                        listIngredientToAdd.add(in_list.get(i));
 
                     }
-                    Recipe newRecipe = new Recipe(iCookTime, iPrepTime, steps, sRecipeName, selectedImageUri, origin, category, listIngredientToAdd);
-                    added = CookHelper.getCookHelper().addRecipe(newRecipe);
+                    if (sRecipeName.isEmpty()) {
+                        Toast.makeText(edit_recipe.this, "Your recipe needs a name!", Toast.LENGTH_LONG).show();
+                    } else {
+                        sRecipeName = (sRecipeName.substring(0, 1).toUpperCase() + sRecipeName.substring(1).toLowerCase());
+                        CookHelper.getCookHelper().removeRecipe(recipe);
+                        Recipe newRecipe = new Recipe(iCookTime, iPrepTime, steps, sRecipeName, selectedImageUri, origin, category, listIngredientToAdd);
+                        added = CookHelper.getCookHelper().addRecipe(newRecipe);
+                    }
+
                 }
 
                 // Recipe newRecipe = new Recipe(sCookTime, sPrepTime, steps, sRecipeName, selectedImageUri);
