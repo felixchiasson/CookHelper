@@ -218,6 +218,7 @@ public class recipe_add_form extends AppCompatActivity {
 
         EditText recipeName = (EditText) findViewById(R.id.recipe_add_name);
         String sRecipeName = recipeName.getText().toString();
+        sRecipeName = (sRecipeName.substring(0,1).toUpperCase() + sRecipeName.substring(1).toLowerCase());
 
         EditText prepTime = (EditText) findViewById(R.id.recipe_add_preptime);
         int sPrepTime = Integer.parseInt(prepTime.getText().toString());
