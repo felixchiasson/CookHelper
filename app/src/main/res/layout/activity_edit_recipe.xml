@@ -53,6 +53,6 @@ tools:context="tophaters.cookhelper.edit_recipe">
     app:layout_anchor="@id/app_bar"
     app:layout_anchorGravity="bottom|end"
     app:srcCompat="@android:drawable/ic_menu_save"
-    android:onClick="openModify" />
+    android:onClick="onClickSaveRecipe" />
 
 </android.support.design.widget.CoordinatorLayout>

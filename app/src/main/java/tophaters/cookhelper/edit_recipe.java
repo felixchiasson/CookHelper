@@ -263,49 +263,59 @@ public class edit_recipe extends AppCompatActivity {
 
     public void onClickSaveRecipe(View v) {
         boolean added;
+        if (verifyIngredients()) {
+            Recipe recipe = null;
+            ArrayList<Recipe> recipeList = CookHelper.getCookHelper().getRecipes();
+            for (int i = 0; i < CookHelper.getCookHelper().getRecipes().size(); i++) {
+                if (name.toLowerCase().equals(recipeList.get(i).getName().toLowerCase())) {
+                    recipe = recipeList.get(i);
+                    break;
+                }
+            }
+            if (recipe != null) {
+                CookHelper.getCookHelper().removeRecipe(recipe);
 
-        EditText recipeName = (EditText) findViewById(R.id.recipe_add_name);
-        String sRecipeName = recipeName.getText().toString();
-        sRecipeName = (sRecipeName.substring(0,1).toUpperCase() + sRecipeName.substring(1).toLowerCase());
+                EditText recipeName = (EditText) findViewById(R.id.recipe_add_name);
+                String sRecipeName = recipeName.getText().toString();
+                sRecipeName = (sRecipeName.substring(0, 1).toUpperCase() + sRecipeName.substring(1).toLowerCase());
 
-        EditText prepTime = (EditText) findViewById(R.id.recipe_add_preptime);
-        int sPrepTime = Integer.parseInt(prepTime.getText().toString());
+                EditText prepTime = (EditText) findViewById(R.id.recipe_add_preptime);
+                int sPrepTime = Integer.parseInt(prepTime.getText().toString());
 
-        EditText cookTime = (EditText) findViewById(R.id.recipe_add_cooktime);
-        int sCookTime = Integer.parseInt(cookTime.getText().toString());
+                EditText cookTime = (EditText) findViewById(R.id.recipe_add_cooktime);
+                int sCookTime = Integer.parseInt(cookTime.getText().toString());
 
-        EditText description = (EditText) findViewById(R.id.add_recipe_edittext_steps);
-        String steps = description.getText().toString();
+                EditText description = (EditText) findViewById(R.id.add_recipe_edittext_steps);
+                String steps = description.getText().toString();
 
-        Spinner categories = (Spinner) findViewById(R.id.add_recipe_category_spinner);
-        Category category = (Category) categories.getSelectedItem();
+                Spinner categories = (Spinner) findViewById(R.id.add_recipe_category_spinner);
+                Category category = (Category) categories.getSelectedItem();
 
-        Spinner origins = (Spinner) findViewById(R.id.add_recipe_origin_spinner);
-        Origin origin = (Origin) origins.getSelectedItem();
+                Spinner origins = (Spinner) findViewById(R.id.add_recipe_origin_spinner);
+                Origin origin = (Origin) origins.getSelectedItem();
 
-        ArrayList<Ingredient> listIngredientToAdd = new ArrayList<>();
-        ListView listIngredients = (ListView) findViewById(R.id.ingredientList);
-        ArrayAdapter<Ingredient> inAdapter = (ArrayAdapter<Ingredient>)listIngredients.getAdapter();
-        for(int i = 0; i<inAdapter.getCount(); i++) {
-            listIngredientToAdd.add(inAdapter.getItem(i));
+                ArrayList<Ingredient> listIngredientToAdd = new ArrayList<>();
+                ListView listIngredients = (ListView) findViewById(R.id.ingredientList);
+                ArrayAdapter<Ingredient> inAdapter = (ArrayAdapter<Ingredient>) listIngredients.getAdapter();
+                for (int i = 0; i < inAdapter.getCount(); i++) {
+                    listIngredientToAdd.add(inAdapter.getItem(i));
+                }
+
+                // Recipe newRecipe = new Recipe(sCookTime, sPrepTime, steps, sRecipeName, selectedImageUri);
+
+
+                Recipe newRecipe = new Recipe(sCookTime, sPrepTime, steps, sRecipeName, selectedImageUri, origin, category, listIngredientToAdd);
+                added = CookHelper.getCookHelper().addRecipe(newRecipe);
+
+                if (added) {
+                    Toast.makeText(edit_recipe.this, "Recipe SuccessFully Modified.", Toast.LENGTH_LONG).show();
+                    finish();
+
+                }
+            }
+        } else {
+            Toast.makeText(edit_recipe.this, "Modification Failed.", Toast.LENGTH_LONG).show();
         }
-
-        // Recipe newRecipe = new Recipe(sCookTime, sPrepTime, steps, sRecipeName, selectedImageUri);
-
-
-
-
-        Recipe newRecipe = new Recipe(sCookTime, sPrepTime, steps, sRecipeName, selectedImageUri, origin, category, listIngredientToAdd);
-        added = CookHelper.getCookHelper().addRecipe(newRecipe);
-
-        if (added){
-            Toast.makeText(edit_recipe.this, "Saved", Toast.LENGTH_LONG).show();
-            finish();
-
-        }else{
-            Toast.makeText(edit_recipe.this, "Recipe already exists.", Toast.LENGTH_LONG).show();
-        }
-
     }
     public static void setListViewHeightBasedOnChildren(ListView listView) {
         ListAdapter listAdapter = listView.getAdapter();
@@ -346,16 +356,14 @@ public class edit_recipe extends AppCompatActivity {
         String received = ingredientList.toString();
         String[] ingredients = received.trim().split("\n");
         for (int i = 0; i < ingredients.length; i++){
-
             if (CookHelper.getCookHelper().findIngredient(ingredients[i])!=null){
             }else {
                 return false;
             }
         }return true;
     }
-    public void save(){
 
-    }
+
 
 }
 
