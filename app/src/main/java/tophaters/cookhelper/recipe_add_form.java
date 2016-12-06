@@ -276,14 +276,15 @@ public class recipe_add_form extends AppCompatActivity {
             for (int i = 0; i < inAdapter.getCount(); i++) {
                 listIngredientToAdd.add(inAdapter.getItem(i));
             }
+            Recipe newRecipe = new Recipe(iCookTime, iPrepTime, steps, sRecipeName, selectedImageUri, origin, category, listIngredientToAdd);
+            added = CookHelper.getCookHelper().addRecipe(newRecipe);
         }
 
         // Recipe newRecipe = new Recipe(sCookTime, sPrepTime, steps, sRecipeName, selectedImageUri);
 
 
 
-        Recipe newRecipe = new Recipe(iCookTime, iPrepTime, steps, sRecipeName, selectedImageUri, origin, category, listIngredientToAdd);
-        added = CookHelper.getCookHelper().addRecipe(newRecipe);
+
 
 
         if (added){
