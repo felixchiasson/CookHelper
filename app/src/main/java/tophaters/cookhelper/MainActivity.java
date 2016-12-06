@@ -143,9 +143,9 @@ public class MainActivity extends AppCompatActivity
             public void onItemClick(AdapterView<?> parent, View viewClick, int position, long id){
                 Recipe clickedRecipe = CookHelper.getCookHelper().getRecipes().get(position);
                 Intent i = new Intent(MainActivity.this, RecipeView.class);
-                i.putExtra("prepTime", clickedRecipe.getPreTime()+" minutes");
+                i.putExtra("prepTime", clickedRecipe.getPreTime()+"");
                 i.putExtra("name", clickedRecipe.getName()+"");
-                i.putExtra("cookTime", clickedRecipe.getCookTime()+" minutes");
+                i.putExtra("cookTime", clickedRecipe.getCookTime()+"");
                 i.putExtra("category", clickedRecipe.getCategory().getName()+"");
                 i.putExtra("origin", clickedRecipe.getOrigin().getName()+"");
                 i.putExtra("description", clickedRecipe.getDescription());

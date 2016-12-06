@@ -64,38 +64,56 @@ public class edit_recipe extends AppCompatActivity {
         iconId = intent.getStringExtra("picture");
         ingredients = intent.getStringExtra("ingredients");
 
+
+
         // This is how to change EditView dynamically(inspired by RecipeView
-        EditText preparation = (EditText)findViewById(R.id.recipe_view_value_preptime);
+        EditText preparation = (EditText)findViewById(R.id.recipe_add_preptime);
         preparation.setText(prepTime, TextView.BufferType.EDITABLE);
 
         //change the name of each recipe
-        EditText recipeName = (EditText)findViewById(R.id.recipe_view_title);
+        EditText recipeName = (EditText)findViewById(R.id.recipe_add_name);
         recipeName.setText(name, TextView.BufferType.EDITABLE);
 
         //change the COOKTIME of each recipe
-        EditText cook = (EditText)findViewById(R.id.recipe_view_value_cooktime);
+        EditText cook = (EditText)findViewById(R.id.recipe_add_cooktime);
         cook.setText(cookTime, TextView.BufferType.EDITABLE);
 
 
         //change the origin of each recipe
-        EditText type = (EditText)findViewById(R.id.recipe_view_value_origin);
-        type.setText(origin, TextView.BufferType.EDITABLE);
+
+        ArrayAdapter<Origin> originAdapter = new ArrayAdapter<Origin>(this, android.R.layout.simple_spinner_item, CookHelper.getCookHelper().getOrigins());
+        ArrayList<Origin> listOrigin = CookHelper.getCookHelper().getOrigins();
+        Spinner originSpinner;
+        originSpinner = (Spinner) findViewById(R.id.add_recipe_origin_spinner);
+        originSpinner.setAdapter(originAdapter);
+        originSpinner.setSelection(listOrigin.indexOf(origin));
+
 
 
         //change the category of each recipe
-        EditText categorie = (EditText)findViewById(R.id.recipe_view_value_category);
-        categorie.setText(category, TextView.BufferType.EDITABLE);
+
+        ArrayAdapter<Category> categoryAdapter = new ArrayAdapter<Category>(this, android.R.layout.simple_spinner_item, CookHelper.getCookHelper().getCategories());
+        ArrayList<Category> listCat = CookHelper.getCookHelper().getCategories();
+        Spinner categorySpinner;
+        categorySpinner = (Spinner) findViewById(R.id.add_recipe_category_spinner);
+        categorySpinner.setAdapter(categoryAdapter);
+        categorySpinner.setSelection(listCat.indexOf(category));
 
         //change the description of each recipe
-        EditText text = (EditText)findViewById(R.id.editDecription);
+        EditText text = (EditText)findViewById(R.id.add_recipe_edittext_steps);
         text.setText(description, TextView.BufferType.EDITABLE);
 
         //change the picture of each recipe
-        ImageView img= (ImageView) findViewById(R.id.defaultRecipeImage);
+        ImageView img= (ImageView) findViewById(R.id.imageView2);
         img.setImageURI(Uri.parse(iconId));
 
-        EditText ingredientList = (EditText) findViewById(R.id.recipe_value_text_ingredients);
-        ingredientList.setText(ingredients, TextView.BufferType.EDITABLE);
+
+        /* ingredientAdapter = new ArrayAdapter<Ingredient>(this, android.R.layout.simple_list_item_multiple_choice, CookHelper.getCookHelper().getIngredients());
+
+        ingredientList = (ListView) findViewById(R.id.ingredientList);
+        ingredientList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        ingredientList.setAdapter(ingredientAdapter); */
+
 
 
         // DISABLE TOUCH EVENTS WHEN SCROLLING THE LISTVIEW
@@ -113,25 +131,13 @@ public class edit_recipe extends AppCompatActivity {
 
         // ****************************************************
 
+*/
 
 
-        ingredientAdapter = new ArrayAdapter<Ingredient>(this, android.R.layout.simple_list_item_multiple_choice, CookHelper.getCookHelper().getIngredients());
 
-        /* ingredientList = (ListView) findViewById(R.id.ingredientList);
-        ingredientList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-        ingredientList.setAdapter(ingredientAdapter); */
 
-        /*ArrayAdapter<Category> categoryAdapter = new ArrayAdapter<Category>(this, android.R.layout.simple_spinner_item, CookHelper.getCookHelper().getCategories());
 
-        Spinner categorySpinner;
-        categorySpinner = (Spinner) findViewById(R.id.add_recipe_category_spinner);
-        categorySpinner.setAdapter(categoryAdapter);
 
-        ArrayAdapter<Origin> originAdapter = new ArrayAdapter<Origin>(this, android.R.layout.simple_spinner_item, CookHelper.getCookHelper().getOrigins());
-
-        Spinner originSpinner;
-        originSpinner = (Spinner) findViewById(R.id.add_recipe_origin_spinner);
-        originSpinner.setAdapter(originAdapter); */
     }
 
     public void onClickOpenGallery(View v) {

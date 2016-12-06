@@ -101,7 +101,7 @@ public class RecipeView extends AppCompatActivity {
 
         // This is how to change TextView dynamically
         TextView preparation = (TextView)findViewById(R.id.recipe_view_value_preptime);
-        preparation.setText(prepTime);
+        preparation.setText(prepTime + " minutes");
 
         //change the name of each recipe
         TextView recipeName = (TextView)findViewById(R.id.recipe_view_title);
@@ -109,7 +109,7 @@ public class RecipeView extends AppCompatActivity {
 
         //change the COOKTIME of each recipe
         TextView cook = (TextView)findViewById(R.id.recipe_view_value_cooktime);
-        cook.setText(cookTime);
+        cook.setText(cookTime + " minutes");
 
 
         //change the origin of each recipe
