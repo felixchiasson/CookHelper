@@ -149,7 +149,11 @@ public class MainActivity extends AppCompatActivity
                 i.putExtra("category", clickedRecipe.getCategory().getName()+"");
                 i.putExtra("origin", clickedRecipe.getOrigin().getName()+"");
                 i.putExtra("description", clickedRecipe.getDescription());
-                i.putExtra("picture", clickedRecipe.getIconId()+"");
+                if(clickedRecipe.getIconId() == null) {
+                    i.putExtra("picture", "android.resource://tophaters.cookhelper/drawable/defimage");
+                } else {
+                    i.putExtra("picture", clickedRecipe.getIconId()+"");
+                }
                 i.putExtra("Position", position+"");
 
                 ArrayList<Ingredient> ingredientList = clickedRecipe.getIngredients();
@@ -265,7 +269,11 @@ public class MainActivity extends AppCompatActivity
             // fill the view
 
             ImageView imageView = (ImageView) itemView.findViewById(R.id.item_icon);
-            imageView.setImageURI(currentRecipe.getIconId());
+            if(currentRecipe.getIconId() == null) {
+                imageView.setImageURI(Uri.parse("android.resource://tophaters.cookhelper/drawable/defimage"));
+            } else {
+                imageView.setImageURI(currentRecipe.getIconId());
+            }
 
             // Make name Text
             TextView nameText = (TextView) itemView.findViewById(R.id.item_txtName);

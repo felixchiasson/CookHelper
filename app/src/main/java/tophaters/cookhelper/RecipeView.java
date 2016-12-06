@@ -97,6 +97,9 @@ public class RecipeView extends AppCompatActivity {
         origin = intent.getStringExtra("origin");
         description = intent.getStringExtra("description");
         iconId = intent.getStringExtra("picture");
+        if(iconId.isEmpty()) {
+            iconId = "android.resource://tophaters.cookhelper/drawable/defimage";
+        }
         ingredients = intent.getStringExtra("ingredients");
 
         // This is how to change TextView dynamically
