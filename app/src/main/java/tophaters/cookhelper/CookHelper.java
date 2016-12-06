@@ -345,7 +345,7 @@ public class CookHelper implements java.io.Serializable{
 
     public Ingredient findIngredient(String ing){
         for(int i=0; i<ingredients.size();i++){
-            if(ing.equals(ingredients.get(i).getName().toLowerCase())){
+            if(ing.toLowerCase().equals(ingredients.get(i).getName().toLowerCase())){
                 return ingredients.get(i);
             }
         }
