@@ -1,5 +1,6 @@
 package tophaters.cookhelper;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -31,8 +32,8 @@ public class edit_recipe extends AppCompatActivity {
     ListView ingredientList;
     private Uri selectedImageUri;
     ArrayList mSelected;
-    ArrayList<Ingredient> in_list = new ArrayList<>();
-    ArrayAdapter<Ingredient> ingredientAdapter;
+    private ArrayList<Ingredient> in_list;
+    private ArrayAdapter<Ingredient> ingredientAdapter;
 
     private String name;
     private String prepTime;
@@ -49,9 +50,10 @@ public class edit_recipe extends AppCompatActivity {
 
         setContentView(R.layout.activity_edit_recipe);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         if(getSupportActionBar() != null){
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         }
         Intent intent = getIntent();
 
@@ -63,6 +65,7 @@ public class edit_recipe extends AppCompatActivity {
         description = intent.getStringExtra("description");
         iconId = intent.getStringExtra("picture");
         ingredients = intent.getStringExtra("ingredients");
+        selectedImageUri = Uri.parse(iconId);
 
 
 
@@ -108,18 +111,17 @@ public class edit_recipe extends AppCompatActivity {
         img.setImageURI(Uri.parse(iconId));
 
 
-        /* ingredientAdapter = new ArrayAdapter<Ingredient>(this, android.R.layout.simple_list_item_multiple_choice, CookHelper.getCookHelper().getIngredients());
+        ingredientAdapter = new ArrayAdapter<Ingredient>(this, android.R.layout.simple_list_item_multiple_choice, verifyIngredients());
 
         ingredientList = (ListView) findViewById(R.id.ingredientList);
-        ingredientList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-        ingredientList.setAdapter(ingredientAdapter); */
+        ingredientList.setAdapter(ingredientAdapter);
+        setListViewHeightBasedOnChildren(ingredientList);
 
-
+        in_list = verifyIngredients();
 
         // DISABLE TOUCH EVENTS WHEN SCROLLING THE LISTVIEW
 
-        /*ListView lv = (ListView) findViewById(R.id.ingredientList);
-        lv.setOnTouchListener(new View.OnTouchListener() {
+        ingredientList.setOnTouchListener(new View.OnTouchListener() {
             // Setting on Touch Listener for handling the touch inside ScrollView
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -129,9 +131,34 @@ public class edit_recipe extends AppCompatActivity {
             }
         });
 
+        SwipeDismissListViewTouchListener touchListener =
+                new SwipeDismissListViewTouchListener(
+                        ingredientList,
+                        new SwipeDismissListViewTouchListener.DismissCallbacks() {
+                            @Override
+                            public boolean canDismiss(int position) {
+                                return true;
+                            }
+
+                            @Override
+                            public void onDismiss(ListView listView, int[] reverseSortedPositions) {
+                                for (int position : reverseSortedPositions) {
+
+
+                                    in_list.remove(in_list.get(position));
+                                    ingredientAdapter.notifyDataSetChanged();
+                                    ingredientList.setAdapter(ingredientAdapter);
+                                    setListViewHeightBasedOnChildren(ingredientList);
+
+                                }
+
+                            }
+                        });
+        ingredientList.setOnTouchListener(touchListener);
+
         // ****************************************************
 
-*/
+
 
 
 
@@ -286,13 +313,30 @@ public class edit_recipe extends AppCompatActivity {
 
                 EditText recipeName = (EditText) findViewById(R.id.recipe_add_name);
                 String sRecipeName = recipeName.getText().toString();
-                sRecipeName = (sRecipeName.substring(0, 1).toUpperCase() + sRecipeName.substring(1).toLowerCase());
+                if (sRecipeName.isEmpty()) {
+                    Toast.makeText(edit_recipe.this, "Your recipe needs a name!", Toast.LENGTH_LONG).show();
+                } else {
+                    sRecipeName = (sRecipeName.substring(0, 1).toUpperCase() + sRecipeName.substring(1).toLowerCase());
+                }
 
                 EditText prepTime = (EditText) findViewById(R.id.recipe_add_preptime);
-                int sPrepTime = Integer.parseInt(prepTime.getText().toString());
+                String sPrepTime = prepTime.getText().toString();
+                int iPrepTime;
+                if (sPrepTime.isEmpty()) {
+                    iPrepTime = 0;
+                } else {
+                    iPrepTime = Integer.parseInt(sPrepTime);
+                }
 
                 EditText cookTime = (EditText) findViewById(R.id.recipe_add_cooktime);
-                int sCookTime = Integer.parseInt(cookTime.getText().toString());
+                String sCookTime = cookTime.getText().toString();
+                int iCookTime;
+                if (sCookTime.isEmpty()) {
+                    iCookTime = 0;
+                } else {
+                    iCookTime = Integer.parseInt(sCookTime);
+                }
+
 
                 EditText description = (EditText) findViewById(R.id.add_recipe_edittext_steps);
                 String steps = description.getText().toString();
@@ -306,18 +350,42 @@ public class edit_recipe extends AppCompatActivity {
                 ArrayList<Ingredient> listIngredientToAdd = new ArrayList<>();
                 ListView listIngredients = (ListView) findViewById(R.id.ingredientList);
                 ArrayAdapter<Ingredient> inAdapter = (ArrayAdapter<Ingredient>) listIngredients.getAdapter();
-                for (int i = 0; i < inAdapter.getCount(); i++) {
-                    listIngredientToAdd.add(inAdapter.getItem(i));
+                if (inAdapter == null) {
+                    Toast.makeText(edit_recipe.this, "Your recipe cannot have 0 ingredient, please add at least one.", Toast.LENGTH_LONG).show();
+                } else {
+                    for (int i = 0; i < inAdapter.getCount(); i++) {
+                        listIngredientToAdd.add(inAdapter.getItem(i));
+                    }
                 }
 
                 // Recipe newRecipe = new Recipe(sCookTime, sPrepTime, steps, sRecipeName, selectedImageUri);
 
 
-                Recipe newRecipe = new Recipe(sCookTime, sPrepTime, steps, sRecipeName, selectedImageUri, origin, category, listIngredientToAdd);
+                Recipe newRecipe = new Recipe(iCookTime, iPrepTime, steps, sRecipeName, selectedImageUri, origin, category, listIngredientToAdd);
                 added = CookHelper.getCookHelper().addRecipe(newRecipe);
 
                 if (added) {
                     Toast.makeText(edit_recipe.this, "Recipe SuccessFully Modified.", Toast.LENGTH_LONG).show();
+                    Intent resultIntent = new Intent();
+                    resultIntent.putExtra("name", recipeName.getText().toString());
+                    resultIntent.putExtra("prepTime", prepTime.getText().toString());
+                    resultIntent.putExtra("cookTime", cookTime.getText().toString());
+                    resultIntent.putExtra("origin", origin.getName());
+                    resultIntent.putExtra("category", category.getName());
+                    resultIntent.putExtra("picture", selectedImageUri.toString());
+                    resultIntent.putExtra("description", steps);
+                    ArrayList<Ingredient> ingredientList = verifyIngredients();
+                    String ingredients = null ;
+                    for (int y =0; y<ingredientList.size(); y++) {
+                        if (y == 0) {
+                            ingredients = ingredientList.get(y).getName();
+                        } else {
+                            ingredients = ingredients + "\n" + ingredientList.get(y).getName();
+                        }
+                    }
+                    resultIntent.putExtra("ingredients", ingredients);
+
+                    setResult(Activity.RESULT_OK, resultIntent);
                     finish();
 
                 }

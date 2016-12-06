@@ -26,6 +26,7 @@ public class RecipeView extends AppCompatActivity {
     private String description;
     private String iconId;
     private String ingredients;
+    private static final int RECIPE_EDIT = 2002;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,17 +35,7 @@ public class RecipeView extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // pass the recipe object
-        final Intent intent = getIntent();
 
-        prepTime = intent.getStringExtra("prepTime");
-        name = intent.getStringExtra("name");
-        cookTime =intent.getStringExtra("cookTime");
-        category = intent.getStringExtra("category");
-        origin = intent.getStringExtra("origin");
-        description = intent.getStringExtra("description");
-        iconId = intent.getStringExtra("picture");
-        ingredients = intent.getStringExtra("ingredients");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -89,15 +80,24 @@ public class RecipeView extends AppCompatActivity {
             i.putExtra("ingredients", ingredients);
 
             //  start the activity
-            startActivity(i);
+            startActivityForResult(i, RECIPE_EDIT);
 
                     }
         });
         if(getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+        // pass the recipe object
+        Intent intent = getIntent();
 
-
+        prepTime = intent.getStringExtra("prepTime");
+        name = intent.getStringExtra("name");
+        cookTime =intent.getStringExtra("cookTime");
+        category = intent.getStringExtra("category");
+        origin = intent.getStringExtra("origin");
+        description = intent.getStringExtra("description");
+        iconId = intent.getStringExtra("picture");
+        ingredients = intent.getStringExtra("ingredients");
 
         // This is how to change TextView dynamically
         TextView preparation = (TextView)findViewById(R.id.recipe_view_value_preptime);
@@ -132,6 +132,8 @@ public class RecipeView extends AppCompatActivity {
         TextView ingredientList = (TextView) findViewById(R.id.recipe_value_text_ingredients);
         ingredientList.setText(ingredients);
 
+
+
         // ------------------------------------------
 
         final CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
@@ -156,7 +158,54 @@ public class RecipeView extends AppCompatActivity {
         });
     }
 
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            if (requestCode == RECIPE_EDIT) {
+                prepTime = data.getStringExtra("prepTime");
+                name = data.getStringExtra("name");
+                cookTime =data.getStringExtra("cookTime");
+                category = data.getStringExtra("category");
+                origin = data.getStringExtra("origin");
+                description = data.getStringExtra("description");
+                iconId = data.getStringExtra("picture");
+                ingredients = data.getStringExtra("ingredients");
 
+                // This is how to change TextView dynamically
+                TextView preparation = (TextView)findViewById(R.id.recipe_view_value_preptime);
+                preparation.setText(prepTime + " minutes");
+
+                //change the name of each recipe
+                TextView recipeName = (TextView)findViewById(R.id.recipe_view_title);
+                recipeName.setText(name);
+
+                //change the COOKTIME of each recipe
+                TextView cook = (TextView)findViewById(R.id.recipe_view_value_cooktime);
+                cook.setText(cookTime + " minutes");
+
+
+                //change the origin of each recipe
+                TextView type = (TextView)findViewById(R.id.recipe_view_value_origin);
+                type.setText(origin);
+
+
+                //change the category of each recipe
+                TextView categorie = (TextView)findViewById(R.id.recipe_view_value_category);
+                categorie.setText(category);
+
+                //change the description of each recipe
+                TextView text = (TextView)findViewById(R.id.textView10);
+                text.setText(description);
+
+                //change the picture of each recipe
+                ImageView img= (ImageView) findViewById(R.id.defaultRecipeImage);
+                img.setImageURI(Uri.parse(iconId));
+
+                TextView ingredientList = (TextView) findViewById(R.id.recipe_value_text_ingredients);
+                ingredientList.setText(ingredients);
+
+            }
+        }
+    }
     @Override
     public void onStop(){
         super.onStop();

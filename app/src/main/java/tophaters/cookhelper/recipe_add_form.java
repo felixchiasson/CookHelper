@@ -291,7 +291,7 @@ public class recipe_add_form extends AppCompatActivity {
             finish();
 
         }else{
-            Toast.makeText(recipe_add_form.this, "Recipe could not be saved", Toast.LENGTH_LONG).show();
+            Toast.makeText(recipe_add_form.this, "Recipe could n", Toast.LENGTH_LONG).show();
         }
 
     }
