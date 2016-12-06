@@ -52,22 +52,32 @@ public class RecipeView extends AppCompatActivity {
             public void onClick(View view) {
 
 
-            int position = Integer.parseInt(getIntent().getStringExtra("Position"));
-            Toast.makeText(RecipeView.this, position, Toast.LENGTH_LONG).show();
-            Recipe clickedRecipe = CookHelper.getCookHelper().getRecipes().get(position);
-            ArrayList<Recipe> recipeList = CookHelper.getCookHelper().getRecipes();
+            //Recipe clickedRecipe = CookHelper.getCookHelper().getRecipes().get(position);
+            /*    Recipe clickedRecipe = null;
+                boolean found = false;
+                ArrayList<Recipe> recipeList = CookHelper.getCookHelper().getRecipes();
+                for (int i = 0; i < CookHelper.getCookHelper().getRecipes().size(); i++) {
+                    Toast.makeText(RecipeView.this, "Y = " + i, Toast.LENGTH_LONG).show();
 
+                    if (name.toLowerCase().equals(recipeList.get(i).getName().toLowerCase())) {
+                        clickedRecipe = recipeList.get(i);
+                        found = true;
+                        Toast.makeText(RecipeView.this, "Found = True", Toast.LENGTH_LONG).show();
+
+                        break;
+                    }
+                }*/
 
             Intent i = new Intent(RecipeView.this, edit_recipe.class);
-            i.putExtra("prepTime", clickedRecipe.getPreTime()+" minutes");
-            i.putExtra("name", clickedRecipe.getName()+"");
-            i.putExtra("cookTime", clickedRecipe.getCookTime()+" minutes");
-            i.putExtra("category", clickedRecipe.getCategory().getName()+"");
-            i.putExtra("origin", clickedRecipe.getOrigin().getName()+"");
-            i.putExtra("description", clickedRecipe.getDescription());
-            i.putExtra("picture", clickedRecipe.getIconId()+"");
+            i.putExtra("prepTime", prepTime);
+            i.putExtra("name", name);
+            i.putExtra("cookTime", cookTime);
+            i.putExtra("category", category);
+            i.putExtra("origin", origin);
+            i.putExtra("description", description);
+            i.putExtra("picture", iconId);
 
-            ArrayList<Ingredient> ingredientList = clickedRecipe.getIngredients();
+            /*ArrayList<Ingredient> ingredientList = clickedRecipe.getIngredients();
             String ingredients = null ;
             for (int y =0; y<ingredientList.size(); y++) {
                 if (y == 0) {
@@ -75,7 +85,7 @@ public class RecipeView extends AppCompatActivity {
                 } else {
                     ingredients = ingredients + "\n" + ingredientList.get(y).getName();
                 }
-            }
+            }*/
             i.putExtra("ingredients", ingredients);
 
             //  start the activity

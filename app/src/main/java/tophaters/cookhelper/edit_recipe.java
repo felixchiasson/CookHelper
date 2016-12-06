@@ -46,7 +46,8 @@ public class edit_recipe extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recipe_add_form);
+
+        setContentView(R.layout.activity_edit_recipe);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         if(getSupportActionBar() != null){
@@ -65,41 +66,41 @@ public class edit_recipe extends AppCompatActivity {
 
         // This is how to change EditView dynamically(inspired by RecipeView
         EditText preparation = (EditText)findViewById(R.id.recipe_view_value_preptime);
-        preparation.setText(prepTime);
+        preparation.setText(prepTime, TextView.BufferType.EDITABLE);
 
         //change the name of each recipe
         EditText recipeName = (EditText)findViewById(R.id.recipe_view_title);
-        recipeName.setText(name);
+        recipeName.setText(name, TextView.BufferType.EDITABLE);
 
         //change the COOKTIME of each recipe
         EditText cook = (EditText)findViewById(R.id.recipe_view_value_cooktime);
-        cook.setText(cookTime);
+        cook.setText(cookTime, TextView.BufferType.EDITABLE);
 
 
         //change the origin of each recipe
         EditText type = (EditText)findViewById(R.id.recipe_view_value_origin);
-        type.setText(origin);
+        type.setText(origin, TextView.BufferType.EDITABLE);
 
 
         //change the category of each recipe
         EditText categorie = (EditText)findViewById(R.id.recipe_view_value_category);
-        categorie.setText(category);
+        categorie.setText(category, TextView.BufferType.EDITABLE);
 
         //change the description of each recipe
         EditText text = (EditText)findViewById(R.id.editDecription);
-        text.setText(description);
+        text.setText(description, TextView.BufferType.EDITABLE);
 
         //change the picture of each recipe
         ImageView img= (ImageView) findViewById(R.id.defaultRecipeImage);
         img.setImageURI(Uri.parse(iconId));
 
         EditText ingredientList = (EditText) findViewById(R.id.recipe_value_text_ingredients);
-        ingredientList.setText(ingredients);
+        ingredientList.setText(ingredients, TextView.BufferType.EDITABLE);
 
 
         // DISABLE TOUCH EVENTS WHEN SCROLLING THE LISTVIEW
 
-        ListView lv = (ListView) findViewById(R.id.ingredientList);
+        /*ListView lv = (ListView) findViewById(R.id.ingredientList);
         lv.setOnTouchListener(new View.OnTouchListener() {
             // Setting on Touch Listener for handling the touch inside ScrollView
             @Override
@@ -120,7 +121,7 @@ public class edit_recipe extends AppCompatActivity {
         ingredientList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         ingredientList.setAdapter(ingredientAdapter); */
 
-        ArrayAdapter<Category> categoryAdapter = new ArrayAdapter<Category>(this, android.R.layout.simple_spinner_item, CookHelper.getCookHelper().getCategories());
+        /*ArrayAdapter<Category> categoryAdapter = new ArrayAdapter<Category>(this, android.R.layout.simple_spinner_item, CookHelper.getCookHelper().getCategories());
 
         Spinner categorySpinner;
         categorySpinner = (Spinner) findViewById(R.id.add_recipe_category_spinner);
@@ -130,7 +131,7 @@ public class edit_recipe extends AppCompatActivity {
 
         Spinner originSpinner;
         originSpinner = (Spinner) findViewById(R.id.add_recipe_origin_spinner);
-        originSpinner.setAdapter(originAdapter);
+        originSpinner.setAdapter(originAdapter); */
     }
 
     public void onClickOpenGallery(View v) {
@@ -262,16 +263,19 @@ public class edit_recipe extends AppCompatActivity {
 
     public void onClickSaveRecipe(View v) {
         boolean added;
+        Recipe recipe = null;
+        boolean found = false;
         if (verifyIngredients()) {
-            Recipe recipe = null;
             ArrayList<Recipe> recipeList = CookHelper.getCookHelper().getRecipes();
             for (int i = 0; i < CookHelper.getCookHelper().getRecipes().size(); i++) {
+
                 if (name.toLowerCase().equals(recipeList.get(i).getName().toLowerCase())) {
                     recipe = recipeList.get(i);
+                    found = true;
                     break;
                 }
             }
-            if (recipe != null) {
+            if (found) {
                 CookHelper.getCookHelper().removeRecipe(recipe);
 
                 EditText recipeName = (EditText) findViewById(R.id.recipe_add_name);
