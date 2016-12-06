@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity
                     if (y == 0) {
                         ingredients = ingredientList.get(y).getName();
                     } else {
-                        ingredients = ingredients + ", " + ingredientList.get(y).getName();
+                        ingredients = ingredients + "\n" + ingredientList.get(y).getName();
                     }
                 }
                 i.putExtra("ingredients", ingredients);
