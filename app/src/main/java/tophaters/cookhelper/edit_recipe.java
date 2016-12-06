@@ -5,10 +5,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MotionEvent;
 import android.view.View;
@@ -110,14 +110,16 @@ public class edit_recipe extends AppCompatActivity {
         ImageView img= (ImageView) findViewById(R.id.imageView2);
         img.setImageURI(Uri.parse(iconId));
 
+        in_list = verifyIngredients();
 
-        ingredientAdapter = new ArrayAdapter<Ingredient>(this, android.R.layout.simple_list_item_multiple_choice, verifyIngredients());
+
+        ingredientAdapter = new ArrayAdapter<Ingredient>(this, android.R.layout.simple_list_item_multiple_choice, in_list);
 
         ingredientList = (ListView) findViewById(R.id.ingredientList);
         ingredientList.setAdapter(ingredientAdapter);
         setListViewHeightBasedOnChildren(ingredientList);
 
-        in_list = verifyIngredients();
+
 
         // DISABLE TOUCH EVENTS WHEN SCROLLING THE LISTVIEW
 
@@ -145,10 +147,14 @@ public class edit_recipe extends AppCompatActivity {
                                 for (int position : reverseSortedPositions) {
 
 
+
                                     in_list.remove(in_list.get(position));
-                                    ingredientAdapter.notifyDataSetChanged();
-                                    ingredientList.setAdapter(ingredientAdapter);
+                                    //ingredientAdapter.remove(in_list.get(position));
+
+
+                                    //ingredientList.setAdapter(ingredientAdapter);
                                     setListViewHeightBasedOnChildren(ingredientList);
+                                    ingredientAdapter.notifyDataSetChanged();
 
                                 }
 

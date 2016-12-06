@@ -1,21 +1,15 @@
 package tophaters.cookhelper;
 
-import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.SpannableStringBuilder;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +22,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.io.PrintWriter;
-
 import java.util.ArrayList;
 
 public class recipe_add_form extends AppCompatActivity {
@@ -41,6 +34,7 @@ public class recipe_add_form extends AppCompatActivity {
     ArrayList mSelected;
     ArrayList<Ingredient> in_list = new ArrayList<>();
     ArrayAdapter<Ingredient> ingredientAdapter;
+    ArrayAdapter<Ingredient> dialogAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +57,10 @@ public class recipe_add_form extends AppCompatActivity {
                 // Disallow the touch request for parent scroll on touch of child view
                 v.getParent().requestDisallowInterceptTouchEvent(true);
                 return false;
+
+
+
+
             }
         });
 
@@ -87,6 +85,53 @@ public class recipe_add_form extends AppCompatActivity {
         Spinner originSpinner;
         originSpinner = (Spinner) findViewById(R.id.add_recipe_origin_spinner);
         originSpinner.setAdapter(originAdapter);
+
+
+        // DISABLE TOUCH EVENTS WHEN SCROLLING THE LISTVIEW
+
+        lv.setOnTouchListener(new View.OnTouchListener() {
+            // Setting on Touch Listener for handling the touch inside ScrollView
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // Disallow the touch request for parent scroll on touch of child view
+                v.getParent().requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });
+
+        SwipeDismissListViewTouchListener touchListener =
+                new SwipeDismissListViewTouchListener(
+                        lv,
+                        new SwipeDismissListViewTouchListener.DismissCallbacks() {
+                            @Override
+                            public boolean canDismiss(int position) {
+                                return true;
+                            }
+
+                            @Override
+                            public void onDismiss(ListView listView, int[] reverseSortedPositions) {
+                                for (int position : reverseSortedPositions) {
+
+                                    if(in_list.isEmpty()){
+
+                                    }else{
+
+
+
+                                   in_list.remove(in_list.get(position));
+                                    //ingredientAdapter.remove(in_list.get(position));
+
+
+                                    //ingredientList.setAdapter(ingredientAdapter);
+                                    //setListViewHeightBasedOnChildren(lv);
+                                    dialogAdapter.notifyDataSetChanged();}
+
+                                }
+
+                            }
+                        });
+        lv.setOnTouchListener(touchListener);
+        // ****************************************************
     }
 
     public void onClickOpenGallery(View v) {
@@ -204,7 +249,7 @@ public class recipe_add_form extends AppCompatActivity {
                             in_list.add(list.get((int)mSelected.get(i)));
                         }
 
-                        ArrayAdapter<Ingredient> dialogAdapter = new ArrayAdapter<Ingredient>(getApplicationContext(), android.R.layout.simple_list_item_multiple_choice, in_list);
+                        dialogAdapter = new ArrayAdapter<Ingredient>(getApplicationContext(), android.R.layout.simple_list_item_multiple_choice, in_list);
 
                         ListView ingredientList = (ListView) findViewById(R.id.ingredientList);
                         ingredientList.setAdapter(dialogAdapter);
