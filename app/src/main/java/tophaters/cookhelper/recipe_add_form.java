@@ -30,6 +30,7 @@ public class recipe_add_form extends AppCompatActivity {
     private static final int GALLERY_KITKAT_INTENT_CALLED = 3;
     private static final int SUCCESS_VALUE = 2;
     ListView ingredientList;
+    ListView lv;
     private Uri selectedImageUri;
     ArrayList mSelected;
     ArrayList<Ingredient> in_list = new ArrayList<>();
@@ -49,7 +50,7 @@ public class recipe_add_form extends AppCompatActivity {
 
         // DISABLE TOUCH EVENTS WHEN SCROLLING THE LISTVIEW
 
-        ListView lv = (ListView) findViewById(R.id.ingredientList);
+        lv = (ListView) findViewById(R.id.ingredientList);
         lv.setOnTouchListener(new View.OnTouchListener() {
             // Setting on Touch Listener for handling the touch inside ScrollView
             @Override
@@ -63,6 +64,42 @@ public class recipe_add_form extends AppCompatActivity {
 
             }
         });
+
+
+
+        SwipeDismissListViewTouchListener touchListener =
+                new SwipeDismissListViewTouchListener(
+                        lv,
+                        new SwipeDismissListViewTouchListener.DismissCallbacks() {
+                            @Override
+                            public boolean canDismiss(int position) {
+                                return true;
+                            }
+
+                            @Override
+                            public void onDismiss(ListView listView, int[] reverseSortedPositions) {
+                                for (int position : reverseSortedPositions) {
+
+                                    if(in_list.isEmpty()){
+
+                                    }else{
+
+
+
+                                        in_list.remove(in_list.get(position));
+                                        //ingredientAdapter.remove(in_list.get(position));
+
+
+                                        lv.setAdapter(dialogAdapter);
+                                        setListViewHeightBasedOnChildren(lv);
+                                        dialogAdapter.notifyDataSetChanged();}
+
+                                }
+
+                            }
+                        });
+        lv.setOnTouchListener(touchListener);
+        // ****************************************************
 
         // ****************************************************
 
@@ -87,51 +124,9 @@ public class recipe_add_form extends AppCompatActivity {
         originSpinner.setAdapter(originAdapter);
 
 
-        // DISABLE TOUCH EVENTS WHEN SCROLLING THE LISTVIEW
-
-        lv.setOnTouchListener(new View.OnTouchListener() {
-            // Setting on Touch Listener for handling the touch inside ScrollView
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                // Disallow the touch request for parent scroll on touch of child view
-                v.getParent().requestDisallowInterceptTouchEvent(true);
-                return false;
-            }
-        });
-
-        SwipeDismissListViewTouchListener touchListener =
-                new SwipeDismissListViewTouchListener(
-                        lv,
-                        new SwipeDismissListViewTouchListener.DismissCallbacks() {
-                            @Override
-                            public boolean canDismiss(int position) {
-                                return true;
-                            }
-
-                            @Override
-                            public void onDismiss(ListView listView, int[] reverseSortedPositions) {
-                                for (int position : reverseSortedPositions) {
-
-                                    if(in_list.isEmpty()){
-
-                                    }else{
 
 
 
-                                   in_list.remove(in_list.get(position));
-                                    //ingredientAdapter.remove(in_list.get(position));
-
-
-                                    //ingredientList.setAdapter(ingredientAdapter);
-                                    //setListViewHeightBasedOnChildren(lv);
-                                    dialogAdapter.notifyDataSetChanged();}
-
-                                }
-
-                            }
-                        });
-        lv.setOnTouchListener(touchListener);
-        // ****************************************************
     }
 
     public void onClickOpenGallery(View v) {
