@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -122,6 +123,29 @@ public class edit_recipe extends AppCompatActivity {
 
 
         // DISABLE TOUCH EVENTS WHEN SCROLLING THE LISTVIEW
+        ingredientList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
+                if(in_list.isEmpty()){
+
+                }else{
+
+
+
+                    in_list.remove(in_list.get(position));
+                    //ingredientAdapter.remove(in_list.get(position));
+
+
+                    //ingredientList.setAdapter(ingredientAdapter);
+                    ingredientAdapter.notifyDataSetChanged();
+                    ListView lv = (ListView) findViewById(R.id.ingredientList);
+                    setListViewHeightBasedOnChildren(lv);}
+
+
+            }
+        });
+
+
+        // DISABLE TOUCH EVENTS WHEN SCROLLING THE LISTVIEW
 
         ingredientList.setOnTouchListener(new View.OnTouchListener() {
             // Setting on Touch Listener for handling the touch inside ScrollView
@@ -132,43 +156,7 @@ public class edit_recipe extends AppCompatActivity {
                 return false;
             }
         });
-
-        SwipeDismissListViewTouchListener touchListener =
-                new SwipeDismissListViewTouchListener(
-                        ingredientList,
-                        new SwipeDismissListViewTouchListener.DismissCallbacks() {
-                            @Override
-                            public boolean canDismiss(int position) {
-                                return true;
-                            }
-
-                            @Override
-                            public void onDismiss(ListView listView, int[] reverseSortedPositions) {
-                                for (int position : reverseSortedPositions) {
-
-
-
-                                    in_list.remove(in_list.get(position));
-                                    //ingredientAdapter.remove(in_list.get(position));
-
-
-                                    //ingredientList.setAdapter(ingredientAdapter);
-                                    setListViewHeightBasedOnChildren(ingredientList);
-                                    ingredientAdapter.notifyDataSetChanged();
-
-                                }
-
-                            }
-                        });
-        ingredientList.setOnTouchListener(touchListener);
-
         // ****************************************************
-
-
-
-
-
-
 
 
     }
