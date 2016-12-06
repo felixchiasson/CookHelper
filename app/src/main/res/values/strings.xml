@@ -39,7 +39,7 @@
         Search Recipe Form
     -->
 
-    <string name="search_recipe_select_ingredients">Select Ingredients</string>
+    <string name="search_recipe_select_ingredients">Write the ingredients and the booleans</string>
     <string name="search_recipe_select_category">Select Category</string>
     <string name="search_recipe_select_origin">Select Origin</string>
 
