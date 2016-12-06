@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.PriorityQueue;
+import java.util.Map;
 
 import static tophaters.cookhelper.Serializer.deserialize;
 import static tophaters.cookhelper.Serializer.serialize;
@@ -59,14 +60,14 @@ public class CookHelper implements java.io.Serializable{
 
         // l'application va offrir ces 9 ingredients
         addIngredient(new Ingredient("Milk"));
-        addIngredient(new Ingredient("Dark Chocolate"));
+        addIngredient(new Ingredient("Dark-Chocolate"));
         addIngredient(new Ingredient("Butter"));
         addIngredient(new Ingredient("Egg"));
-        addIngredient(new Ingredient("Vanilla Extract"));
+        addIngredient(new Ingredient("Vanilla-Extract"));
         addIngredient(new Ingredient("Sugar"));
         addIngredient(new Ingredient("Flour"));
         addIngredient(new Ingredient("Sugar"));
-        addIngredient(new Ingredient("Whipping cream"));
+        addIngredient(new Ingredient("Whipping-cream"));
 
         // l'application va offrir cette recette
 
@@ -75,14 +76,14 @@ public class CookHelper implements java.io.Serializable{
                 ,"Chocolate Crepes", defaultRecipeA, origins.get(0) , categories.get(0), (ArrayList<Ingredient>)ingredients.clone()));
 
         //Voici le array d'Ingredients pour le saumon
-        Ingredient a1= new Ingredient("Salmon Filet");
-        Ingredient a2 =new Ingredient("Lemon Pepper");
-        Ingredient a3 = new Ingredient("Garlic Powder");
+        Ingredient a1= new Ingredient("Salmon-Filet");
+        Ingredient a2 =new Ingredient("Lemon-Pepper");
+        Ingredient a3 = new Ingredient("Garlic-Powder");
         Ingredient a4 = new Ingredient("Salt");
-        Ingredient a5 =new Ingredient("Soy Sauce");
-        Ingredient a6 =new Ingredient("Brown Sugar");
+        Ingredient a5 =new Ingredient("Soy-Sauce");
+        Ingredient a6 =new Ingredient("Brown-Sugar");
         Ingredient a7 = new Ingredient("Water");
-        Ingredient a8 =new Ingredient("Vegetable Oil");
+        Ingredient a8 =new Ingredient("Vegetable-Oil");
 
         ArrayList<Ingredient> salmon_ingredient= new ArrayList<Ingredient>();
 
@@ -282,16 +283,21 @@ public class CookHelper implements java.io.Serializable{
         ArrayList<Ingredient> orIngredients = new ArrayList<Ingredient>();
         ArrayList<Integer> orCounter;
         Integer counter;
-        PriorityQueue<Recipe> sortedRecipes;
+        PriorityQueue<Map.Entry<String,Recipe>> sortedRecipes= new PriorityQueue<>();
 
-
-        recipes = filterCategory(category, recipes);
-        recipes = filterOrigin(origin, recipes);
-        for (int i = 0; i < ingredients.size(); i++) {
-            if(bools.get(i)!="OR"){
-                recipes = filterIngredient(bools.get(i), ingredients.get(i), recipes);
-            }else{
-                orIngredients.add(ingredients.get(i));
+        if(category!=null){
+            recipes = filterCategory(category, recipes);
+        }
+        if(origin!=null){
+            recipes = filterOrigin(origin, recipes);
+        }
+        if(ingredients!=null && bools!=null){
+            for (int i = 0; i < ingredients.size(); i++) {
+                if(!bools.get(i).equals("OR")){
+                    recipes = filterIngredient(bools.get(i), ingredients.get(i), recipes);
+                }else{
+                    orIngredients.add(ingredients.get(i));
+                }
             }
         }
 
@@ -300,10 +306,11 @@ public class CookHelper implements java.io.Serializable{
             for (int j=0; j < recipes.size(); j++) {
                 counter=0;
                 for(int k=0 ; k < orIngredients.size();k++){
-                    if(recipes.get(j).hasIngredient(orIngredients.get(k))==true){
+                    if(recipes.get(j).hasIngredient(orIngredients.get(k))){
                         counter++;
                     }
                 }
+
                 orCounter.set(j,counter);
             }
         }else{//no or ingredients
@@ -340,19 +347,15 @@ public class CookHelper implements java.io.Serializable{
     private ArrayList<Recipe> filterIngredient(String bool, Ingredient ingredient, ArrayList<Recipe> recipes){
         ArrayList<Recipe> newRecipes= new ArrayList<Recipe>();
         Boolean flag;
-        ArrayList<Ingredient>  tempIngredients;
+
         for(int i=0 ; i<recipes.size() ; i++){
-            tempIngredients=recipes.get(i).getIngredients();
-            flag=false;
-            for(int j=0; j<tempIngredients.size();j++) {
-                flag=recipes.get(i).hasIngredient(tempIngredients.get(j));
-                if(flag==true){
-                    break;
-                }
-            }
-            if(bool=="AND" && flag==true){
+
+            flag=recipes.get(i).hasIngredient(ingredient);
+
+
+            if(bool.equals("AND") && flag==true){
                 newRecipes.add(recipes.get(i));
-            }else if(bool=="NOT" && flag==false){
+            }else if(bool.equals("NOT") && flag==false){
                 newRecipes.add(recipes.get(i));
             }
         }
@@ -361,7 +364,7 @@ public class CookHelper implements java.io.Serializable{
 
     public Ingredient findIngredient(String ing){
         for(int i=0; i<ingredients.size();i++){
-            if(ing==ingredients.get(i).getName().toLowerCase()){
+            if(ing.equals(ingredients.get(i).getName().toLowerCase())){
                 return ingredients.get(i);
             }
         }

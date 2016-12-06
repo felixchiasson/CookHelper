@@ -1,11 +1,13 @@
 package tophaters.cookhelper;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,7 +26,7 @@ public class content_search_activity extends AppCompatActivity {
     private ListView list;
     private ArrayList<String> searchBools;
     private ArrayList<Ingredient> searchIngredients;
-    private ArrayList<Recipe> searchRecipes;
+    private ArrayList<Recipe> recherche;
 
 
 
@@ -80,16 +82,23 @@ public class content_search_activity extends AppCompatActivity {
 
                 Spinner origins = (Spinner) findViewById(R.id.origin_search);
                 Origin origin = (Origin) origins.getSelectedItem();
+                boolean allo = true;
 
                 try{
-                    readIngredients(ingredients);
-                    ArrayList<Recipe> searchRecipes = CookHelper.getCookHelper().search(category, origin, searchIngredients, searchBools );
-                    //populateListView();
+                    if(! ingredients.matches("")){
+                        allo =readIngredients(ingredients);
+                        Toast.makeText( content_search_activity.this, ""+allo , Toast.LENGTH_LONG).show();
+                    }
+                    recherche = CookHelper.getCookHelper().search(category, origin, searchIngredients, searchBools);
                 }catch (IOException e){
                     Toast.makeText( content_search_activity.this, "String was not valid for search. Refer to help page for details." , Toast.LENGTH_LONG).show();
                     return;
 
                 }
+               if (allo){
+                   populateListView();
+               }
+                registerClickCallBack();
 
 
 
@@ -98,27 +107,58 @@ public class content_search_activity extends AppCompatActivity {
             }});}
 
 
+    //methode ajouter pour clicker sur les items sune liste
+    private void registerClickCallBack(){
+
+        ListView list = (ListView) findViewById(R.id.select_ListView);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            public void onItemClick(AdapterView<?> parent, View viewClick, int position, long id){
+                Recipe clickedRecipe = CookHelper.getCookHelper().getRecipes().get(position);
+                Intent i = new Intent(content_search_activity.this, RecipeView.class);
+                i.putExtra("prepTime", clickedRecipe.getPreTime()+" minutes");
+                i.putExtra("name", clickedRecipe.getName()+"");
+                i.putExtra("cookTime", clickedRecipe.getCookTime()+" minutes");
+                i.putExtra("category", clickedRecipe.getCategory().getName()+"");
+                i.putExtra("origin", clickedRecipe.getOrigin().getName()+"");
+                i.putExtra("description", clickedRecipe.getDescription());
+                i.putExtra("picture", clickedRecipe.getIconId()+"");
+
+
+
+                //  start the activity
+                startActivity(i);
+
+
+            }
+        });
+
+    }
+
+
 
     public Boolean readIngredients(String received) throws IOException{
-        String[] splitString = received.split(" ");
+        String[] splitString = received.trim().split(" ");
         ArrayList<String> ingredients;
+
         if(splitString.length%2!=0){
             throw new IOException("String not convertible to search");
         }
+
         for(int i = 0 ; i<splitString.length;i++){
             splitString[i]=splitString[i].toLowerCase();
         }
-        searchBools= new ArrayList<String>(splitString.length/2);
-        ingredients= new ArrayList<String>(splitString.length/2);
+        searchBools= new ArrayList<String>();
+        ingredients= new ArrayList<String>();
         for(int j=0;j<splitString.length/2;j++){
-            if(splitString[2*j].toUpperCase()=="AND" ||
-                    splitString[2*j].toUpperCase()=="NOT" ||
-                    splitString[2*j].toUpperCase()=="OR"){
-                searchBools.set(j,splitString[2*j]);
+            if(splitString[2*j].toUpperCase().equals("AND") ||
+                    splitString[2*j].toUpperCase().equals("NOT") ||
+                    splitString[2*j].toUpperCase().equals("OR")){
+                searchBools.add(j,splitString[2*j].toUpperCase());
             }else{
                 return false;
             }
-            ingredients.set(j,splitString[2*j+1]);
+            ingredients.add(j,splitString[2*j+1]);
         }
         searchIngredients=new ArrayList<Ingredient>();
         for(int h=0;h<ingredients.size();h++){
@@ -146,7 +186,7 @@ public class content_search_activity extends AppCompatActivity {
 
     private class  MyListAdapter extends ArrayAdapter<Recipe> {
                 public MyListAdapter() {
-            super(content_search_activity.this, item_ingredient_view, searchRecipes);
+            super(content_search_activity.this, item_ingredient_view, recherche);
        }
 
         @Override
@@ -158,7 +198,7 @@ public class content_search_activity extends AppCompatActivity {
 
             //find the ingredient
 
-            Recipe currentRecipe = searchRecipes.get(position);
+            Recipe currentRecipe = recherche.get(position);
 
 
             // Make name Text
@@ -167,8 +207,53 @@ public class content_search_activity extends AppCompatActivity {
             return itemView;
 
 
-        }}
+        }
+    }
+    public ArrayList<Ingredient> getOrIngredients(ArrayList<String> bools, ArrayList<Ingredient> ings){
+        ArrayList<Ingredient> orIngredients= new ArrayList<>();
+        if(bools.size()<0) {
+            for (int i = 0; i < bools.size(); i++) {
+                if (bools.get(i).equals("OR")) {
+                    orIngredients.add(ings.get(i));
+                }
+            }
+            return orIngredients;
+        }else{
+            return null;
+        }
+    }
 
+    public ArrayList<String> orInRecipes(ArrayList<Recipe> recipes, ArrayList<Ingredient> ingredients){
+        ArrayList<String> ors = new ArrayList<>(recipes.size());
+        int counter;
+        for(int i=0;i<recipes.size();i++){
+            counter=0;
+            for(int j=0;j<ingredients.size();j++){
+                if(recipes.get(i).hasIngredient(ingredients.get(j))){
+                    counter++;
+                }
+            }
+            ors.set(i,counter+"/"+ingredients.size());
+        }
+        return ors;
+    }
+
+    public void sortSearchResult(ArrayList<Recipe> recipes, ArrayList<String> orsOfRecipes){
+        ArrayList<Recipe> newRecipes= new ArrayList<>(recipes.size());
+        ArrayList<String> newOrsOfRecipes = new ArrayList<>(orsOfRecipes.size());
+        int counter = orsOfRecipes.size();
+        while(counter>=0){
+            for(int i=0;i<orsOfRecipes.size();i++){
+                if(orsOfRecipes.get(i).charAt(0)==(char)counter){
+                    newRecipes.add(recipes.get(i));
+                    newOrsOfRecipes.add(orsOfRecipes.get(i));
+                }
+            }
+            counter--;
+        }
+        recipes=newRecipes;
+        orsOfRecipes=newOrsOfRecipes;
+    }
 
 
 }

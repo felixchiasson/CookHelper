@@ -101,17 +101,10 @@
             android:layout_centerHorizontal="true"
             android:alwaysDrawnWithCache="true">
 
-            <ScrollView
+            <ListView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_alignParentTop="true">
-
-                <ListView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:minHeight="250dp"
-                    android:id="@+id/select_ListView" />
-            </ScrollView>
+                android:id="@+id/select_ListView"/>
         </LinearLayout>
     </LinearLayout>
 
