@@ -53,6 +53,6 @@
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|end"
         app:srcCompat="@drawable/ic_create_black_24dp"
-        android:onClick="onModify" />
+        android:onClick="onClick" />
 
 </android.support.design.widget.CoordinatorLayout>
