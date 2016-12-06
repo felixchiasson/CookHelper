@@ -276,14 +276,15 @@ public class recipe_add_form extends AppCompatActivity {
             for (int i = 0; i < inAdapter.getCount(); i++) {
                 listIngredientToAdd.add(inAdapter.getItem(i));
             }
+            Recipe newRecipe = new Recipe(iCookTime, iPrepTime, steps, sRecipeName, selectedImageUri, origin, category, listIngredientToAdd);
+            added = CookHelper.getCookHelper().addRecipe(newRecipe);
         }
 
         // Recipe newRecipe = new Recipe(sCookTime, sPrepTime, steps, sRecipeName, selectedImageUri);
 
 
 
-        Recipe newRecipe = new Recipe(iCookTime, iPrepTime, steps, sRecipeName, selectedImageUri, origin, category, listIngredientToAdd);
-        added = CookHelper.getCookHelper().addRecipe(newRecipe);
+
 
 
         if (added){
@@ -291,7 +292,7 @@ public class recipe_add_form extends AppCompatActivity {
             finish();
 
         }else{
-            Toast.makeText(recipe_add_form.this, "Recipe could n", Toast.LENGTH_LONG).show();
+            Toast.makeText(recipe_add_form.this, "Recipe could not be added", Toast.LENGTH_LONG).show();
         }
 
     }

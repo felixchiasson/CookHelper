@@ -295,7 +295,7 @@ public class edit_recipe extends AppCompatActivity {
     // ************** SAVE RECIPE *********************
 
     public void onClickSaveRecipe(View v) {
-        boolean added;
+        boolean added = false;
         Recipe recipe = null;
         boolean found = false;
         if (true) { //changed
@@ -355,14 +355,16 @@ public class edit_recipe extends AppCompatActivity {
                 } else {
                     for (int i = 0; i < inAdapter.getCount(); i++) {
                         listIngredientToAdd.add(inAdapter.getItem(i));
+
                     }
+                    Recipe newRecipe = new Recipe(iCookTime, iPrepTime, steps, sRecipeName, selectedImageUri, origin, category, listIngredientToAdd);
+                    added = CookHelper.getCookHelper().addRecipe(newRecipe);
                 }
 
                 // Recipe newRecipe = new Recipe(sCookTime, sPrepTime, steps, sRecipeName, selectedImageUri);
 
 
-                Recipe newRecipe = new Recipe(iCookTime, iPrepTime, steps, sRecipeName, selectedImageUri, origin, category, listIngredientToAdd);
-                added = CookHelper.getCookHelper().addRecipe(newRecipe);
+
 
                 if (added) {
                     Toast.makeText(edit_recipe.this, "Recipe SuccessFully Modified.", Toast.LENGTH_LONG).show();
@@ -374,13 +376,13 @@ public class edit_recipe extends AppCompatActivity {
                     resultIntent.putExtra("category", category.getName());
                     resultIntent.putExtra("picture", selectedImageUri.toString());
                     resultIntent.putExtra("description", steps);
-                    ArrayList<Ingredient> ingredientList = verifyIngredients();
+
                     String ingredients = null ;
-                    for (int y =0; y<ingredientList.size(); y++) {
+                    for (int y =0; y<in_list.size(); y++) {
                         if (y == 0) {
-                            ingredients = ingredientList.get(y).getName();
+                            ingredients = in_list.get(y).getName();
                         } else {
-                            ingredients = ingredients + "\n" + ingredientList.get(y).getName();
+                            ingredients = ingredients + "\n" + in_list.get(y).getName();
                         }
                     }
                     resultIntent.putExtra("ingredients", ingredients);
