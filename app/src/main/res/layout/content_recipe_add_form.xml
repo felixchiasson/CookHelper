@@ -34,7 +34,7 @@
                     android:contentDescription="@string/add_recipe_upload_image"
                     android:background="#80000000"
                     android:id="@+id/imageView2"
-                    android:src="@drawable/ic_filet"
+                    android:src="@drawable/defimage"
                     android:scaleType="centerCrop"
                     android:layout_weight="1"
                     android:onClick="onClickOpenGallery"/>

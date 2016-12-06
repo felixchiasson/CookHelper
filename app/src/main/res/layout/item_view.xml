@@ -23,7 +23,7 @@
             android:scaleType="centerCrop"
 
 
-            app:srcCompat="@drawable/ic_salmon"
+            app:srcCompat="@drawable/defimage"
             android:id="@+id/item_icon" />
 
     </LinearLayout>

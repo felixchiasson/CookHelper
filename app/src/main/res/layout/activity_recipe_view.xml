@@ -27,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:contentDescription="@string/title_activity_recipe_view"
-                android:src="@drawable/ic_filet"
+                android:src="@drawable/defimage"
                 android:scaleType="centerCrop"
                 app:layout_collapseMode="parallax"
                 app:layout_collapseParallaxMultiplier="0.7"
