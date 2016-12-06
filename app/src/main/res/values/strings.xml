@@ -185,4 +185,5 @@
     <string name="title_activity_category__list">List of Categories</string>
     <string name="title_activity_browse_picture">BrowsePictureActivity</string>
     <string name="SearchIngredients">Enter the boolean and the ingredients.</string>
+    <string name="ingredients">Ingredients:</string>
 </resources>

@@ -71,6 +71,13 @@
                     android:id="@+id/recipe_view_text_origin"
                     android:textAppearance="@android:style/TextAppearance.Material.Medium" />
 
+                <TextView
+                    android:text="@string/ingredients"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/recipe_view_text_ingredients"
+                    android:textSize="18sp" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -108,6 +115,24 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/recipe_view_value_origin"
                     android:textAppearance="@android:style/TextAppearance.Material.Medium" />
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:text="TextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/recipe_value_text_ingredients"
+                            android:textSize="18sp" />
+                    </LinearLayout>
+                </ScrollView>
 
             </LinearLayout>
         </LinearLayout>

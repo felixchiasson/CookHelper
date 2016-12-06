@@ -30,6 +30,7 @@ import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import static java.security.AccessController.getContext;
 
@@ -150,7 +151,16 @@ public class MainActivity extends AppCompatActivity
                 i.putExtra("description", clickedRecipe.getDescription());
                 i.putExtra("picture", clickedRecipe.getIconId()+"");
 
-
+                ArrayList<Ingredient> ingredientList = clickedRecipe.getIngredients();
+                String ingredients = null ;
+                for (int y =0; y<ingredientList.size(); y++) {
+                    if (y == 0) {
+                        ingredients = ingredientList.get(y).getName();
+                    } else {
+                        ingredients = ingredients + ", " + ingredientList.get(y).getName();
+                    }
+                }
+                i.putExtra("ingredients", ingredients);
 
                 //  start the activity
                 startActivity(i);

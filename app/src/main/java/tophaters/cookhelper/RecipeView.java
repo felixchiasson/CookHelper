@@ -23,6 +23,7 @@ public class RecipeView extends AppCompatActivity {
     private String category;
     private String description;
     private String iconId;
+    private String ingredients;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,15 +32,21 @@ public class RecipeView extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
+
+     /*           Intent i = new Intent(RecipeView.this, modify_recipe.class);
+                i.putExtra("prepTime", prepTime+" minutes");
+                i.putExtra("name", name+"");
+                i.putExtra("cookTime", cookTime+" minutes");
+                i.putExtra("category", category+"");
+                i.putExtra("origin", origin+"");
+                i.putExtra("description", description);
+                startActivity(i);*/
+
+                    }
         });
         if(getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -55,7 +62,7 @@ public class RecipeView extends AppCompatActivity {
         origin = intent.getStringExtra("origin");
         description = intent.getStringExtra("description");
         iconId = intent.getStringExtra("picture");
-
+        ingredients = intent.getStringExtra("ingredients");
 
         // This is how to change TextView dynamically
         TextView preparation = (TextView)findViewById(R.id.recipe_view_value_preptime);
@@ -87,6 +94,8 @@ public class RecipeView extends AppCompatActivity {
         ImageView img= (ImageView) findViewById(R.id.defaultRecipeImage);
         img.setImageURI(Uri.parse(iconId));
 
+        TextView ingredientList = (TextView) findViewById(R.id.recipe_value_text_ingredients);
+        ingredientList.setText(ingredients);
 
         // ------------------------------------------
 
@@ -122,4 +131,5 @@ public class RecipeView extends AppCompatActivity {
         catch(java.io.IOException e){}
 
     }
+
 }
