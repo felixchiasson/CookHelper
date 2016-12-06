@@ -37,10 +37,10 @@ public class RecipeView extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-     /*           Intent i = new Intent(RecipeView.this, modify_recipe.class);
-                i.putExtra("prepTime", prepTime+" minutes");
+    /*            Intent i = new Intent(RecipeView.this, edit_recipe.class);
+                i.putExtra("prepTime", prepTime);
                 i.putExtra("name", name+"");
-                i.putExtra("cookTime", cookTime+" minutes");
+                i.putExtra("cookTime", cookTime);
                 i.putExtra("category", category+"");
                 i.putExtra("origin", origin+"");
                 i.putExtra("description", description);

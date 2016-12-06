@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.PrintWriter;
@@ -32,6 +33,16 @@ public class edit_recipe extends AppCompatActivity {
     ArrayList mSelected;
     ArrayList<Ingredient> in_list = new ArrayList<>();
     ArrayAdapter<Ingredient> ingredientAdapter;
+
+    private String name;
+    private String prepTime;
+    private String cookTime;
+    private String origin;
+    private String category;
+    private String description;
+    private String iconId;
+    private String ingredients;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +53,49 @@ public class edit_recipe extends AppCompatActivity {
         if(getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+        Intent intent = getIntent();
+
+        prepTime = intent.getStringExtra("prepTime");
+        name = intent.getStringExtra("name");
+        cookTime =intent.getStringExtra("cookTime");
+        category = intent.getStringExtra("category");
+        origin = intent.getStringExtra("origin");
+        description = intent.getStringExtra("description");
+        iconId = intent.getStringExtra("picture");
+        ingredients = intent.getStringExtra("ingredients");
+
+        // This is how to change EditView dynamically(inspired by RecipeView
+        EditText preparation = (EditText)findViewById(R.id.recipe_view_value_preptime);
+        preparation.setText(prepTime);
+
+        //change the name of each recipe
+        EditText recipeName = (EditText)findViewById(R.id.recipe_view_title);
+        recipeName.setText(name);
+
+        //change the COOKTIME of each recipe
+        EditText cook = (EditText)findViewById(R.id.recipe_view_value_cooktime);
+        cook.setText(cookTime);
+
+
+        //change the origin of each recipe
+        EditText type = (EditText)findViewById(R.id.recipe_view_value_origin);
+        type.setText(origin);
+
+
+        //change the category of each recipe
+        EditText categorie = (EditText)findViewById(R.id.recipe_view_value_category);
+        categorie.setText(category);
+
+        //change the description of each recipe
+        EditText text = (EditText)findViewById(R.id.editDecription);
+        text.setText(description);
+
+        //change the picture of each recipe
+        ImageView img= (ImageView) findViewById(R.id.defaultRecipeImage);
+        img.setImageURI(Uri.parse(iconId));
+
+        EditText ingredientList = (EditText) findViewById(R.id.recipe_value_text_ingredients);
+        ingredientList.setText(ingredients);
 
 
         // DISABLE TOUCH EVENTS WHEN SCROLLING THE LISTVIEW
@@ -283,6 +337,23 @@ public class edit_recipe extends AppCompatActivity {
             writer.print(bytes);
         }
         catch(java.io.IOException e){}
+
+    }
+
+    public boolean verifyIngredients(){
+        EditText ingredientList = (EditText) findViewById(R.id.recipe_value_text_ingredients);
+
+        String received = ingredientList.toString();
+        String[] ingredients = received.trim().split("\n");
+        for (int i = 0; i < ingredients.length; i++){
+
+            if (CookHelper.getCookHelper().findIngredient(ingredients[i])!=null){
+            }else {
+                return false;
+            }
+        }return true;
+    }
+    public void save(){
 
     }
 

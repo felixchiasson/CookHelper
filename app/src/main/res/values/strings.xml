@@ -186,4 +186,5 @@
     <string name="title_activity_browse_picture">BrowsePictureActivity</string>
     <string name="SearchIngredients">Enter the boolean and the ingredients.</string>
     <string name="ingredients">Ingredients:</string>
+    <string name="minute">min</string>
 </resources>
