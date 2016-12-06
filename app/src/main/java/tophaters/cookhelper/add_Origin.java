@@ -36,7 +36,27 @@ public class add_Origin extends AppCompatActivity {
         boolean added;
         EditText edit =  (EditText) findViewById(R.id.inputNewOrigin);
         String origin = edit.getText().toString();
-        Origin newOrigin = new Origin(origin.substring(0,1).toUpperCase() + origin.substring(1).toLowerCase());
+
+        int[] capsLocation = new int[origin.length()];
+        capsLocation[0] = 1;
+        char[] originChar = origin.toCharArray();
+        for (int i = 0; i<originChar.length; i++){
+            char c = originChar[i];
+            if(c == ' '){
+                capsLocation[i+1] = 1;
+            }
+        }
+
+        origin = String.valueOf(originChar).toLowerCase();
+        String originString = new String();
+        for (int y = 0; y< capsLocation.length; y++){
+            if (capsLocation[y]==1){
+                originString = originString + origin.substring(y,y+1).toUpperCase();
+            }else{
+                originString = originString + origin.substring(y,y+1).toLowerCase();
+            }
+        }
+        Origin newOrigin = new Origin(originString);
 
         added = CookHelper.getCookHelper().addOrigin(newOrigin);
 
