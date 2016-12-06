@@ -1,11 +1,13 @@
 package tophaters.cookhelper;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
@@ -32,6 +34,7 @@ import java.util.ArrayList;
 public class recipe_add_form extends AppCompatActivity {
 
     private static final int SELECT_PICTURE = 1;
+    private static final int GALLERY_KITKAT_INTENT_CALLED = 3;
     private static final int SUCCESS_VALUE = 2;
     ListView ingredientList;
     private Uri selectedImageUri;
@@ -88,11 +91,20 @@ public class recipe_add_form extends AppCompatActivity {
 
     public void onClickOpenGallery(View v) {
 
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent,
-                "Select Picture"), SELECT_PICTURE);
+        if(Build.VERSION.SDK_INT < 19) {
+
+            Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(Intent.createChooser(intent,
+                    "Select Picture"), SELECT_PICTURE);
+
+        } else {
+            Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+            intent.setType("image/jpeg");
+            startActivityForResult(intent, GALLERY_KITKAT_INTENT_CALLED);
+        }
 
     }
 
@@ -103,13 +115,16 @@ public class recipe_add_form extends AppCompatActivity {
                 selectedImageUri = data.getData();
                 ImageView imagetest = (ImageView) findViewById(R.id.imageView2);
                 imagetest.setImageURI(selectedImageUri);
-            } else if (requestCode == SUCCESS_VALUE) {
-                ArrayList<Ingredient> listOfIngredients = new ArrayList<Ingredient>();
-                ArrayAdapter<Ingredient> ingredientsAdapter = new ArrayAdapter<Ingredient>(this, android.R.layout.simple_list_item_multiple_choice, listOfIngredients);
-                Bundle b = getIntent().getParcelableExtra("test");
-                listOfIngredients.add((Ingredient)data.getParcelableExtra("test"));
-                ListView inList = (ListView) findViewById(R.id.ingredientList);
-                inList.setAdapter(ingredientsAdapter);
+                Toast.makeText(recipe_add_form.this, selectedImageUri.toString(), Toast.LENGTH_LONG).show();
+            } else if (requestCode == GALLERY_KITKAT_INTENT_CALLED) {
+                selectedImageUri = data.getData();
+                int takeFlags = data.getFlags();
+                takeFlags &= (Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                // Check for the freshest data.
+
+                getContentResolver().takePersistableUriPermission(selectedImageUri, takeFlags);
+                ImageView imagetest = (ImageView) findViewById(R.id.imageView2);
+                imagetest.setImageURI(selectedImageUri);
 
 
             }
@@ -215,16 +230,27 @@ public class recipe_add_form extends AppCompatActivity {
 
     public void onClickSaveRecipe(View v) {
         boolean added;
-
         EditText recipeName = (EditText) findViewById(R.id.recipe_add_name);
         String sRecipeName = recipeName.getText().toString();
-        sRecipeName = (sRecipeName.substring(0,1).toUpperCase() + sRecipeName.substring(1).toLowerCase());
 
         EditText prepTime = (EditText) findViewById(R.id.recipe_add_preptime);
-        int sPrepTime = Integer.parseInt(prepTime.getText().toString());
+        String sPrepTime = prepTime.getText().toString();
+        int iPrepTime;
+        if (sPrepTime.isEmpty()) {
+            iPrepTime = 0;
+        } else {
+            iPrepTime = Integer.parseInt(sPrepTime);
+        }
 
         EditText cookTime = (EditText) findViewById(R.id.recipe_add_cooktime);
-        int sCookTime = Integer.parseInt(cookTime.getText().toString());
+        String sCookTime = cookTime.getText().toString();
+        int iCookTime;
+        if (sCookTime.isEmpty()) {
+            iCookTime = 0;
+        } else {
+            iCookTime = Integer.parseInt(sPrepTime);
+        }
+
 
         EditText description = (EditText) findViewById(R.id.add_recipe_edittext_steps);
         String steps = description.getText().toString();
@@ -234,6 +260,9 @@ public class recipe_add_form extends AppCompatActivity {
 
         Spinner origins = (Spinner) findViewById(R.id.add_recipe_origin_spinner);
         Origin origin = (Origin) origins.getSelectedItem();
+
+        sRecipeName = (sRecipeName.substring(0,1).toUpperCase() + sRecipeName.substring(1).toLowerCase());
+
 
         ArrayList<Ingredient> listIngredientToAdd = new ArrayList<>();
         ListView listIngredients = (ListView) findViewById(R.id.ingredientList);
@@ -247,7 +276,7 @@ public class recipe_add_form extends AppCompatActivity {
 
 
 
-        Recipe newRecipe = new Recipe(sCookTime, sPrepTime, steps, sRecipeName, selectedImageUri, origin, category, listIngredientToAdd);
+        Recipe newRecipe = new Recipe(iCookTime, iPrepTime, steps, sRecipeName, selectedImageUri, origin, category, listIngredientToAdd);
         added = CookHelper.getCookHelper().addRecipe(newRecipe);
 
         if (added){

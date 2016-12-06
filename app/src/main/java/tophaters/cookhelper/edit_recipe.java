@@ -48,7 +48,6 @@ public class edit_recipe extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_add_form);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         if(getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -57,7 +56,7 @@ public class edit_recipe extends AppCompatActivity {
 
         prepTime = intent.getStringExtra("prepTime");
         name = intent.getStringExtra("name");
-        cookTime =intent.getStringExtra("cookTime");
+        cookTime = intent.getStringExtra("cookTime");
         category = intent.getStringExtra("category");
         origin = intent.getStringExtra("origin");
         description = intent.getStringExtra("description");

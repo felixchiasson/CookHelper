@@ -12,8 +12,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 public class RecipeView extends AppCompatActivity {
     private String name;
@@ -37,14 +39,38 @@ public class RecipeView extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-    /*            Intent i = new Intent(RecipeView.this, edit_recipe.class);
-                i.putExtra("prepTime", prepTime);
-                i.putExtra("name", name+"");
-                i.putExtra("cookTime", cookTime);
-                i.putExtra("category", category+"");
-                i.putExtra("origin", origin+"");
-                i.putExtra("description", description);
-                startActivity(i);*/
+            Toast.makeText(RecipeView.this, "TEST TEST TEST", Toast.LENGTH_LONG).show();
+            Recipe clickedRecipe = null;
+            ArrayList<Recipe> recipeList = CookHelper.getCookHelper().getRecipes();
+            for (int i = 0; i < CookHelper.getCookHelper().getRecipes().size(); i++) {
+                if (name.toLowerCase().equals(recipeList.get(i).getName().toLowerCase())) {
+                    clickedRecipe = recipeList.get(i);
+                    break;
+                }
+            }
+
+            Intent i = new Intent(RecipeView.this, edit_recipe.class);
+            i.putExtra("prepTime", clickedRecipe.getPreTime()+" minutes");
+            i.putExtra("name", clickedRecipe.getName()+"");
+            i.putExtra("cookTime", clickedRecipe.getCookTime()+" minutes");
+            i.putExtra("category", clickedRecipe.getCategory().getName()+"");
+            i.putExtra("origin", clickedRecipe.getOrigin().getName()+"");
+            i.putExtra("description", clickedRecipe.getDescription());
+            i.putExtra("picture", clickedRecipe.getIconId()+"");
+
+            ArrayList<Ingredient> ingredientList = clickedRecipe.getIngredients();
+            String ingredients = null ;
+            for (int y =0; y<ingredientList.size(); y++) {
+                if (y == 0) {
+                    ingredients = ingredientList.get(y).getName();
+                } else {
+                    ingredients = ingredients + "\n" + ingredientList.get(y).getName();
+                }
+            }
+            i.putExtra("ingredients", ingredients);
+
+            //  start the activity
+            startActivity(i);
 
                     }
         });
@@ -120,6 +146,8 @@ public class RecipeView extends AppCompatActivity {
             }
         });
     }
+
+
     @Override
     public void onStop(){
         super.onStop();
