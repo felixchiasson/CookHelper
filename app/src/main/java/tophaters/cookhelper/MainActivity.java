@@ -150,6 +150,7 @@ public class MainActivity extends AppCompatActivity
                 i.putExtra("origin", clickedRecipe.getOrigin().getName()+"");
                 i.putExtra("description", clickedRecipe.getDescription());
                 i.putExtra("picture", clickedRecipe.getIconId()+"");
+                i.putExtra("Position", position+"");
 
                 ArrayList<Ingredient> ingredientList = clickedRecipe.getIngredients();
                 String ingredients = null ;

@@ -34,20 +34,29 @@ public class RecipeView extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // pass the recipe object
+        final Intent intent = getIntent();
+
+        prepTime = intent.getStringExtra("prepTime");
+        name = intent.getStringExtra("name");
+        cookTime =intent.getStringExtra("cookTime");
+        category = intent.getStringExtra("category");
+        origin = intent.getStringExtra("origin");
+        description = intent.getStringExtra("description");
+        iconId = intent.getStringExtra("picture");
+        ingredients = intent.getStringExtra("ingredients");
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-            Toast.makeText(RecipeView.this, "TEST TEST TEST", Toast.LENGTH_LONG).show();
-            Recipe clickedRecipe = null;
+
+            int position = Integer.parseInt(getIntent().getStringExtra("Position"));
+            Toast.makeText(RecipeView.this, position, Toast.LENGTH_LONG).show();
+            Recipe clickedRecipe = CookHelper.getCookHelper().getRecipes().get(position);
             ArrayList<Recipe> recipeList = CookHelper.getCookHelper().getRecipes();
-            for (int i = 0; i < CookHelper.getCookHelper().getRecipes().size(); i++) {
-                if (name.toLowerCase().equals(recipeList.get(i).getName().toLowerCase())) {
-                    clickedRecipe = recipeList.get(i);
-                    break;
-                }
-            }
+
 
             Intent i = new Intent(RecipeView.this, edit_recipe.class);
             i.putExtra("prepTime", clickedRecipe.getPreTime()+" minutes");
@@ -78,17 +87,7 @@ public class RecipeView extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        // pass the recipe object
-        Intent intent = getIntent();
 
-        prepTime = intent.getStringExtra("prepTime");
-        name = intent.getStringExtra("name");
-        cookTime =intent.getStringExtra("cookTime");
-        category = intent.getStringExtra("category");
-        origin = intent.getStringExtra("origin");
-        description = intent.getStringExtra("description");
-        iconId = intent.getStringExtra("picture");
-        ingredients = intent.getStringExtra("ingredients");
 
         // This is how to change TextView dynamically
         TextView preparation = (TextView)findViewById(R.id.recipe_view_value_preptime);
