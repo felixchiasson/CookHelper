@@ -15,19 +15,33 @@
 
     <TextView
         android:text="Help!"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textView"
         android:textSize="36sp"
         android:textStyle="normal|bold" />
 
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/textView"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="32dp"
-        android:id="@+id/helpCenter"
-        android:text="@string/help_description" />
+        android:layout_below="@+id/textView">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:id="@+id/helpCenter"
+                android:text="@string/PreHelp"
+                android:layout_below="@+id/textView"
+                android:layout_alignParentStart="true"
+                android:layout_height="match_parent"
+                android:maxLines = "30"
+                android:scrollbars = "vertical"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </ScrollView>
+
 </RelativeLayout>
