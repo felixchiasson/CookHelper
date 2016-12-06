@@ -271,7 +271,7 @@ public class edit_recipe extends AppCompatActivity {
         boolean added;
         Recipe recipe = null;
         boolean found = false;
-        if (verifyIngredients()) {
+        if (true) { //changed
             ArrayList<Recipe> recipeList = CookHelper.getCookHelper().getRecipes();
             for (int i = 0; i < CookHelper.getCookHelper().getRecipes().size(); i++) {
 
@@ -359,17 +359,18 @@ public class edit_recipe extends AppCompatActivity {
 
     }
 
-    public boolean verifyIngredients(){
-        EditText ingredientList = (EditText) findViewById(R.id.recipe_value_text_ingredients);
-
-        String received = ingredientList.toString();
-        String[] ingredients = received.trim().split("\n");
-        for (int i = 0; i < ingredients.length; i++){
-            if (CookHelper.getCookHelper().findIngredient(ingredients[i])!=null){
+    public ArrayList<Ingredient> verifyIngredients(){
+        ArrayList<Ingredient> ingredientList = new ArrayList<Ingredient>();
+        String received = ingredients.toString();
+        String[] ingredientStringList = received.trim().split("\n");
+        for (int i = 0; i < ingredientStringList.length; i++){
+            if (CookHelper.getCookHelper().findIngredient(ingredientStringList[i])!=null){
+                ingredientList.add(CookHelper.getCookHelper().findIngredient(ingredientStringList[i]));
             }else {
-                return false;
+                Toast.makeText(edit_recipe.this, "There is an error.", Toast.LENGTH_SHORT);
             }
-        }return true;
+            }
+        return ingredientList;
     }
 
 
