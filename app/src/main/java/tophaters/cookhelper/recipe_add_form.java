@@ -115,7 +115,7 @@ public class recipe_add_form extends AppCompatActivity {
                 selectedImageUri = data.getData();
                 ImageView imagetest = (ImageView) findViewById(R.id.imageView2);
                 imagetest.setImageURI(selectedImageUri);
-                Toast.makeText(recipe_add_form.this, selectedImageUri.toString(), Toast.LENGTH_LONG).show();
+
             } else if (requestCode == GALLERY_KITKAT_INTENT_CALLED) {
                 selectedImageUri = data.getData();
                 int takeFlags = data.getFlags();
@@ -229,7 +229,7 @@ public class recipe_add_form extends AppCompatActivity {
     // ************** SAVE RECIPE *********************
 
     public void onClickSaveRecipe(View v) {
-        boolean added;
+        boolean added = false;
         EditText recipeName = (EditText) findViewById(R.id.recipe_add_name);
         String sRecipeName = recipeName.getText().toString();
 
@@ -261,30 +261,37 @@ public class recipe_add_form extends AppCompatActivity {
         Spinner origins = (Spinner) findViewById(R.id.add_recipe_origin_spinner);
         Origin origin = (Origin) origins.getSelectedItem();
 
-        sRecipeName = (sRecipeName.substring(0,1).toUpperCase() + sRecipeName.substring(1).toLowerCase());
-
+        if (sRecipeName.isEmpty()) {
+            Toast.makeText(recipe_add_form.this, "Your recipe needs a name!", Toast.LENGTH_LONG).show();
+        } else {
+            sRecipeName = (sRecipeName.substring(0, 1).toUpperCase() + sRecipeName.substring(1).toLowerCase());
+        }
 
         ArrayList<Ingredient> listIngredientToAdd = new ArrayList<>();
         ListView listIngredients = (ListView) findViewById(R.id.ingredientList);
         ArrayAdapter<Ingredient> inAdapter = (ArrayAdapter<Ingredient>)listIngredients.getAdapter();
-        for(int i = 0; i<inAdapter.getCount(); i++) {
-            listIngredientToAdd.add(inAdapter.getItem(i));
+        if (inAdapter == null) {
+            Toast.makeText(recipe_add_form.this, "Your recipe cannot have 0 ingredient, please add at least one.", Toast.LENGTH_LONG).show();
+        } else {
+            for (int i = 0; i < inAdapter.getCount(); i++) {
+                listIngredientToAdd.add(inAdapter.getItem(i));
+            }
         }
 
         // Recipe newRecipe = new Recipe(sCookTime, sPrepTime, steps, sRecipeName, selectedImageUri);
 
 
 
-
         Recipe newRecipe = new Recipe(iCookTime, iPrepTime, steps, sRecipeName, selectedImageUri, origin, category, listIngredientToAdd);
         added = CookHelper.getCookHelper().addRecipe(newRecipe);
+
 
         if (added){
             Toast.makeText(recipe_add_form.this, "Saved", Toast.LENGTH_LONG).show();
             finish();
 
         }else{
-            Toast.makeText(recipe_add_form.this, "Recipe already exists.", Toast.LENGTH_LONG).show();
+            Toast.makeText(recipe_add_form.this, "Recipe could not be saved", Toast.LENGTH_LONG).show();
         }
 
     }
