@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -35,6 +36,7 @@ public class recipe_add_form extends AppCompatActivity {
     ArrayList<Ingredient> in_list = new ArrayList<>();
     ArrayAdapter<Ingredient> ingredientAdapter;
     ArrayAdapter<Ingredient> dialogAdapter;
+    ListView lv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +90,29 @@ public class recipe_add_form extends AppCompatActivity {
 
 
         // DISABLE TOUCH EVENTS WHEN SCROLLING THE LISTVIEW
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
+                if(in_list.isEmpty()){
+
+                }else{
+
+
+
+                    in_list.remove(in_list.get(position));
+                    //ingredientAdapter.remove(in_list.get(position));
+
+
+                    //ingredientList.setAdapter(ingredientAdapter);
+                    dialogAdapter.notifyDataSetChanged();
+                    ListView lv = (ListView) findViewById(R.id.ingredientList);
+                    setListViewHeightBasedOnChildren(lv);}
+
+
+            }
+        });
+
+
+        // DISABLE TOUCH EVENTS WHEN SCROLLING THE LISTVIEW
 
         lv.setOnTouchListener(new View.OnTouchListener() {
             // Setting on Touch Listener for handling the touch inside ScrollView
@@ -98,39 +123,6 @@ public class recipe_add_form extends AppCompatActivity {
                 return false;
             }
         });
-
-        SwipeDismissListViewTouchListener touchListener =
-                new SwipeDismissListViewTouchListener(
-                        lv,
-                        new SwipeDismissListViewTouchListener.DismissCallbacks() {
-                            @Override
-                            public boolean canDismiss(int position) {
-                                return true;
-                            }
-
-                            @Override
-                            public void onDismiss(ListView listView, int[] reverseSortedPositions) {
-                                for (int position : reverseSortedPositions) {
-
-                                    if(in_list.isEmpty()){
-
-                                    }else{
-
-
-
-                                   in_list.remove(in_list.get(position));
-                                    //ingredientAdapter.remove(in_list.get(position));
-
-
-                                    //ingredientList.setAdapter(ingredientAdapter);
-                                    //setListViewHeightBasedOnChildren(lv);
-                                    dialogAdapter.notifyDataSetChanged();}
-
-                                }
-
-                            }
-                        });
-        lv.setOnTouchListener(touchListener);
         // ****************************************************
     }
 
