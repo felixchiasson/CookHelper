@@ -52,11 +52,13 @@ public class CookHelper implements java.io.Serializable{
         addCategory(new Category("Drink"));
         addCategory(new Category("Sea Food"));
 
+
        // l'application va offrir ces 4 origines
         addOrigin(new Origin("French"));
         addOrigin(new Origin("Mexican"));
         addOrigin(new Origin("Canadian"));
         addOrigin(new Origin("Colombian"));
+        addCategory(new Category("Sea Food"));
 
         // l'application va offrir ces 9 ingredients
         addIngredient(new Ingredient("Milk"));
@@ -72,7 +74,7 @@ public class CookHelper implements java.io.Serializable{
         // l'application va offrir cette recette
 
         addRecipe(new Recipe(5, 30, "For the crepes: Put the milk, chocolate and butter in a saucepan and heat to melt. Beat the eggs with the sugar in a bowl. Add the vanilla, then the flour. Beat in the chocolate mixture. Strain into a jug and let sit for 30 minutes. Add more milk or water if necessary to give the consistency of thin cream. " +
-                "Fry the crepes in a nonstick pan. If you do not have a nonstick pan use a bit of oil. For the chocolate sauce: Put the chocolate and cream together in a saucepan and heat, gently, until the chocolate has melted and the mixture is very smooth. Thin, as needed with more cream. Serve hot."
+                 "Fry the crepes in a nonstick pan. If you do not have a nonstick pan use a bit of oil. For the chocolate sauce: Put the chocolate and cream together in a saucepan and heat, gently, until the chocolate has melted and the mixture is very smooth. Thin, as needed with more cream. Serve hot."
                 ,"Chocolate Crepes", defaultRecipeA, origins.get(0) , categories.get(0), (ArrayList<Ingredient>)ingredients.clone()));
 
         //Voici le array d'Ingredients pour le saumon
@@ -295,32 +297,10 @@ public class CookHelper implements java.io.Serializable{
             for (int i = 0; i < ingredients.size(); i++) {
                 if(!bools.get(i).equals("OR")){
                     recipes = filterIngredient(bools.get(i), ingredients.get(i), recipes);
-                }else{
-                    orIngredients.add(ingredients.get(i));
                 }
             }
         }
 
-        orCounter = new ArrayList<Integer>(recipes.size());
-        if(orIngredients.size()>0) {
-            for (int j=0; j < recipes.size(); j++) {
-                counter=0;
-                for(int k=0 ; k < orIngredients.size();k++){
-                    if(recipes.get(j).hasIngredient(orIngredients.get(k))){
-                        counter++;
-                    }
-                }
-
-                orCounter.set(j,counter);
-            }
-        }else{//no or ingredients
-            for(int h=0 ; h<orCounter.size() ; h++){
-                orCounter.set(h,0);
-            }
-        }
-        for(int g=0; g<orCounter.size();g++){
-
-        }
         return recipes;
     }
 
@@ -347,6 +327,7 @@ public class CookHelper implements java.io.Serializable{
     private ArrayList<Recipe> filterIngredient(String bool, Ingredient ingredient, ArrayList<Recipe> recipes){
         ArrayList<Recipe> newRecipes= new ArrayList<Recipe>();
         Boolean flag;
+        ArrayList<Ingredient>  tempIngredients;
 
         for(int i=0 ; i<recipes.size() ; i++){
 
