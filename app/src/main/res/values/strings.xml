@@ -197,7 +197,7 @@
 "4.	Search Engine\n\n"
 
 "1. Adding Ingredients, Origins or Categories:\n"
- 	"To add any of the items above to the application, the user has to navigate to the corresponding list of said element and click on the “+” button located at the bottom right of the screen.  This action will open an Add page. The user enters the name of origin, category or ingredient, whichever is applicable, then clicks on save and the new element would appear in the related list. \n\n"
+ 	"To add any of the items above to the application, the user has to navigate to the corresponding list of said element and click on the “+” button located at the bottom right of the screen.  This action will open an Add page. The user enters the name of origin, category or ingredient, whichever is applicable, then clicks on \"Save\" button and the new element will appear in the related list. \n\n"
 
 "Important:\n"
 "-	To remove any of these three, swipe left the item desired to be deleted in the list page, however the item will be permanently deleted. \n"
@@ -205,16 +205,19 @@
 "-	Ingredients cannot have spaces in them. Spaces will be substituted with a \"-\".\n\n"
 
 "2. Adding recipes:\n"
-"To add a recipe to the system, the user clicks the “+” button at the bottom-right of the recipes’ list and the add recipe page will open."
-"In the add page, the use indicates the name of the recipes, all the ingredients in the recipe, as well as the category and the origin related to the recipe."
-"Preparation and cooking times are optional, but will fixed at zero by default. \n\n"
+"To add a recipe to the system, the user clicks the “+” button at the bottom-right of the recipes list and the add recipe page will open."
+"In the add page, the user indicates the name of the recipe. All the ingredients in the recipe must be selected by clicking the \"Add Ingredients\" button, followed by the selection of all the ingredients used in the recipe. The user has to select the category and the origin related to the recipe by clicking on the respective text box, "Dessert" and "Canadian" by default, a list will appear and the user has to click the related origin and related category."
+"Preparation and cooking times can be manually set, but are optional and will fixed at zero by default. \n\n"
 
 "Important:\n"
-"-	The ingredients, category and origin has to be added into the system before the recipe itself.\n"    
+"-	Any new ingredients, category or origin has to be added into the system before the recipe itself by using the respective add pages otherwise, they will not appear.\n"    
 "-	To remove a recipe, swipe left the element in the recipe list, however the item will be permanently deleted.\n\n"   
 
 "3. Modify Recipe:\n"
-"To modify a recipe, the user has to click on the desired recipe in the recipe list and click on the pencil button in the top-right of the recipe page. The modification page will then open and from this page the user can modify anything in the recipe. \n\n"
+"To modify a recipe, the user has to click on the desired recipe in the recipe list and click on the pencil button in the top-right of the recipe page. The modification page will then open and from this page the user can modify anything in the recipe. The name of the recipe, preparation time, cookingt time and steps can be modified directly from the text box. To remove an ingredient, you must click on the ingredient to be removed from the list. To add an ingredient, click on the \"Add Ingredients\" button and select the ingredients that you want to add. The category and origin can be modified by clicking on the text box and selecting the element that you want.\n\n"
+
+"Important:\n"
+"- To succesfully modify a recipe, you must have at least one ingredient and a name.\n\n"
 
 "4. Search Engine:\n"
 
