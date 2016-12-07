@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-public class activity_help_page extends AppCompatActivity {
+public class activity_help_page extends AppCompatActivity {//basic activity. Nothing was added. Nothing need to be added for this activity since it only displays a pre loaded text.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
