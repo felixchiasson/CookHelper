@@ -207,14 +207,14 @@
 "2. Adding recipes:\n"
 "To add a recipe to the system, the user clicks the “+” button at the bottom-right of the recipes list and the add recipe page will open."
 "In the add page, the user indicates the name of the recipe. All the ingredients in the recipe must be selected by clicking the \"Add Ingredients\" button, followed by the selection of all the ingredients used in the recipe. The user has to select the category and the origin related to the recipe by clicking on the respective text box, a list will appear and the user has to click the related origin and related category."
-"Preparation and cooking times can be manually set, but are optional and will fixed at zero by default. \n\n"
+"Preparation and cooking times can be manually set, but are optional and will fixed at zero by default. It is also possible to add a new picture by clicking on the picture. A new page will open and you will be able to select a picture from your gallery. If not, a default picture will be used. \n\n"
 
 "Important:\n"
 "-	Any new ingredients, category or origin has to be added into the system before the recipe itself by using the respective add pages otherwise, they will not appear.\n"    
 "-	To remove a recipe, swipe left the element in the recipe list, however the item will be permanently deleted.\n\n"   
 
 "3. Modify Recipe:\n"
-"To modify a recipe, the user has to click on the desired recipe in the recipe list and click on the pencil button in the top-right of the recipe page. The modification page will then open and from this page the user can modify anything in the recipe. The name of the recipe, preparation time, cookingt time and steps can be modified directly from the text box. To remove an ingredient, you must click on the ingredient to be removed from the list. To add an ingredient, click on the \"Add Ingredients\" button and select the ingredients that you want to add. The category and origin can be modified by clicking on the text box and selecting the element that you want.\n\n"
+"To modify a recipe, the user has to click on the desired recipe in the recipe list and click on the pencil button in the top-right of the recipe page. The modification page will then open and from this page the user can modify anything in the recipe. The name of the recipe, preparation time, cookingt time and steps can be modified directly from the text box. To remove an ingredient, you must click on the ingredient to be removed from the list. To add an ingredient, click on the \"Add Ingredients\" button and select the ingredients that you want to add. The category and origin can be modified by clicking on the text box and selecting the element that you want.It is also possible to change the picture by clicking on the current picture. A new page will open and you will be able to select a picture from your gallery. If not, the previous picture will be used.\n\n"
 
 "Important:\n"
 "- To succesfully modify a recipe, you must have at least one ingredient and a name.\n\n"
