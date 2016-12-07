@@ -414,17 +414,6 @@ public class edit_recipe extends AppCompatActivity {
         listView.setLayoutParams(params);
     }
 
-    @Override
-    public void onStop(){
-        super.onStop();
-        try{
-            byte[]  bytes = Serializer.serialize(CookHelper.getCookHelper());
-            PrintWriter writer = new PrintWriter("DATA.txt");
-            writer.print(bytes);
-        }
-        catch(java.io.IOException e){}
-
-    }
 
     public ArrayList<Ingredient> verifyIngredients(){
         ArrayList<Ingredient> ingredientList = new ArrayList<Ingredient>();

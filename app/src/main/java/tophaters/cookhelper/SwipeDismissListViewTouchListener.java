@@ -2,6 +2,8 @@ package tophaters.cookhelper;
 
 /**
  * Created by shanelgauthier on 16-12-02.
+ * Code was taken from this website: http://codesfor.in/android-swipe-to-delete-listview/
+ * Code is not ours by not mean, but it is reused code for swipe to dismiss.
  */
 
 import android.animation.Animator;
@@ -22,7 +24,7 @@ import java.util.Collections;
 import java.util.List;
 
 
-public class SwipeDismissListViewTouchListener implements View.OnTouchListener {
+public class SwipeDismissListViewTouchListener implements View.OnTouchListener { //Code reused from http://codesfor.in/android-swipe-to-delete-listview/
 
     private int mSlop;
     private int mMinFlingVelocity;

@@ -102,17 +102,6 @@ public class Ingredient_List extends AppCompatActivity {
 //    }
 
 
-    @Override
-    public void onStop(){
-        super.onStop();
-        try{
-            byte[]  bytes = Serializer.serialize(CookHelper.getCookHelper());
-            PrintWriter writer = new PrintWriter("DATA.txt");
-            writer.print(bytes);
-        }
-        catch(java.io.IOException e){}
-
-    }
 
     private void populateListView() {
 

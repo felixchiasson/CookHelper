@@ -354,16 +354,4 @@ public class recipe_add_form extends AppCompatActivity {
         listView.setLayoutParams(params);
     }
 
-    @Override
-    public void onStop(){
-        super.onStop();
-        try{
-            byte[]  bytes = Serializer.serialize(CookHelper.getCookHelper());
-            PrintWriter writer = new PrintWriter("DATA.txt");
-            writer.print(bytes);
-        }
-        catch(java.io.IOException e){}
-
-    }
-
 }

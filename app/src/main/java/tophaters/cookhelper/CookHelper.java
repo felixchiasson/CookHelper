@@ -14,8 +14,6 @@ import java.util.Collections;
 import java.util.PriorityQueue;
 import java.util.Map;
 
-import static tophaters.cookhelper.Serializer.deserialize;
-import static tophaters.cookhelper.Serializer.serialize;
 
 /**
  * Created by shanelgauthier on 16-11-29.
@@ -114,25 +112,7 @@ public class CookHelper implements java.io.Serializable{
     // methode qui permet d'obtenir une seule instance de CookHelper
     public static CookHelper getCookHelper(){
         if(cookHelper == null){
-            try{
-                FileReader reader = new FileReader("DATA.txt");
-                ArrayList<Character> fileInfo = new ArrayList<Character>();
-                byte[] bytes;
-                while(reader.ready()){
-                    fileInfo.add((char)reader.read());
-                }
-                bytes = new byte[fileInfo.size()];
-                for(int i = 0 ; i<fileInfo.size();i++){
-                    bytes[i] = (byte)(int)fileInfo.get(i);
-                }
-                cookHelper = Serializer.deserialize(bytes);
-            }catch(FileNotFoundException e) {
-                cookHelper = new CookHelper();
-            }catch(java.io.IOException g){
-                cookHelper = new CookHelper();
-            }catch(java.lang.ClassNotFoundException h){
-                cookHelper = new CookHelper();
-            }
+            cookHelper = new CookHelper();
         }
         return cookHelper;
 
@@ -384,38 +364,4 @@ public class CookHelper implements java.io.Serializable{
     public void setIngredients(ArrayList<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
-
-    //Functions to save
-    public void save(Context c)throws IOException{
-        c.deleteFile("CookHelper");//delete if the file already exists to free memory
-        FileOutputStream outputStream;
-        savedData = serialize(cookHelper);
-
-        try {
-            outputStream = c.openFileOutput(filename,Context.MODE_PRIVATE);
-            outputStream.write(savedData);
-            outputStream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public CookHelper openFile(Context c)throws IOException, ClassNotFoundException{
-        savedData = null; //wipe the current byte array
-        FileInputStream fin = c.openFileInput("CookHelper");
-
-        return deserialize(readBytes(fin));
-    }
-
-    public byte[] readBytes(FileInputStream inputStream) throws IOException {
-        ByteArrayOutputStream byteBuffer = new ByteArrayOutputStream();
-
-        byte[] buffer = new byte[1024];
-        int len = 0;
-        while ((len = inputStream.read(buffer)) != -1) {
-            byteBuffer.write(buffer, 0, len);
-        }
-        return byteBuffer.toByteArray(); //http://stackoverflow.com/questions/2436385/android-getting-from-a-uri-to-an-inputstream-to-a-byte-array
-    }
-
 }
