@@ -86,17 +86,17 @@ public class content_search_activity extends AppCompatActivity {
 
                 Spinner origins = (Spinner) findViewById(R.id.origin_search);
                 Origin origin = (Origin) origins.getSelectedItem();
-                boolean allo = true;
+                boolean flag = true;
 
                 try{
                     if(!ingredients.matches("")){
-                        allo =readIngredients(ingredients);
+                        flag =readIngredients(ingredients); // Instanciates
 
                     }else{
                         searchBools=null;
                         searchIngredients=null;
                     }
-                    if(!allo){
+                    if(!flag){
                         Toast.makeText(content_search_activity.this, "A component of the string was mispelled or did not exist" , Toast.LENGTH_LONG).show();
                     }
 
@@ -116,7 +116,7 @@ public class content_search_activity extends AppCompatActivity {
                     return;
 
                 }
-               if (allo){
+               if (flag){
                    populateListView();
                }
                 registerClickCallBack();
@@ -157,10 +157,11 @@ public class content_search_activity extends AppCompatActivity {
     }
 
 
-
+    // Parsing method for the boolean expression
+    // instanciates class variables searchBools and searchIngredients
     public Boolean readIngredients(String received) throws IOException{
-        String[] splitString = received.trim().split(" ");
-        ArrayList<String> ingredients;
+        String[] splitString = received.trim().split(" "); //Trims and splits the received string
+        ArrayList<String> ingredients;//Array of the ingredient names (strings)
 
         if(splitString.length%2!=0){
             throw new IOException("String not convertible to search");
@@ -169,15 +170,15 @@ public class content_search_activity extends AppCompatActivity {
         for(int i = 0 ; i<splitString.length;i++){
             splitString[i]=splitString[i].toLowerCase();
         }
-        searchBools= new ArrayList<String>();
+        searchBools= new ArrayList<String>();//Class instance, defines the boolean terms for the latest search
         ingredients= new ArrayList<String>();
         for(int j=0;j<splitString.length/2;j++){
             if(splitString[2*j].toUpperCase().equals("AND") ||
                     splitString[2*j].toUpperCase().equals("NOT") ||
-                    splitString[2*j].toUpperCase().equals("OR")){
+                    splitString[2*j].toUpperCase().equals("OR")){ //If a boolean is not valid, returns false, search is invalid
                 searchBools.add(j,splitString[2*j].toUpperCase());
             }else{
-                searchBools=null;
+                searchBools=null; //Since search is invalid, return false and make both instance variable null
                 searchIngredients=null;
                 return false;
             }
@@ -185,10 +186,10 @@ public class content_search_activity extends AppCompatActivity {
         }
         searchIngredients=new ArrayList<Ingredient>();
         for(int h=0;h<ingredients.size();h++){
-            if(CookHelper.getCookHelper().findIngredient(ingredients.get(h))!=null){
+            if(CookHelper.getCookHelper().findIngredient(ingredients.get(h))!=null){//checks if ingredient exists
                 searchIngredients.add(CookHelper.getCookHelper().findIngredient(ingredients.get(h)));
             }else{
-                searchBools=null;
+                searchBools=null;   //Since search is invalid, return false and make both instance variable null
                 searchIngredients=null;
                 return false;
             }
@@ -239,13 +240,15 @@ public class content_search_activity extends AppCompatActivity {
 
         }
     }
+
+    //Filters the ingredient list to the list of optional ingridients (OR)
     public ArrayList<Ingredient> getOrIngredients(ArrayList<String> bools, ArrayList<Ingredient> ings){
         ArrayList<Ingredient> orIngredients= new ArrayList<>();
-        if(bools==null || ings ==null){
+        if(bools==null || ings ==null){ // if either arrays are null, no ingredients was given, so return null
             return null;
         }
-        if(bools.size()>0) {
-            for (int i = 0; i < bools.size(); i++) {
+        if(bools.size()>0) { //Skips for loop if no bools
+            for (int i = 0; i < bools.size(); i++) {//Adds all ingredient preceded by or in the array
                 if (bools.get(i).toUpperCase().equals("OR")) {
                     orIngredients.add(ings.get(i));
                 }
@@ -256,26 +259,28 @@ public class content_search_activity extends AppCompatActivity {
         }
     }
 
+    // Creates corresponding array of integer matching the amount of ingredients
+    // preceded by OR in each recipe.
     public ArrayList<Integer> orInRecipes(ArrayList<Recipe> recipes, ArrayList<Ingredient> ingredients){
-        ArrayList<Integer> ors = new ArrayList<>(recipes.size());
+        ArrayList<Integer> matchingOrs = new ArrayList<>(recipes.size());
         int counter;
-        if(ingredients!=null){
+        if(ingredients!=null){ //Does not count if there is no ingredients
             for(int i=0;i<recipes.size();i++){
                 counter=0;
-                for(int j=0;j<ingredients.size();j++){
+                for(int j=0;j<ingredients.size();j++){//
                     if(recipes.get(i).hasIngredient(ingredients.get(j))){
                         counter++;
                     }
                 }
-                ors.add(counter);
+                matchingOrs.add(counter);
             }
         }else{
             for(int i=0;i<recipes.size();i++){
-                ors.add(0);
+                matchingOrs.add(0);
             }
         }
 
-        return ors;
+        return matchingOrs;
     }
 
     public void sortSearchResult(ArrayList<Recipe> recipes, ArrayList<Integer> orsOfRecipes){
@@ -286,7 +291,7 @@ public class content_search_activity extends AppCompatActivity {
         if(orsOfRecipes.size()<=0){
             return;
         }else{
-            counter = orsOfRecipes.size();
+            counter = numberOfOrs;
         }
 
         while(counter>=0){

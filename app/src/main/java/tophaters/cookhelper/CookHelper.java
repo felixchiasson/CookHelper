@@ -262,10 +262,6 @@ public class CookHelper implements java.io.Serializable{
     public ArrayList<Recipe> search(Category category, Origin origin, ArrayList<Ingredient> ingredients, ArrayList<String> bools) {
 
         ArrayList<Recipe> recipes = getRecipes();
-        ArrayList<Ingredient> orIngredients = new ArrayList<Ingredient>();
-        ArrayList<Integer> orCounter;
-        Integer counter;
-        PriorityQueue<Map.Entry<String,Recipe>> sortedRecipes= new PriorityQueue<>();
 
         if(category!=null){
             recipes = filterCategory(category, recipes);
@@ -307,7 +303,6 @@ public class CookHelper implements java.io.Serializable{
     private ArrayList<Recipe> filterIngredient(String bool, Ingredient ingredient, ArrayList<Recipe> recipes){
         ArrayList<Recipe> newRecipes= new ArrayList<Recipe>();
         Boolean flag;
-        ArrayList<Ingredient>  tempIngredients;
 
         for(int i=0 ; i<recipes.size() ; i++){
 
