@@ -44,25 +44,8 @@ public class Category_List extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
         }
 
-
-        //methode ajouter pour clicker sur les items sune liste
-//    private void registerClickCallBack(){
-//
-//        ListView list = (ListView) findViewById(R.id.ingredientsListView);
-//        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//
-//            public void onItemClick(AdapterView<?> parent, View viewClick, int position, long id){
-//                Ingredient clickedIngredient = myIngredients.get(position);
-//                String message = "You clicked " + position + " this is car make " + clickedIngredient.getName();
-//                Toast.makeText( Ingredient_List.this, message , Toast.LENGTH_LONG).show();
-//
-//            }
-//        });
-//
-//    }
 
     }
 
@@ -75,7 +58,7 @@ public class Category_List extends AppCompatActivity {
         populateListView();
         //registerClickCallBack();
 
-        SwipeDismissListViewTouchListener touchListener =
+        SwipeDismissListViewTouchListener touchListener = //Delete a Category from the list by swiping
                 new SwipeDismissListViewTouchListener(
                         list,
                         new SwipeDismissListViewTouchListener.DismissCallbacks() {
@@ -95,8 +78,8 @@ public class Category_List extends AppCompatActivity {
                                     if (!isNotInRecipe) {
                                         String message = " You can not remove this category because it is currently used in a recipe";
                                         Toast.makeText(Category_List.this, message, Toast.LENGTH_LONG).show();
-                                        adapter.notifyDataSetChanged();
-                                    }
+
+                                    }  adapter.notifyDataSetChanged();
 
                                 }
                             }});
@@ -104,7 +87,7 @@ public class Category_List extends AppCompatActivity {
     }
 
 
-    private void populateListView() {
+    private void populateListView() { //Initialize the adapter with the right list
 
         adapter = new MyListAdapter();
         list = (ListView) findViewById(R.id.categoriesListView);
@@ -113,9 +96,9 @@ public class Category_List extends AppCompatActivity {
     }
 
 
-        private class MyListAdapter extends ArrayAdapter<Category> {
+        private class MyListAdapter extends ArrayAdapter<Category> { //creates a new class for customView
 
-            public MyListAdapter() {
+            public MyListAdapter() { //Uses the content of item_view activity as a line in the list to be populated
                 super(Category_List.this, R.layout.item_ingredient_view, CookHelper.getCookHelper().getCategories());
             }
 
@@ -128,7 +111,6 @@ public class Category_List extends AppCompatActivity {
                 }
 
                 //find the ingredient
-
                 Category currentCategory = CookHelper.getCookHelper().getCategories().get(position);
 
 

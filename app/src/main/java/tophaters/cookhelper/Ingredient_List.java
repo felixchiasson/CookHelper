@@ -85,23 +85,6 @@ public class Ingredient_List extends AppCompatActivity {
         list.setOnTouchListener(touchListener);
     }
 
-    //methode ajouter pour clicker sur les items sune liste
-//    private void registerClickCallBack(){
-//
-//        ListView list = (ListView) findViewById(R.id.ingredientsListView);
-//        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//
-//            public void onItemClick(AdapterView<?> parent, View viewClick, int position, long id){
-//                Ingredient clickedIngredient = myIngredients.get(position);
-//                String message = "You clicked " + position + " this is car make " + clickedIngredient.getName();
-//                Toast.makeText( Ingredient_List.this, message , Toast.LENGTH_LONG).show();
-//
-//            }
-//        });
-//
-//    }
-
-
 
     private void populateListView() {
 

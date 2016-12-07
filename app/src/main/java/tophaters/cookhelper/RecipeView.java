@@ -41,23 +41,7 @@ public class RecipeView extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-            //Recipe clickedRecipe = CookHelper.getCookHelper().getRecipes().get(position);
-            /*    Recipe clickedRecipe = null;
-                boolean found = false;
-                ArrayList<Recipe> recipeList = CookHelper.getCookHelper().getRecipes();
-                for (int i = 0; i < CookHelper.getCookHelper().getRecipes().size(); i++) {
-                    Toast.makeText(RecipeView.this, "Y = " + i, Toast.LENGTH_LONG).show();
-
-                    if (name.toLowerCase().equals(recipeList.get(i).getName().toLowerCase())) {
-                        clickedRecipe = recipeList.get(i);
-                        found = true;
-                        Toast.makeText(RecipeView.this, "Found = True", Toast.LENGTH_LONG).show();
-
-                        break;
-                    }
-                }*/
+            //WHen the fab is clicked, transfer the information of the current recipe to the modify recipe
 
             Intent i = new Intent(RecipeView.this, edit_recipe.class);
             i.putExtra("prepTime", prepTime);
@@ -68,15 +52,6 @@ public class RecipeView extends AppCompatActivity {
             i.putExtra("description", description);
             i.putExtra("picture", iconId);
 
-            /*ArrayList<Ingredient> ingredientList = clickedRecipe.getIngredients();
-            String ingredients = null ;
-            for (int y =0; y<ingredientList.size(); y++) {
-                if (y == 0) {
-                    ingredients = ingredientList.get(y).getName();
-                } else {
-                    ingredients = ingredients + "\n" + ingredientList.get(y).getName();
-                }
-            }*/
             i.putExtra("ingredients", ingredients);
 
             //  start the activity
@@ -161,8 +136,8 @@ public class RecipeView extends AppCompatActivity {
         });
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {//Display of the recipe view by using the transfered intent of the MainActivity
+        if (resultCode == RESULT_OK) { //this is used when you are coming back from the edit recipe page and the recipe was modified and saved
             if (requestCode == RECIPE_EDIT) {
                 prepTime = data.getStringExtra("prepTime");
                 name = data.getStringExtra("name");

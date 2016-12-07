@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity
     }
     //methode ajouter pour clicker sur les items sune liste
     private void registerClickCallBack(){
-
+        //Here to send the intent of the selected recipe and display the correct information
         ListView list = (ListView) findViewById(R.id.recipesListView);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 

@@ -206,7 +206,7 @@
 
 "2. Adding recipes:\n"
 "To add a recipe to the system, the user clicks the “+” button at the bottom-right of the recipes list and the add recipe page will open."
-"In the add page, the user indicates the name of the recipe. All the ingredients in the recipe must be selected by clicking the \"Add Ingredients\" button, followed by the selection of all the ingredients used in the recipe. The user has to select the category and the origin related to the recipe by clicking on the respective text box, "Dessert" and "Canadian" by default, a list will appear and the user has to click the related origin and related category."
+"In the add page, the user indicates the name of the recipe. All the ingredients in the recipe must be selected by clicking the \"Add Ingredients\" button, followed by the selection of all the ingredients used in the recipe. The user has to select the category and the origin related to the recipe by clicking on the respective text box, a list will appear and the user has to click the related origin and related category."
 "Preparation and cooking times can be manually set, but are optional and will fixed at zero by default. \n\n"
 
 "Important:\n"

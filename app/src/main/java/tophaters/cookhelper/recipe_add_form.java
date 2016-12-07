@@ -72,10 +72,6 @@ public class recipe_add_form extends AppCompatActivity {
 
         ingredientAdapter = new ArrayAdapter<Ingredient>(this, android.R.layout.simple_list_item_multiple_choice, CookHelper.getCookHelper().getIngredients());
 
-        /* ingredientList = (ListView) findViewById(R.id.ingredientList);
-        ingredientList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-        ingredientList.setAdapter(ingredientAdapter); */
-
         ArrayAdapter<Category> categoryAdapter = new ArrayAdapter<Category>(this, android.R.layout.simple_spinner_item, CookHelper.getCookHelper().getCategories());
 
         Spinner categorySpinner;
@@ -265,8 +261,10 @@ public class recipe_add_form extends AppCompatActivity {
 
     // ************** SAVE RECIPE *********************
 
-    public void onClickSaveRecipe(View v) {
+    public void onClickSaveRecipe(View v) { //save the recipe when the button is pressed
         boolean added = false;
+
+        //getting all the information from the textboxes.
         EditText recipeName = (EditText) findViewById(R.id.recipe_add_name);
         String sRecipeName = recipeName.getText().toString();
 
@@ -303,21 +301,19 @@ public class recipe_add_form extends AppCompatActivity {
         } else {
             sRecipeName = (sRecipeName.substring(0, 1).toUpperCase() + sRecipeName.substring(1).toLowerCase());
         }
-
+        //create the array of ingredients used in the recipe
         ArrayList<Ingredient> listIngredientToAdd = new ArrayList<>();
         ListView listIngredients = (ListView) findViewById(R.id.ingredientList);
         ArrayAdapter<Ingredient> inAdapter = (ArrayAdapter<Ingredient>)listIngredients.getAdapter();
-        if (inAdapter == null) {
+        if (inAdapter == null) { //verify if there is at least one ingredient
             Toast.makeText(recipe_add_form.this, "Your recipe cannot have 0 ingredient, please add at least one.", Toast.LENGTH_LONG).show();
         } else {
             for (int i = 0; i < inAdapter.getCount(); i++) {
                 listIngredientToAdd.add(inAdapter.getItem(i));
             }
-            Recipe newRecipe = new Recipe(iCookTime, iPrepTime, steps, sRecipeName, selectedImageUri, origin, category, listIngredientToAdd);
-            added = CookHelper.getCookHelper().addRecipe(newRecipe);
+            Recipe newRecipe = new Recipe(iCookTime, iPrepTime, steps, sRecipeName, selectedImageUri, origin, category, listIngredientToAdd); //create a new recipe
+            added = CookHelper.getCookHelper().addRecipe(newRecipe); //add the new recipe to the cookHelper
         }
-
-        // Recipe newRecipe = new Recipe(sCookTime, sPrepTime, steps, sRecipeName, selectedImageUri);
 
 
 
@@ -325,7 +321,7 @@ public class recipe_add_form extends AppCompatActivity {
 
 
         if (added){
-            Toast.makeText(recipe_add_form.this, "Saved", Toast.LENGTH_LONG).show();
+            Toast.makeText(recipe_add_form.this, "Saved", Toast.LENGTH_LONG).show(); //Confirm if the recipe was added
             finish();
 
         }else{

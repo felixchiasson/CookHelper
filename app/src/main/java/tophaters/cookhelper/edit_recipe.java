@@ -46,7 +46,7 @@ public class edit_recipe extends AppCompatActivity {
     private String ingredients;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_edit_recipe);
@@ -56,7 +56,7 @@ public class edit_recipe extends AppCompatActivity {
         if(getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         }
-        Intent intent = getIntent();
+        Intent intent = getIntent(); //Get the information from the previous activity
 
         prepTime = intent.getStringExtra("prepTime");
         name = intent.getStringExtra("name");
@@ -161,7 +161,7 @@ public class edit_recipe extends AppCompatActivity {
 
     }
 
-    public void onClickOpenGallery(View v) {
+    public void onClickOpenGallery(View v) { //Open the gallery to take an image
 
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -216,7 +216,7 @@ public class edit_recipe extends AppCompatActivity {
         return uri.getPath();
     }
 
-    public void onClickOpenIngredientDialog(View v) {
+    public void onClickOpenIngredientDialog(View v) { //OPen the list to select an ingredient
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);
         mSelected = new ArrayList();
@@ -288,23 +288,22 @@ public class edit_recipe extends AppCompatActivity {
 
     // ************** SAVE RECIPE *********************
 
-    public void onClickSaveRecipe(View v) {
+    public void onClickSaveRecipe(View v) { //Click to save the recipe
         boolean added = false;
         Recipe recipe = null;
         boolean found = false;
         if (true) { //changed
-            ArrayList<Recipe> recipeList = CookHelper.getCookHelper().getRecipes();
-            for (int i = 0; i < CookHelper.getCookHelper().getRecipes().size(); i++) {
-
-                if (name.toLowerCase().equals(recipeList.get(i).getName().toLowerCase())) {
-                    recipe = recipeList.get(i);
+            ArrayList<Recipe> recipeList = CookHelper.getCookHelper().getRecipes(); //get the recipes
+            for (int i = 0; i < CookHelper.getCookHelper().getRecipes().size(); i++) {//Loop in to find the actual recipe to be modified
+                if (name.toLowerCase().equals(recipeList.get(i).getName().toLowerCase())) { //Compare the names of the recipes
+                    recipe = recipeList.get(i); //If the recipe is found, take reference of the recipe
                     found = true;
-                    break;
+                    break;//stop the loop
                 }
             }
             if (found) {
 
-
+                //Take all the information in the text boxes
                 EditText recipeName = (EditText) findViewById(R.id.recipe_add_name);
                 String sRecipeName = recipeName.getText().toString();
 
@@ -351,19 +350,15 @@ public class edit_recipe extends AppCompatActivity {
                         Toast.makeText(edit_recipe.this, "Your recipe needs a name!", Toast.LENGTH_LONG).show();
                     } else {
                         sRecipeName = (sRecipeName.substring(0, 1).toUpperCase() + sRecipeName.substring(1).toLowerCase());
-                        CookHelper.getCookHelper().removeRecipe(recipe);
-                        Recipe newRecipe = new Recipe(iCookTime, iPrepTime, steps, sRecipeName, selectedImageUri, origin, category, listIngredientToAdd);
-                        added = CookHelper.getCookHelper().addRecipe(newRecipe);
+                        CookHelper.getCookHelper().removeRecipe(recipe); //Delete the recipe
+                        Recipe newRecipe = new Recipe(iCookTime, iPrepTime, steps, sRecipeName, selectedImageUri, origin, category, listIngredientToAdd);//Create the new recipe
+                        added = CookHelper.getCookHelper().addRecipe(newRecipe); //Add the new recipe and verify if it is added
                     }
 
                 }
 
-                // Recipe newRecipe = new Recipe(sCookTime, sPrepTime, steps, sRecipeName, selectedImageUri);
 
-
-
-
-                if (added) {
+                if (added) { //If the recipe is succesfully added, send the intent to display the modified recipe in the Recipe View
                     Toast.makeText(edit_recipe.this, "Recipe SuccessFully Modified.", Toast.LENGTH_LONG).show();
                     Intent resultIntent = new Intent();
                     resultIntent.putExtra("name", recipeName.getText().toString());
@@ -385,7 +380,7 @@ public class edit_recipe extends AppCompatActivity {
                     resultIntent.putExtra("ingredients", ingredients);
 
                     setResult(Activity.RESULT_OK, resultIntent);
-                    finish();
+                    finish(); //close the activity
 
                 }
             }
@@ -415,17 +410,17 @@ public class edit_recipe extends AppCompatActivity {
     }
 
 
-    public ArrayList<Ingredient> verifyIngredients(){
+    public ArrayList<Ingredient> verifyIngredients(){ //Methode to return an array of ingredients from the string gotten by the intent
         ArrayList<Ingredient> ingredientList = new ArrayList<Ingredient>();
-        String received = ingredients.toString();
-        String[] ingredientStringList = received.trim().split("\n");
+        String received = ingredients.toString(); //takes all the ingredients
+        String[] ingredientStringList = received.trim().split("\n"); //Split the received string
         for (int i = 0; i < ingredientStringList.length; i++){
-            if (CookHelper.getCookHelper().findIngredient(ingredientStringList[i])!=null){
-                ingredientList.add(CookHelper.getCookHelper().findIngredient(ingredientStringList[i]));
+            if (CookHelper.getCookHelper().findIngredient(ingredientStringList[i])!=null){ //if the ingredient exist
+                ingredientList.add(CookHelper.getCookHelper().findIngredient(ingredientStringList[i])); //add it to the new arrayList
             }else {
-                Toast.makeText(edit_recipe.this, "There is an error.", Toast.LENGTH_SHORT);
+                Toast.makeText(edit_recipe.this, "There is an error.", Toast.LENGTH_SHORT); //display "There is an error." if the ingredient doesnt exist
             }
-            }
+        }
         return ingredientList;
     }
 

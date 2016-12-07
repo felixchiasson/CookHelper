@@ -315,9 +315,9 @@ public class CookHelper implements java.io.Serializable{
             flag=recipes.get(i).hasIngredient(ingredient);
 
 
-            if(bool.equals("AND") && flag==true){//if AND is the boolean, ingredient has to have been found
+            if(bool.equals("AND") && flag==true){
                 newRecipes.add(recipes.get(i));
-            }else if(bool.equals("NOT") && flag==false){ //if Not is the boolean, ingredient cannot haave been found
+            }else if(bool.equals("NOT") && flag==false){
                 newRecipes.add(recipes.get(i));
             }
         }
