@@ -34,10 +34,12 @@ public class Recipe implements Serializable {
         this.ingredients=ingredients;
     }
 
+
+    //return true if ingredient given is in the recipe, false if it is not
     public Boolean hasIngredient(Ingredient ingredient){
         Boolean flag=false;
         for(int i=0 ; i<ingredients.size() ; i++){
-            if(ingredients.get(i)==ingredient){
+            if(ingredients.get(i)==ingredient){// when ingredient is found, flag is true then breaks loop
                 flag=true;
                 break;
             }

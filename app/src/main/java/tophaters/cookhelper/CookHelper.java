@@ -258,20 +258,20 @@ public class CookHelper implements java.io.Serializable{
     }
 
 
-    //La fonction qui implemente la recherhce de recette
+    //The function that handles the complete search
     public ArrayList<Recipe> search(Category category, Origin origin, ArrayList<Ingredient> ingredients, ArrayList<String> bools) {
 
         ArrayList<Recipe> recipes = getRecipes();
 
-        if(category!=null){
+        if(category!=null){//In case null is passed
             recipes = filterCategory(category, recipes);
         }
-        if(origin!=null){
+        if(origin!=null){//In case null is passed
             recipes = filterOrigin(origin, recipes);
         }
-        if(ingredients!=null && bools!=null){
+        if(ingredients!=null && bools!=null){//In case null is passed
             for (int i = 0; i < ingredients.size(); i++) {
-                if(!bools.get(i).equals("OR")){
+                if(!bools.get(i).equals("OR")){//Only filter AND and NOT
                     recipes = filterIngredient(bools.get(i), ingredients.get(i), recipes);
                 }
             }
@@ -280,6 +280,8 @@ public class CookHelper implements java.io.Serializable{
         return recipes;
     }
 
+
+    //filters recipes given to match the category
     private ArrayList<Recipe> filterCategory(Category category, ArrayList<Recipe> recipes){
         ArrayList<Recipe> newRecipes= new ArrayList<Recipe>();
         for(int i=0 ; i<recipes.size();i++){
@@ -290,6 +292,8 @@ public class CookHelper implements java.io.Serializable{
         return newRecipes;
     }
 
+
+    //filters recipes given to match the origin
     private ArrayList<Recipe> filterOrigin(Origin origin, ArrayList<Recipe> recipes){
         ArrayList<Recipe> newRecipes= new ArrayList<Recipe>();
         for(int i=0 ; i<recipes.size();i++){
@@ -300,6 +304,8 @@ public class CookHelper implements java.io.Serializable{
         return newRecipes;
     }
 
+
+    //filters recipes given to match the ingredient and boolean
     private ArrayList<Recipe> filterIngredient(String bool, Ingredient ingredient, ArrayList<Recipe> recipes){
         ArrayList<Recipe> newRecipes= new ArrayList<Recipe>();
         Boolean flag;
@@ -309,15 +315,16 @@ public class CookHelper implements java.io.Serializable{
             flag=recipes.get(i).hasIngredient(ingredient);
 
 
-            if(bool.equals("AND") && flag==true){
+            if(bool.equals("AND") && flag==true){//if AND is the boolean, ingredient has to have been found
                 newRecipes.add(recipes.get(i));
-            }else if(bool.equals("NOT") && flag==false){
+            }else if(bool.equals("NOT") && flag==false){ //if Not is the boolean, ingredient cannot haave been found
                 newRecipes.add(recipes.get(i));
             }
         }
         return newRecipes;
     }
 
+    //find ingredient by name
     public Ingredient findIngredient(String ing){
         for(int i=0; i<ingredients.size();i++){
             if(ing.toLowerCase().equals(ingredients.get(i).getName().toLowerCase())){

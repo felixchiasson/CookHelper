@@ -90,33 +90,33 @@ public class content_search_activity extends AppCompatActivity {
 
                 try{
                     if(!ingredients.matches("")){
-                        flag =readIngredients(ingredients); // Instanciates
+                        flag =readIngredients(ingredients); // Instantiates the flag telling us if it was parsed correctly
 
-                    }else{
+                    }else{ //If its not, set everything to null
                         searchBools=null;
                         searchIngredients=null;
                     }
-                    if(!flag){
-                        Toast.makeText(content_search_activity.this, "A component of the string was mispelled or did not exist" , Toast.LENGTH_LONG).show();
+                    if(!flag){//displays if something was misspelled
+                        Toast.makeText(content_search_activity.this, "A component of the string was misspelled or did not exist" , Toast.LENGTH_LONG).show();
                     }
 
-                    recherche = CookHelper.getCookHelper().search(category, origin, searchIngredients, searchBools);
-                    ArrayList<Ingredient>  orIngredients= getOrIngredients(searchBools, searchIngredients);
-                                       if(orIngredients!=null){
+                    recherche = CookHelper.getCookHelper().search(category, origin, searchIngredients, searchBools); //calls the search
+                    ArrayList<Ingredient>  orIngredients= getOrIngredients(searchBools, searchIngredients); //lists or ingredients
+                    if(orIngredients!=null){    //If we have a list, we get the size to determine how many or ingredients there are for future use
                         numberOfOrs=orIngredients.size();
-                    }else{
+                    }else{                      //If there is no or ingredient, the number is 0
                         numberOfOrs=0;
                     }
 
-                    recipesOr = orInRecipes(recherche,orIngredients );
+                    recipesOr = orInRecipes(recherche,orIngredients ); //recipesOr corresponds to
                     sortSearchResult(recherche, recipesOr);
 
-                }catch (IOException e){
+                }catch (IOException e){//Catches bad syntax of boolean expression
                     Toast.makeText( content_search_activity.this, "String was not valid for search. Refer to help page for details." , Toast.LENGTH_LONG).show();
                     return;
 
                 }
-               if (flag){
+               if (flag){ //Only display result if the string parsing was successful
                    populateListView();
                }
                 registerClickCallBack();
@@ -158,7 +158,7 @@ public class content_search_activity extends AppCompatActivity {
 
 
     // Parsing method for the boolean expression
-    // instanciates class variables searchBools and searchIngredients
+    // instantiates class variables searchBools and searchIngredients
     public Boolean readIngredients(String received) throws IOException{
         String[] splitString = received.trim().split(" "); //Trims and splits the received string
         ArrayList<String> ingredients;//Array of the ingredient names (strings)
@@ -199,7 +199,7 @@ public class content_search_activity extends AppCompatActivity {
 
 
 
-
+    //Populates the view with the recipes resulting from the search
     private void populateListView() {
 
 
@@ -267,15 +267,15 @@ public class content_search_activity extends AppCompatActivity {
         if(ingredients!=null){ //Does not count if there is no ingredients
             for(int i=0;i<recipes.size();i++){
                 counter=0;
-                for(int j=0;j<ingredients.size();j++){//
+                for(int j=0;j<ingredients.size();j++){//for all ingredients in all the recipes, get if its there
                     if(recipes.get(i).hasIngredient(ingredients.get(j))){
-                        counter++;
+                        counter++; //adds to the count of matching ingrdients
                     }
                 }
-                matchingOrs.add(counter);
+                matchingOrs.add(counter); //add method adds to the end of array, so the count matches the recipe
             }
         }else{
-            for(int i=0;i<recipes.size();i++){
+            for(int i=0;i<recipes.size();i++){//If we have no or, put all 0 so we can display 0/0
                 matchingOrs.add(0);
             }
         }
@@ -283,24 +283,27 @@ public class content_search_activity extends AppCompatActivity {
         return matchingOrs;
     }
 
+
+    //Method that sort the recipes by number of or ingredients matching
+    //Recipes will also be sorted alphabetically automatically since their order has never been changed
     public void sortSearchResult(ArrayList<Recipe> recipes, ArrayList<Integer> orsOfRecipes){
         ArrayList<Recipe> newRecipes= new ArrayList<>(recipes.size());
         ArrayList<Integer> newOrsOfRecipes = new ArrayList<>(orsOfRecipes.size());
         int counter;
 
-        if(orsOfRecipes.size()<=0){
+        if(orsOfRecipes.size()<=0){ //Function does not continue if there is no or ingredients
             return;
         }else{
-            counter = numberOfOrs;
+            counter = numberOfOrs; //Start at the number of or ingredients for the counter
         }
 
         while(counter>=0){
-            for(int i=0;i<orsOfRecipes.size();i++){
-                if(orsOfRecipes.get(i)==counter){
-                    newRecipes.add(recipes.get(i));
-                    newOrsOfRecipes.add(orsOfRecipes.get(i));
-                }
-            }
+            for(int i=0;i<orsOfRecipes.size();i++){             //goes through all recipes to find
+                if(orsOfRecipes.get(i)==counter){               //if the counter matches the number
+                    newRecipes.add(recipes.get(i));             //of matching ors. this will then
+                    newOrsOfRecipes.add(orsOfRecipes.get(i));   //take all the recipes in order of
+                }                                               //matching ors with a alphabetical
+            }                                                   //suborder
             counter--;
         }
         recherche=newRecipes;
