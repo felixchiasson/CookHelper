@@ -13,14 +13,6 @@
     tools:context="tophaters.cookhelper.activity_help_page"
     tools:showIn="@layout/activity_help_page">
 
-    <TextView
-        android:text="Help Page"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView"
-        android:textSize="36sp"
-        android:textStyle="normal|bold" />
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
