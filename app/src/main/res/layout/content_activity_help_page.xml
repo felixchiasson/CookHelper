@@ -14,7 +14,7 @@
     tools:showIn="@layout/activity_help_page">
 
     <TextView
-        android:text="Help!"
+        android:text="Help Page"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textView"
@@ -38,7 +38,6 @@
                 android:layout_below="@+id/textView"
                 android:layout_alignParentStart="true"
                 android:layout_height="match_parent"
-                android:maxLines = "30"
                 android:scrollbars = "vertical"
                 android:textSize="18sp" />
         </LinearLayout>

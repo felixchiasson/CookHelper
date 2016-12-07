@@ -187,5 +187,49 @@
     <string name="SearchIngredients">Enter the boolean and the ingredients.</string>
     <string name="ingredients">Ingredients:</string>
     <string name="minute">min</string>
-    <string name="PreHelp"><![CDATA[CookHelper is an android application developed by software engineering students at the University of Ottawa. The purpose of this application is to help users stock their recipes as well helping them making decisions concerning the choice of their daily recipe.  - Adding Ingredients, Origins or Categories   To add any of these items to the application, the user has to open the list of the desired element page and click on the bottom right + button.  This action will open an add page, so the user enter the name of origin, category or ingredient and click on save, and the new element would appear in the related list.  Important:  To remove any of these three, swipe left the item desired to be deleted in the list page, however the item will be permanently deleted.    -Adding recipes To add a recipe to the system, the user would simply click the + button at the bottom-right of the recipes’ list and the add recipe page would open. In the add page, the user has to indicate, the name of the recipes, all the ingredients in the recipe, as well as the category and the origin related to that meal.  Preparation time and cooking time are optional, but fixed at zero by default.  Important: The ingredients, category and origin has to be added into the system before the recipe itself.     Important:  To remove a recipe, swipe left the element in the recipe list, however the item will be permanently deleted.    -Modify Recipe To modify any recipe, the user has to click on the desired recipe in the recipe list and click on the pencil button on the top-right of the recipe page, the modification page would open and from that point the user can modify anything in the recipe.  -Search Engine:  CookHelper’s search engine refers to the ingredients desired and not desired in the recipe, as well as the category and the origin of the meal. However, a correct syntax has to be written in the search text field so the searching would process as wanted. Here are the syntax:  1.\tWhen an ingredient is mandatory in the recipe the syntax form is: “AND <Ingredient>”.  2.\tWhen an ingredient is not desired in the recipe the syntax form is : “NOT <Ingredient>” 3.\tWhen an ingredient is not optional in the recipe the syntax form is : “OR <Ingredient>” Important: The user has to choose a category and an origin to operate the search.]]></string>
+    <string name="PreHelp">
+    	"CookHelper is an android application developed by students attending the University of Ottawa. The purpose of this application is to help users stock and manage their recipes.\n\n"
+ 
+"Content:\n"
+"1.	Adding Ingredients, Origins or Categories\n"
+"2.	Adding recipes\n"
+"3.	Modify Recipe\n"
+"4.	Search Engine\n\n"
+
+"1. Adding Ingredients, Origins or Categories:\n"
+ 	"To add any of the items above to the application, the user has to navigate to the corresponding list of said element and click on the “+” button located at the bottom right of the screen.  This action will open an Add page. The user enters the name of origin, category or ingredient, whichever is applicable, then clicks on save and the new element would appear in the related list. \n\n"
+
+"Important:\n"
+"-	To remove any of these three, swipe left the item desired to be deleted in the list page, however the item will be permanently deleted. \n"
+"-	Users cannot enter two origins, categories or ingredients in the same list. \n"
+"-	Ingredients cannot have spaces in them. Spaces will be substituted with a \"-\".\n\n"
+
+"2. Adding recipes:\n"
+"To add a recipe to the system, the user clicks the “+” button at the bottom-right of the recipes’ list and the add recipe page will open."
+"In the add page, the use indicates the name of the recipes, all the ingredients in the recipe, as well as the category and the origin related to the recipe."
+"Preparation and cooking times are optional, but will fixed at zero by default. \n\n"
+
+"Important:\n"
+"-	The ingredients, category and origin has to be added into the system before the recipe itself.\n"    
+"-	To remove a recipe, swipe left the element in the recipe list, however the item will be permanently deleted.\n\n"   
+
+"3. Modify Recipe:\n"
+"To modify a recipe, the user has to click on the desired recipe in the recipe list and click on the pencil button in the top-right of the recipe page. The modification page will then open and from this page the user can modify anything in the recipe. \n\n"
+
+"4. Search Engine:\n"
+
+"CookHelper’s search engine refers to the ingredients desired and not desired in the recipe, as well as the category and the origin of the meal. However, the syntax has to be written correctly in the "search text field for the search to execute. Here are the rules for the syntax of the statement: \n"
+"1.	When an ingredient is mandatory in the recipe the syntax form is:\n AND \"Ingredient\". \n"
+"2.	When an ingredient is not desired in the recipe the syntax form is:\n NOT \"Ingredient\".\n"
+"3.	When an ingredient is optional in the recipe the syntax form is:\n OR \"Ingredient\".\n"
+"4.	Between every element, a space is required.\n"
+"Exemple:"
+"-	AND Milk NOT Egg OR Sugar"
+"-	OR Tomato NOT Sugar OR Bread NOT Salt NOT Pepper AND Water\n"
+"Important:"
+"-	The user has to choose a category and an origin to operate the search or the first category and the first origin in both lists will be selected."
+"-	The search is not caps sensitive."
+"-	Order of statement does not matter."
+
+    </string>
 </resources>
